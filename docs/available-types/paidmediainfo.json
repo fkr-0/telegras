@@ -1,0 +1,27 @@
+{
+  "name": "PaidMediaInfo",
+  "anchor": "paidmediainfo",
+  "description": [
+    "Describes the paid media added to a message."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "star_count",
+        "type": "Integer",
+        "description": "The number of Telegram Stars that must be paid to buy access to the media"
+      },
+      {
+        "field": "paid_media",
+        "type": "Array of PaidMedia",
+        "description": "Information about the paid media"
+      }
+    ]
+  },
+  "notes": []
+}

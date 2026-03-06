@@ -1,0 +1,132 @@
+{
+  "name": "promoteChatMember",
+  "anchor": "promotechatmember",
+  "description": [
+    "Use this method to promote or demote a user in a supergroup or a channel. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Pass False for all boolean parameters to demote a user. Returns True on success."
+  ],
+  "table": {
+    "headers": [
+      "Parameter",
+      "Type",
+      "Required",
+      "Description"
+    ],
+    "rows": [
+      {
+        "parameter": "chat_id",
+        "type": "Integer or String",
+        "required": "Yes",
+        "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername )"
+      },
+      {
+        "parameter": "user_id",
+        "type": "Integer",
+        "required": "Yes",
+        "description": "Unique identifier of the target user"
+      },
+      {
+        "parameter": "is_anonymous",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True if the administrator's presence in the chat is hidden"
+      },
+      {
+        "parameter": "can_manage_chat",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True if the administrator can access the chat event log, get boost list, see hidden supergroup and channel members, report spam messages, ignore slow mode, and send messages to the chat without paying Telegram Stars. Implied by any other administrator privilege."
+      },
+      {
+        "parameter": "can_delete_messages",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True if the administrator can delete messages of other users"
+      },
+      {
+        "parameter": "can_manage_video_chats",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True if the administrator can manage video chats"
+      },
+      {
+        "parameter": "can_restrict_members",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True if the administrator can restrict, ban or unban chat members, or access supergroup statistics. For backward compatibility, defaults to True for promotions of channel administrators"
+      },
+      {
+        "parameter": "can_promote_members",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True if the administrator can add new administrators with a subset of their own privileges or demote administrators that they have promoted, directly or indirectly (promoted by administrators that were appointed by him)"
+      },
+      {
+        "parameter": "can_change_info",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True if the administrator can change chat title, photo and other settings"
+      },
+      {
+        "parameter": "can_invite_users",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True if the administrator can invite new users to the chat"
+      },
+      {
+        "parameter": "can_post_stories",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True if the administrator can post stories to the chat"
+      },
+      {
+        "parameter": "can_edit_stories",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True if the administrator can edit stories posted by other users, post stories to the chat page, pin chat stories, and access the chat's story archive"
+      },
+      {
+        "parameter": "can_delete_stories",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True if the administrator can delete stories posted by other users"
+      },
+      {
+        "parameter": "can_post_messages",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True if the administrator can post messages in the channel, approve suggested posts, or access channel statistics; for channels only"
+      },
+      {
+        "parameter": "can_edit_messages",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True if the administrator can edit messages of other users and can pin messages; for channels only"
+      },
+      {
+        "parameter": "can_pin_messages",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True if the administrator can pin messages; for supergroups only"
+      },
+      {
+        "parameter": "can_manage_topics",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True if the user is allowed to create, rename, close, and reopen forum topics; for supergroups only"
+      },
+      {
+        "parameter": "can_manage_direct_messages",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True if the administrator can manage direct messages within the channel and decline suggested posts; for channels only"
+      },
+      {
+        "parameter": "can_manage_tags",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True if the administrator can edit the tags of regular members; for groups and supergroups only"
+      }
+    ]
+  },
+  "notes": []
+}

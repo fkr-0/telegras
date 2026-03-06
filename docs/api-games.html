@@ -1,0 +1,259 @@
+<h3><a class="anchor" name="games" href="#games"><i class="anchor-icon"></i></a>Games</h3>
+<p>Your bot can offer users <strong>HTML5 games</strong> to play solo or to compete against each other in groups and one-on-one chats. Create games via <a href="https://t.me/botfather">@BotFather</a> using the <em>/newgame</em> command. Please note that this kind of power requires responsibility: you will need to accept the terms for each game that your bots will be offering.</p>
+<ul>
+<li>Games are a new type of content on Telegram, represented by the <a href="#game">Game</a> and <a href="#inlinequeryresultgame">InlineQueryResultGame</a> objects.</li>
+<li>Once you&#39;ve created a game via <a href="https://t.me/botfather">BotFather</a>, you can send games to chats as regular messages using the <a href="#sendgame">sendGame</a> method, or use <a href="#inline-mode">inline mode</a> with <a href="#inlinequeryresultgame">InlineQueryResultGame</a>.</li>
+<li>If you send the game message without any buttons, it will automatically have a &#39;Play <em>GameName</em>&#39; button. When this button is pressed, your bot gets a <a href="#callbackquery">CallbackQuery</a> with the <em>game_short_name</em> of the requested game. You provide the correct URL for this particular user and the app opens the game in the in-app browser.</li>
+<li>You can manually add multiple buttons to your game message. Please note that the first button in the first row <strong>must always</strong> launch the game, using the field <em>callback_game</em> in <a href="#inlinekeyboardbutton">InlineKeyboardButton</a>. You can add extra buttons according to taste: e.g., for a description of the rules, or to open the game&#39;s official community.</li>
+<li>To make your game more attractive, you can upload a GIF animation that demonstrates the game to the users via <a href="https://t.me/botfather">BotFather</a> (see <a href="https://t.me/gamebot?game=lumberjack">Lumberjack</a> for example).</li>
+<li>A game message will also display high scores for the current chat. Use <a href="#setgamescore">setGameScore</a> to post high scores to the chat with the game, add the <em>disable_edit_message</em> parameter to disable automatic update of the message with the current scoreboard.</li>
+<li>Use <a href="#getgamehighscores">getGameHighScores</a> to get data for in-game high score tables.</li>
+<li>You can also add an extra <a href="/bots/games#sharing-your-game-to-telegram-chats">sharing button</a> for users to share their best score to different chats.</li>
+<li>For examples of what can be done using this new stuff, check the <a href="https://t.me/gamebot">@gamebot</a> and <a href="https://t.me/gamee">@gamee</a> bots.</li>
+</ul>
+<h4><a class="anchor" name="sendgame" href="#sendgame"><i class="anchor-icon"></i></a>sendGame</h4>
+<p>Use this method to send a game. On success, the sent <a href="#message">Message</a> is returned.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>business_connection_id</td>
+<td>String</td>
+<td>Optional</td>
+<td>Unique identifier of the business connection on behalf of which the message will be sent</td>
+</tr>
+<tr>
+<td>chat_id</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>Unique identifier for the target chat. Games can&#39;t be sent to channel direct messages chats and channel chats.</td>
+</tr>
+<tr>
+<td>message_thread_id</td>
+<td>Integer</td>
+<td>Optional</td>
+<td>Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only</td>
+</tr>
+<tr>
+<td>game_short_name</td>
+<td>String</td>
+<td>Yes</td>
+<td>Short name of the game, serves as the unique identifier for the game. Set up your games via <a href="https://t.me/botfather">@BotFather</a>.</td>
+</tr>
+<tr>
+<td>disable_notification</td>
+<td>Boolean</td>
+<td>Optional</td>
+<td>Sends the message <a href="https://telegram.org/blog/channels-2-0#silent-messages">silently</a>. Users will receive a notification with no sound.</td>
+</tr>
+<tr>
+<td>protect_content</td>
+<td>Boolean</td>
+<td>Optional</td>
+<td>Protects the contents of the sent message from forwarding and saving</td>
+</tr>
+<tr>
+<td>allow_paid_broadcast</td>
+<td>Boolean</td>
+<td>Optional</td>
+<td>Pass <em>True</em> to allow up to 1000 messages per second, ignoring <a href="https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once">broadcasting limits</a> for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot&#39;s balance</td>
+</tr>
+<tr>
+<td>message_effect_id</td>
+<td>String</td>
+<td>Optional</td>
+<td>Unique identifier of the message effect to be added to the message; for private chats only</td>
+</tr>
+<tr>
+<td>reply_parameters</td>
+<td><a href="#replyparameters">ReplyParameters</a></td>
+<td>Optional</td>
+<td>Description of the message to reply to</td>
+</tr>
+<tr>
+<td>reply_markup</td>
+<td><a href="#inlinekeyboardmarkup">InlineKeyboardMarkup</a></td>
+<td>Optional</td>
+<td>A JSON-serialized object for an <a href="/bots/features#inline-keyboards">inline keyboard</a>. If empty, one &#39;Play game_title&#39; button will be shown. If not empty, the first button must launch the game.</td>
+</tr>
+</tbody>
+</table>
+<h4><a class="anchor" name="game" href="#game"><i class="anchor-icon"></i></a>Game</h4>
+<p>This object represents a game. Use BotFather to create and edit games, their short names will act as unique identifiers.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>title</td>
+<td>String</td>
+<td>Title of the game</td>
+</tr>
+<tr>
+<td>description</td>
+<td>String</td>
+<td>Description of the game</td>
+</tr>
+<tr>
+<td>photo</td>
+<td>Array of <a href="#photosize">PhotoSize</a></td>
+<td>Photo that will be displayed in the game message in chats.</td>
+</tr>
+<tr>
+<td>text</td>
+<td>String</td>
+<td><em>Optional</em>. Brief description of the game or high scores included in the game message. Can be automatically edited to include current high scores for the game when the bot calls <a href="#setgamescore">setGameScore</a>, or manually edited using <a href="#editmessagetext">editMessageText</a>. 0-4096 characters.</td>
+</tr>
+<tr>
+<td>text_entities</td>
+<td>Array of <a href="#messageentity">MessageEntity</a></td>
+<td><em>Optional</em>. Special entities that appear in <em>text</em>, such as usernames, URLs, bot commands, etc.</td>
+</tr>
+<tr>
+<td>animation</td>
+<td><a href="#animation">Animation</a></td>
+<td><em>Optional</em>. Animation that will be displayed in the game message in chats. Upload via <a href="https://t.me/botfather">BotFather</a></td>
+</tr>
+</tbody>
+</table>
+<h4><a class="anchor" name="callbackgame" href="#callbackgame"><i class="anchor-icon"></i></a>CallbackGame</h4>
+<p>A placeholder, currently holds no information. Use <a href="https://t.me/botfather">BotFather</a> to set up your game.</p>
+<h4><a class="anchor" name="setgamescore" href="#setgamescore"><i class="anchor-icon"></i></a>setGameScore</h4>
+<p>Use this method to set the score of the specified user in a game message. On success, if the message is not an inline message, the <a href="#message">Message</a> is returned, otherwise <em>True</em> is returned. Returns an error, if the new score is not greater than the user&#39;s current score in the chat and <em>force</em> is <em>False</em>.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>user_id</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>User identifier</td>
+</tr>
+<tr>
+<td>score</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>New score, must be non-negative</td>
+</tr>
+<tr>
+<td>force</td>
+<td>Boolean</td>
+<td>Optional</td>
+<td>Pass <em>True</em> if the high score is allowed to decrease. This can be useful when fixing mistakes or banning cheaters</td>
+</tr>
+<tr>
+<td>disable_edit_message</td>
+<td>Boolean</td>
+<td>Optional</td>
+<td>Pass <em>True</em> if the game message should not be automatically edited to include the current scoreboard</td>
+</tr>
+<tr>
+<td>chat_id</td>
+<td>Integer</td>
+<td>Optional</td>
+<td>Required if <em>inline_message_id</em> is not specified. Unique identifier for the target chat</td>
+</tr>
+<tr>
+<td>message_id</td>
+<td>Integer</td>
+<td>Optional</td>
+<td>Required if <em>inline_message_id</em> is not specified. Identifier of the sent message</td>
+</tr>
+<tr>
+<td>inline_message_id</td>
+<td>String</td>
+<td>Optional</td>
+<td>Required if <em>chat_id</em> and <em>message_id</em> are not specified. Identifier of the inline message</td>
+</tr>
+</tbody>
+</table>
+<h4><a class="anchor" name="getgamehighscores" href="#getgamehighscores"><i class="anchor-icon"></i></a>getGameHighScores</h4>
+<p>Use this method to get data for high score tables. Will return the score of the specified user and several of their neighbors in a game. Returns an Array of <a href="#gamehighscore">GameHighScore</a> objects.</p>
+<blockquote>
+<p>This method will currently return scores for the target user, plus two of their closest neighbors on each side. Will also return the top three users if the user and their neighbors are not among them. Please note that this behavior is subject to change.</p>
+</blockquote>
+<table class="table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>user_id</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>Target user id</td>
+</tr>
+<tr>
+<td>chat_id</td>
+<td>Integer</td>
+<td>Optional</td>
+<td>Required if <em>inline_message_id</em> is not specified. Unique identifier for the target chat</td>
+</tr>
+<tr>
+<td>message_id</td>
+<td>Integer</td>
+<td>Optional</td>
+<td>Required if <em>inline_message_id</em> is not specified. Identifier of the sent message</td>
+</tr>
+<tr>
+<td>inline_message_id</td>
+<td>String</td>
+<td>Optional</td>
+<td>Required if <em>chat_id</em> and <em>message_id</em> are not specified. Identifier of the inline message</td>
+</tr>
+</tbody>
+</table>
+<h4><a class="anchor" name="gamehighscore" href="#gamehighscore"><i class="anchor-icon"></i></a>GameHighScore</h4>
+<p>This object represents one row of the high scores table for a game.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>position</td>
+<td>Integer</td>
+<td>Position in high score table for the game</td>
+</tr>
+<tr>
+<td>user</td>
+<td><a href="#user">User</a></td>
+<td>User</td>
+</tr>
+<tr>
+<td>score</td>
+<td>Integer</td>
+<td>Score</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>And that&#39;s about all we&#39;ve got for now.<br>If you&#39;ve got any questions, please check out our <a href="/bots/faq"><strong>Bot FAQ »</strong></a></p>

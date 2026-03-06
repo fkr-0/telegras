@@ -1,0 +1,27 @@
+{
+  "name": "ChatBoostUpdated",
+  "anchor": "chatboostupdated",
+  "description": [
+    "This object represents a boost added to a chat or changed."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "chat",
+        "type": "Chat",
+        "description": "Chat which was boosted"
+      },
+      {
+        "field": "boost",
+        "type": "ChatBoost",
+        "description": "Information about the chat boost"
+      }
+    ]
+  },
+  "notes": []
+}

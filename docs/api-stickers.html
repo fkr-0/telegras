@@ -1,0 +1,717 @@
+<h3><a class="anchor" name="stickers" href="#stickers"><i class="anchor-icon"></i></a>Stickers</h3>
+<p>The following methods and objects allow your bot to handle stickers and sticker sets.</p>
+<h4><a class="anchor" name="sticker" href="#sticker"><i class="anchor-icon"></i></a>Sticker</h4>
+<p>This object represents a sticker.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>file_id</td>
+<td>String</td>
+<td>Identifier for this file, which can be used to download or reuse the file</td>
+</tr>
+<tr>
+<td>file_unique_id</td>
+<td>String</td>
+<td>Unique identifier for this file, which is supposed to be the same over time and for different bots. Can&#39;t be used to download or reuse the file.</td>
+</tr>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>Type of the sticker, currently one of “regular”, “mask”, “custom_emoji”. The type of the sticker is independent from its format, which is determined by the fields <em>is_animated</em> and <em>is_video</em>.</td>
+</tr>
+<tr>
+<td>width</td>
+<td>Integer</td>
+<td>Sticker width</td>
+</tr>
+<tr>
+<td>height</td>
+<td>Integer</td>
+<td>Sticker height</td>
+</tr>
+<tr>
+<td>is_animated</td>
+<td>Boolean</td>
+<td><em>True</em>, if the sticker is <a href="https://telegram.org/blog/animated-stickers">animated</a></td>
+</tr>
+<tr>
+<td>is_video</td>
+<td>Boolean</td>
+<td><em>True</em>, if the sticker is a <a href="https://telegram.org/blog/video-stickers-better-reactions">video sticker</a></td>
+</tr>
+<tr>
+<td>thumbnail</td>
+<td><a href="#photosize">PhotoSize</a></td>
+<td><em>Optional</em>. Sticker thumbnail in the .WEBP or .JPG format</td>
+</tr>
+<tr>
+<td>emoji</td>
+<td>String</td>
+<td><em>Optional</em>. Emoji associated with the sticker</td>
+</tr>
+<tr>
+<td>set_name</td>
+<td>String</td>
+<td><em>Optional</em>. Name of the sticker set to which the sticker belongs</td>
+</tr>
+<tr>
+<td>premium_animation</td>
+<td><a href="#file">File</a></td>
+<td><em>Optional</em>. For premium regular stickers, premium animation for the sticker</td>
+</tr>
+<tr>
+<td>mask_position</td>
+<td><a href="#maskposition">MaskPosition</a></td>
+<td><em>Optional</em>. For mask stickers, the position where the mask should be placed</td>
+</tr>
+<tr>
+<td>custom_emoji_id</td>
+<td>String</td>
+<td><em>Optional</em>. For custom emoji stickers, unique identifier of the custom emoji</td>
+</tr>
+<tr>
+<td>needs_repainting</td>
+<td>True</td>
+<td><em>Optional</em>. <em>True</em>, if the sticker must be repainted to a text color in messages, the color of the Telegram Premium badge in emoji status, white color on chat photos, or another appropriate color in other places</td>
+</tr>
+<tr>
+<td>file_size</td>
+<td>Integer</td>
+<td><em>Optional</em>. File size in bytes</td>
+</tr>
+</tbody>
+</table>
+<h4><a class="anchor" name="stickerset" href="#stickerset"><i class="anchor-icon"></i></a>StickerSet</h4>
+<p>This object represents a sticker set.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Sticker set name</td>
+</tr>
+<tr>
+<td>title</td>
+<td>String</td>
+<td>Sticker set title</td>
+</tr>
+<tr>
+<td>sticker_type</td>
+<td>String</td>
+<td>Type of stickers in the set, currently one of “regular”, “mask”, “custom_emoji”</td>
+</tr>
+<tr>
+<td>stickers</td>
+<td>Array of <a href="#sticker">Sticker</a></td>
+<td>List of all set stickers</td>
+</tr>
+<tr>
+<td>thumbnail</td>
+<td><a href="#photosize">PhotoSize</a></td>
+<td><em>Optional</em>. Sticker set thumbnail in the .WEBP, .TGS, or .WEBM format</td>
+</tr>
+</tbody>
+</table>
+<h4><a class="anchor" name="maskposition" href="#maskposition"><i class="anchor-icon"></i></a>MaskPosition</h4>
+<p>This object describes the position on faces where a mask should be placed by default.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>point</td>
+<td>String</td>
+<td>The part of the face relative to which the mask should be placed. One of “forehead”, “eyes”, “mouth”, or “chin”.</td>
+</tr>
+<tr>
+<td>x_shift</td>
+<td>Float</td>
+<td>Shift by X-axis measured in widths of the mask scaled to the face size, from left to right. For example, choosing -1.0 will place mask just to the left of the default mask position.</td>
+</tr>
+<tr>
+<td>y_shift</td>
+<td>Float</td>
+<td>Shift by Y-axis measured in heights of the mask scaled to the face size, from top to bottom. For example, 1.0 will place the mask just below the default mask position.</td>
+</tr>
+<tr>
+<td>scale</td>
+<td>Float</td>
+<td>Mask scaling coefficient. For example, 2.0 means double size.</td>
+</tr>
+</tbody>
+</table>
+<h4><a class="anchor" name="inputsticker" href="#inputsticker"><i class="anchor-icon"></i></a>InputSticker</h4>
+<p>This object describes a sticker to be added to a sticker set.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sticker</td>
+<td>String</td>
+<td>The added sticker. Pass a <em>file_id</em> as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or pass “attach://&lt;file_attach_name&gt;” to upload a new file using multipart/form-data under &lt;file_attach_name&gt; name. Animated and video stickers can&#39;t be uploaded via HTTP URL. <a href="#sending-files">More information on Sending Files »</a></td>
+</tr>
+<tr>
+<td>format</td>
+<td>String</td>
+<td>Format of the added sticker, must be one of “static” for a <strong>.WEBP</strong> or <strong>.PNG</strong> image, “animated” for a <strong>.TGS</strong> animation, “video” for a <strong>.WEBM</strong> video</td>
+</tr>
+<tr>
+<td>emoji_list</td>
+<td>Array of String</td>
+<td>List of 1-20 emoji associated with the sticker</td>
+</tr>
+<tr>
+<td>mask_position</td>
+<td><a href="#maskposition">MaskPosition</a></td>
+<td><em>Optional</em>. Position where the mask should be placed on faces. For “mask” stickers only.</td>
+</tr>
+<tr>
+<td>keywords</td>
+<td>Array of String</td>
+<td><em>Optional</em>. List of 0-20 search keywords for the sticker with total length of up to 64 characters. For “regular” and “custom_emoji” stickers only.</td>
+</tr>
+</tbody>
+</table>
+<h4><a class="anchor" name="sendsticker" href="#sendsticker"><i class="anchor-icon"></i></a>sendSticker</h4>
+<p>Use this method to send static .WEBP, <a href="https://telegram.org/blog/animated-stickers">animated</a> .TGS, or <a href="https://telegram.org/blog/video-stickers-better-reactions">video</a> .WEBM stickers. On success, the sent <a href="#message">Message</a> is returned.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>business_connection_id</td>
+<td>String</td>
+<td>Optional</td>
+<td>Unique identifier of the business connection on behalf of which the message will be sent</td>
+</tr>
+<tr>
+<td>chat_id</td>
+<td>Integer or String</td>
+<td>Yes</td>
+<td>Unique identifier for the target chat or username of the target channel (in the format <code>@channelusername</code>)</td>
+</tr>
+<tr>
+<td>message_thread_id</td>
+<td>Integer</td>
+<td>Optional</td>
+<td>Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only</td>
+</tr>
+<tr>
+<td>direct_messages_topic_id</td>
+<td>Integer</td>
+<td>Optional</td>
+<td>Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat</td>
+</tr>
+<tr>
+<td>sticker</td>
+<td><a href="#inputfile">InputFile</a> or String</td>
+<td>Yes</td>
+<td>Sticker to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a .WEBP sticker from the Internet, or upload a new .WEBP, .TGS, or .WEBM sticker using multipart/form-data. <a href="#sending-files">More information on Sending Files »</a>. Video and animated stickers can&#39;t be sent via an HTTP URL.</td>
+</tr>
+<tr>
+<td>emoji</td>
+<td>String</td>
+<td>Optional</td>
+<td>Emoji associated with the sticker; only for just uploaded stickers</td>
+</tr>
+<tr>
+<td>disable_notification</td>
+<td>Boolean</td>
+<td>Optional</td>
+<td>Sends the message <a href="https://telegram.org/blog/channels-2-0#silent-messages">silently</a>. Users will receive a notification with no sound.</td>
+</tr>
+<tr>
+<td>protect_content</td>
+<td>Boolean</td>
+<td>Optional</td>
+<td>Protects the contents of the sent message from forwarding and saving</td>
+</tr>
+<tr>
+<td>allow_paid_broadcast</td>
+<td>Boolean</td>
+<td>Optional</td>
+<td>Pass <em>True</em> to allow up to 1000 messages per second, ignoring <a href="https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once">broadcasting limits</a> for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot&#39;s balance</td>
+</tr>
+<tr>
+<td>message_effect_id</td>
+<td>String</td>
+<td>Optional</td>
+<td>Unique identifier of the message effect to be added to the message; for private chats only</td>
+</tr>
+<tr>
+<td>suggested_post_parameters</td>
+<td><a href="#suggestedpostparameters">SuggestedPostParameters</a></td>
+<td>Optional</td>
+<td>A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.</td>
+</tr>
+<tr>
+<td>reply_parameters</td>
+<td><a href="#replyparameters">ReplyParameters</a></td>
+<td>Optional</td>
+<td>Description of the message to reply to</td>
+</tr>
+<tr>
+<td>reply_markup</td>
+<td><a href="#inlinekeyboardmarkup">InlineKeyboardMarkup</a> or <a href="#replykeyboardmarkup">ReplyKeyboardMarkup</a> or <a href="#replykeyboardremove">ReplyKeyboardRemove</a> or <a href="#forcereply">ForceReply</a></td>
+<td>Optional</td>
+<td>Additional interface options. A JSON-serialized object for an <a href="/bots/features#inline-keyboards">inline keyboard</a>, <a href="/bots/features#keyboards">custom reply keyboard</a>, instructions to remove a reply keyboard or to force a reply from the user</td>
+</tr>
+</tbody>
+</table>
+<h4><a class="anchor" name="getstickerset" href="#getstickerset"><i class="anchor-icon"></i></a>getStickerSet</h4>
+<p>Use this method to get a sticker set. On success, a <a href="#stickerset">StickerSet</a> object is returned.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Yes</td>
+<td>Name of the sticker set</td>
+</tr>
+</tbody>
+</table>
+<h4><a class="anchor" name="getcustomemojistickers" href="#getcustomemojistickers"><i class="anchor-icon"></i></a>getCustomEmojiStickers</h4>
+<p>Use this method to get information about custom emoji stickers by their identifiers. Returns an Array of <a href="#sticker">Sticker</a> objects.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>custom_emoji_ids</td>
+<td>Array of String</td>
+<td>Yes</td>
+<td>A JSON-serialized list of custom emoji identifiers. At most 200 custom emoji identifiers can be specified.</td>
+</tr>
+</tbody>
+</table>
+<h4><a class="anchor" name="uploadstickerfile" href="#uploadstickerfile"><i class="anchor-icon"></i></a>uploadStickerFile</h4>
+<p>Use this method to upload a file with a sticker for later use in the <a href="#createnewstickerset">createNewStickerSet</a>, <a href="#addstickertoset">addStickerToSet</a>, or <a href="#replacestickerinset">replaceStickerInSet</a> methods (the file can be used multiple times). Returns the uploaded <a href="#file">File</a> on success.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>user_id</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>User identifier of sticker file owner</td>
+</tr>
+<tr>
+<td>sticker</td>
+<td><a href="#inputfile">InputFile</a></td>
+<td>Yes</td>
+<td>A file with the sticker in .WEBP, .PNG, .TGS, or .WEBM format. See <a href="/stickers"><a href="https://core.telegram.org/stickers">https://core.telegram.org/stickers</a></a> for technical requirements. <a href="#sending-files">More information on Sending Files »</a></td>
+</tr>
+<tr>
+<td>sticker_format</td>
+<td>String</td>
+<td>Yes</td>
+<td>Format of the sticker, must be one of “static”, “animated”, “video”</td>
+</tr>
+</tbody>
+</table>
+<h4><a class="anchor" name="createnewstickerset" href="#createnewstickerset"><i class="anchor-icon"></i></a>createNewStickerSet</h4>
+<p>Use this method to create a new sticker set owned by a user. The bot will be able to edit the sticker set thus created. Returns <em>True</em> on success.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>user_id</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>User identifier of created sticker set owner</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Yes</td>
+<td>Short name of sticker set, to be used in <code>t.me/addstickers/</code> URLs (e.g., <em>animals</em>). Can contain only English letters, digits and underscores. Must begin with a letter, can&#39;t contain consecutive underscores and must end in <code>&quot;_by_&lt;bot_username&gt;&quot;</code>. <code>&lt;bot_username&gt;</code> is case insensitive. 1-64 characters.</td>
+</tr>
+<tr>
+<td>title</td>
+<td>String</td>
+<td>Yes</td>
+<td>Sticker set title, 1-64 characters</td>
+</tr>
+<tr>
+<td>stickers</td>
+<td>Array of <a href="#inputsticker">InputSticker</a></td>
+<td>Yes</td>
+<td>A JSON-serialized list of 1-50 initial stickers to be added to the sticker set</td>
+</tr>
+<tr>
+<td>sticker_type</td>
+<td>String</td>
+<td>Optional</td>
+<td>Type of stickers in the set, pass “regular”, “mask”, or “custom_emoji”. By default, a regular sticker set is created.</td>
+</tr>
+<tr>
+<td>needs_repainting</td>
+<td>Boolean</td>
+<td>Optional</td>
+<td>Pass <em>True</em> if stickers in the sticker set must be repainted to the color of text when used in messages, the accent color if used as emoji status, white on chat photos, or another appropriate color based on context; for custom emoji sticker sets only</td>
+</tr>
+</tbody>
+</table>
+<h4><a class="anchor" name="addstickertoset" href="#addstickertoset"><i class="anchor-icon"></i></a>addStickerToSet</h4>
+<p>Use this method to add a new sticker to a set created by the bot. Emoji sticker sets can have up to 200 stickers. Other sticker sets can have up to 120 stickers. Returns <em>True</em> on success.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>user_id</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>User identifier of sticker set owner</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Yes</td>
+<td>Sticker set name</td>
+</tr>
+<tr>
+<td>sticker</td>
+<td><a href="#inputsticker">InputSticker</a></td>
+<td>Yes</td>
+<td>A JSON-serialized object with information about the added sticker. If exactly the same sticker had already been added to the set, then the set isn&#39;t changed.</td>
+</tr>
+</tbody>
+</table>
+<h4><a class="anchor" name="setstickerpositioninset" href="#setstickerpositioninset"><i class="anchor-icon"></i></a>setStickerPositionInSet</h4>
+<p>Use this method to move a sticker in a set created by the bot to a specific position. Returns <em>True</em> on success.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sticker</td>
+<td>String</td>
+<td>Yes</td>
+<td>File identifier of the sticker</td>
+</tr>
+<tr>
+<td>position</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>New sticker position in the set, zero-based</td>
+</tr>
+</tbody>
+</table>
+<h4><a class="anchor" name="deletestickerfromset" href="#deletestickerfromset"><i class="anchor-icon"></i></a>deleteStickerFromSet</h4>
+<p>Use this method to delete a sticker from a set created by the bot. Returns <em>True</em> on success.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sticker</td>
+<td>String</td>
+<td>Yes</td>
+<td>File identifier of the sticker</td>
+</tr>
+</tbody>
+</table>
+<h4><a class="anchor" name="replacestickerinset" href="#replacestickerinset"><i class="anchor-icon"></i></a>replaceStickerInSet</h4>
+<p>Use this method to replace an existing sticker in a sticker set with a new one. The method is equivalent to calling <a href="#deletestickerfromset">deleteStickerFromSet</a>, then <a href="#addstickertoset">addStickerToSet</a>, then <a href="#setstickerpositioninset">setStickerPositionInSet</a>. Returns <em>True</em> on success.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>user_id</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>User identifier of the sticker set owner</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Yes</td>
+<td>Sticker set name</td>
+</tr>
+<tr>
+<td>old_sticker</td>
+<td>String</td>
+<td>Yes</td>
+<td>File identifier of the replaced sticker</td>
+</tr>
+<tr>
+<td>sticker</td>
+<td><a href="#inputsticker">InputSticker</a></td>
+<td>Yes</td>
+<td>A JSON-serialized object with information about the added sticker. If exactly the same sticker had already been added to the set, then the set remains unchanged.</td>
+</tr>
+</tbody>
+</table>
+<h4><a class="anchor" name="setstickeremojilist" href="#setstickeremojilist"><i class="anchor-icon"></i></a>setStickerEmojiList</h4>
+<p>Use this method to change the list of emoji assigned to a regular or custom emoji sticker. The sticker must belong to a sticker set created by the bot. Returns <em>True</em> on success.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sticker</td>
+<td>String</td>
+<td>Yes</td>
+<td>File identifier of the sticker</td>
+</tr>
+<tr>
+<td>emoji_list</td>
+<td>Array of String</td>
+<td>Yes</td>
+<td>A JSON-serialized list of 1-20 emoji associated with the sticker</td>
+</tr>
+</tbody>
+</table>
+<h4><a class="anchor" name="setstickerkeywords" href="#setstickerkeywords"><i class="anchor-icon"></i></a>setStickerKeywords</h4>
+<p>Use this method to change search keywords assigned to a regular or custom emoji sticker. The sticker must belong to a sticker set created by the bot. Returns <em>True</em> on success.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sticker</td>
+<td>String</td>
+<td>Yes</td>
+<td>File identifier of the sticker</td>
+</tr>
+<tr>
+<td>keywords</td>
+<td>Array of String</td>
+<td>Optional</td>
+<td>A JSON-serialized list of 0-20 search keywords for the sticker with total length of up to 64 characters</td>
+</tr>
+</tbody>
+</table>
+<h4><a class="anchor" name="setstickermaskposition" href="#setstickermaskposition"><i class="anchor-icon"></i></a>setStickerMaskPosition</h4>
+<p>Use this method to change the <a href="#maskposition">mask position</a> of a mask sticker. The sticker must belong to a sticker set that was created by the bot. Returns <em>True</em> on success.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sticker</td>
+<td>String</td>
+<td>Yes</td>
+<td>File identifier of the sticker</td>
+</tr>
+<tr>
+<td>mask_position</td>
+<td><a href="#maskposition">MaskPosition</a></td>
+<td>Optional</td>
+<td>A JSON-serialized object with the position where the mask should be placed on faces. Omit the parameter to remove the mask position.</td>
+</tr>
+</tbody>
+</table>
+<h4><a class="anchor" name="setstickersettitle" href="#setstickersettitle"><i class="anchor-icon"></i></a>setStickerSetTitle</h4>
+<p>Use this method to set the title of a created sticker set. Returns <em>True</em> on success.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Yes</td>
+<td>Sticker set name</td>
+</tr>
+<tr>
+<td>title</td>
+<td>String</td>
+<td>Yes</td>
+<td>Sticker set title, 1-64 characters</td>
+</tr>
+</tbody>
+</table>
+<h4><a class="anchor" name="setstickersetthumbnail" href="#setstickersetthumbnail"><i class="anchor-icon"></i></a>setStickerSetThumbnail</h4>
+<p>Use this method to set the thumbnail of a regular or mask sticker set. The format of the thumbnail file must match the format of the stickers in the set. Returns <em>True</em> on success.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Yes</td>
+<td>Sticker set name</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>User identifier of the sticker set owner</td>
+</tr>
+<tr>
+<td>thumbnail</td>
+<td><a href="#inputfile">InputFile</a> or String</td>
+<td>Optional</td>
+<td>A <strong>.WEBP</strong> or <strong>.PNG</strong> image with the thumbnail, must be up to 128 kilobytes in size and have a width and height of exactly 100px, or a <strong>.TGS</strong> animation with a thumbnail up to 32 kilobytes in size (see <a href="/stickers#animation-requirements"><a href="https://core.telegram.org/stickers#animation-requirements">https://core.telegram.org/stickers#animation-requirements</a></a> for animated sticker technical requirements), or a <strong>.WEBM</strong> video with the thumbnail up to 32 kilobytes in size; see <a href="/stickers#video-requirements"><a href="https://core.telegram.org/stickers#video-requirements">https://core.telegram.org/stickers#video-requirements</a></a> for video sticker technical requirements. Pass a <em>file_id</em> as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. <a href="#sending-files">More information on Sending Files »</a>. Animated and video sticker set thumbnails can&#39;t be uploaded via HTTP URL. If omitted, then the thumbnail is dropped and the first sticker is used as the thumbnail.</td>
+</tr>
+<tr>
+<td>format</td>
+<td>String</td>
+<td>Yes</td>
+<td>Format of the thumbnail, must be one of “static” for a <strong>.WEBP</strong> or <strong>.PNG</strong> image, “animated” for a <strong>.TGS</strong> animation, or “video” for a <strong>.WEBM</strong> video</td>
+</tr>
+</tbody>
+</table>
+<h4><a class="anchor" name="setcustomemojistickersetthumbnail" href="#setcustomemojistickersetthumbnail"><i class="anchor-icon"></i></a>setCustomEmojiStickerSetThumbnail</h4>
+<p>Use this method to set the thumbnail of a custom emoji sticker set. Returns <em>True</em> on success.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Yes</td>
+<td>Sticker set name</td>
+</tr>
+<tr>
+<td>custom_emoji_id</td>
+<td>String</td>
+<td>Optional</td>
+<td>Custom emoji identifier of a sticker from the sticker set; pass an empty string to drop the thumbnail and use the first sticker as the thumbnail.</td>
+</tr>
+</tbody>
+</table>
+<h4><a class="anchor" name="deletestickerset" href="#deletestickerset"><i class="anchor-icon"></i></a>deleteStickerSet</h4>
+<p>Use this method to delete a sticker set that was created by the bot. Returns <em>True</em> on success.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Yes</td>
+<td>Sticker set name</td>
+</tr>
+</tbody>
+</table>

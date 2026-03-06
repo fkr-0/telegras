@@ -1,0 +1,32 @@
+{
+  "name": "GiftBackground",
+  "anchor": "giftbackground",
+  "description": [
+    "This object describes the background of a gift."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "center_color",
+        "type": "Integer",
+        "description": "Center color of the background in RGB format"
+      },
+      {
+        "field": "edge_color",
+        "type": "Integer",
+        "description": "Edge color of the background in RGB format"
+      },
+      {
+        "field": "text_color",
+        "type": "Integer",
+        "description": "Text color of the background in RGB format"
+      }
+    ]
+  },
+  "notes": []
+}

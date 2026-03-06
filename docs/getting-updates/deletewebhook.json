@@ -1,0 +1,24 @@
+{
+  "name": "deleteWebhook",
+  "anchor": "deletewebhook",
+  "description": [
+    "Use this method to remove webhook integration if you decide to switch back to getUpdates . Returns True on success."
+  ],
+  "table": {
+    "headers": [
+      "Parameter",
+      "Type",
+      "Required",
+      "Description"
+    ],
+    "rows": [
+      {
+        "parameter": "drop_pending_updates",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True to drop all pending updates"
+      }
+    ]
+  },
+  "notes": []
+}

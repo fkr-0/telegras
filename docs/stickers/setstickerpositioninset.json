@@ -1,0 +1,30 @@
+{
+  "name": "setStickerPositionInSet",
+  "anchor": "setstickerpositioninset",
+  "description": [
+    "Use this method to move a sticker in a set created by the bot to a specific position. Returns True on success."
+  ],
+  "table": {
+    "headers": [
+      "Parameter",
+      "Type",
+      "Required",
+      "Description"
+    ],
+    "rows": [
+      {
+        "parameter": "sticker",
+        "type": "String",
+        "required": "Yes",
+        "description": "File identifier of the sticker"
+      },
+      {
+        "parameter": "position",
+        "type": "Integer",
+        "required": "Yes",
+        "description": "New sticker position in the set, zero-based"
+      }
+    ]
+  },
+  "notes": []
+}

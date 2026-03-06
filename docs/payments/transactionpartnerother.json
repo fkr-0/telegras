@@ -1,0 +1,22 @@
+{
+  "name": "TransactionPartnerOther",
+  "anchor": "transactionpartnerother",
+  "description": [
+    "Describes a transaction with an unknown source or recipient."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "type",
+        "type": "String",
+        "description": "Type of the transaction partner, always “other”"
+      }
+    ]
+  },
+  "notes": []
+}

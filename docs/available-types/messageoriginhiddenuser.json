@@ -1,0 +1,32 @@
+{
+  "name": "MessageOriginHiddenUser",
+  "anchor": "messageoriginhiddenuser",
+  "description": [
+    "The message was originally sent by an unknown user."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "type",
+        "type": "String",
+        "description": "Type of the message origin, always “hidden_user”"
+      },
+      {
+        "field": "date",
+        "type": "Integer",
+        "description": "Date the message was sent originally in Unix time"
+      },
+      {
+        "field": "sender_user_name",
+        "type": "String",
+        "description": "Name of the user that sent the message originally"
+      }
+    ]
+  },
+  "notes": []
+}

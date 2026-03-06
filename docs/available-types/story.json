@@ -1,0 +1,27 @@
+{
+  "name": "Story",
+  "anchor": "story",
+  "description": [
+    "This object represents a story."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "chat",
+        "type": "Chat",
+        "description": "Chat that posted the story"
+      },
+      {
+        "field": "id",
+        "type": "Integer",
+        "description": "Unique identifier for the story in the chat"
+      }
+    ]
+  },
+  "notes": []
+}

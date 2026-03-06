@@ -1,0 +1,27 @@
+{
+  "name": "PaidMediaVideo",
+  "anchor": "paidmediavideo",
+  "description": [
+    "The paid media is a video."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "type",
+        "type": "String",
+        "description": "Type of the paid media, always “video”"
+      },
+      {
+        "field": "video",
+        "type": "Video",
+        "description": "The video"
+      }
+    ]
+  },
+  "notes": []
+}

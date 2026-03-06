@@ -1,0 +1,555 @@
+<h3><a class="anchor" name="updating-messages" href="#updating-messages"><i class="anchor-icon"></i></a>Updating messages</h3>
+<p>The following methods allow you to change an existing message in the message history instead of sending a new one with a result of an action. This is most useful for messages with <a href="/bots/features#inline-keyboards">inline keyboards</a> using callback queries, but can also help reduce clutter in conversations with regular chat bots.</p>
+<p>Please note, that it is currently only possible to edit messages without <em>reply_markup</em> or with <a href="/bots/features#inline-keyboards">inline keyboards</a>.</p>
+<h4><a class="anchor" name="editmessagetext" href="#editmessagetext"><i class="anchor-icon"></i></a>editMessageText</h4>
+<p>Use this method to edit text and <a href="#games">game</a> messages. On success, if the edited message is not an inline message, the edited <a href="#message">Message</a> is returned, otherwise <em>True</em> is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within <strong>48 hours</strong> from the time they were sent.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>business_connection_id</td>
+<td>String</td>
+<td>Optional</td>
+<td>Unique identifier of the business connection on behalf of which the message to be edited was sent</td>
+</tr>
+<tr>
+<td>chat_id</td>
+<td>Integer or String</td>
+<td>Optional</td>
+<td>Required if <em>inline_message_id</em> is not specified. Unique identifier for the target chat or username of the target channel (in the format <code>@channelusername</code>)</td>
+</tr>
+<tr>
+<td>message_id</td>
+<td>Integer</td>
+<td>Optional</td>
+<td>Required if <em>inline_message_id</em> is not specified. Identifier of the message to edit</td>
+</tr>
+<tr>
+<td>inline_message_id</td>
+<td>String</td>
+<td>Optional</td>
+<td>Required if <em>chat_id</em> and <em>message_id</em> are not specified. Identifier of the inline message</td>
+</tr>
+<tr>
+<td>text</td>
+<td>String</td>
+<td>Yes</td>
+<td>New text of the message, 1-4096 characters after entities parsing</td>
+</tr>
+<tr>
+<td>parse_mode</td>
+<td>String</td>
+<td>Optional</td>
+<td>Mode for parsing entities in the message text. See <a href="#formatting-options">formatting options</a> for more details.</td>
+</tr>
+<tr>
+<td>entities</td>
+<td>Array of <a href="#messageentity">MessageEntity</a></td>
+<td>Optional</td>
+<td>A JSON-serialized list of special entities that appear in message text, which can be specified instead of <em>parse_mode</em></td>
+</tr>
+<tr>
+<td>link_preview_options</td>
+<td><a href="#linkpreviewoptions">LinkPreviewOptions</a></td>
+<td>Optional</td>
+<td>Link preview generation options for the message</td>
+</tr>
+<tr>
+<td>reply_markup</td>
+<td><a href="#inlinekeyboardmarkup">InlineKeyboardMarkup</a></td>
+<td>Optional</td>
+<td>A JSON-serialized object for an <a href="/bots/features#inline-keyboards">inline keyboard</a>.</td>
+</tr>
+</tbody>
+</table>
+<h4><a class="anchor" name="editmessagecaption" href="#editmessagecaption"><i class="anchor-icon"></i></a>editMessageCaption</h4>
+<p>Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited <a href="#message">Message</a> is returned, otherwise <em>True</em> is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within <strong>48 hours</strong> from the time they were sent.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>business_connection_id</td>
+<td>String</td>
+<td>Optional</td>
+<td>Unique identifier of the business connection on behalf of which the message to be edited was sent</td>
+</tr>
+<tr>
+<td>chat_id</td>
+<td>Integer or String</td>
+<td>Optional</td>
+<td>Required if <em>inline_message_id</em> is not specified. Unique identifier for the target chat or username of the target channel (in the format <code>@channelusername</code>)</td>
+</tr>
+<tr>
+<td>message_id</td>
+<td>Integer</td>
+<td>Optional</td>
+<td>Required if <em>inline_message_id</em> is not specified. Identifier of the message to edit</td>
+</tr>
+<tr>
+<td>inline_message_id</td>
+<td>String</td>
+<td>Optional</td>
+<td>Required if <em>chat_id</em> and <em>message_id</em> are not specified. Identifier of the inline message</td>
+</tr>
+<tr>
+<td>caption</td>
+<td>String</td>
+<td>Optional</td>
+<td>New caption of the message, 0-1024 characters after entities parsing</td>
+</tr>
+<tr>
+<td>parse_mode</td>
+<td>String</td>
+<td>Optional</td>
+<td>Mode for parsing entities in the message caption. See <a href="#formatting-options">formatting options</a> for more details.</td>
+</tr>
+<tr>
+<td>caption_entities</td>
+<td>Array of <a href="#messageentity">MessageEntity</a></td>
+<td>Optional</td>
+<td>A JSON-serialized list of special entities that appear in the caption, which can be specified instead of <em>parse_mode</em></td>
+</tr>
+<tr>
+<td>show_caption_above_media</td>
+<td>Boolean</td>
+<td>Optional</td>
+<td>Pass <em>True</em>, if the caption must be shown above the message media. Supported only for animation, photo and video messages.</td>
+</tr>
+<tr>
+<td>reply_markup</td>
+<td><a href="#inlinekeyboardmarkup">InlineKeyboardMarkup</a></td>
+<td>Optional</td>
+<td>A JSON-serialized object for an <a href="/bots/features#inline-keyboards">inline keyboard</a>.</td>
+</tr>
+</tbody>
+</table>
+<h4><a class="anchor" name="editmessagemedia" href="#editmessagemedia"><i class="anchor-icon"></i></a>editMessageMedia</h4>
+<p>Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can&#39;t be uploaded; use a previously uploaded file via its file_id or specify a URL. On success, if the edited message is not an inline message, the edited <a href="#message">Message</a> is returned, otherwise <em>True</em> is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within <strong>48 hours</strong> from the time they were sent.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>business_connection_id</td>
+<td>String</td>
+<td>Optional</td>
+<td>Unique identifier of the business connection on behalf of which the message to be edited was sent</td>
+</tr>
+<tr>
+<td>chat_id</td>
+<td>Integer or String</td>
+<td>Optional</td>
+<td>Required if <em>inline_message_id</em> is not specified. Unique identifier for the target chat or username of the target channel (in the format <code>@channelusername</code>)</td>
+</tr>
+<tr>
+<td>message_id</td>
+<td>Integer</td>
+<td>Optional</td>
+<td>Required if <em>inline_message_id</em> is not specified. Identifier of the message to edit</td>
+</tr>
+<tr>
+<td>inline_message_id</td>
+<td>String</td>
+<td>Optional</td>
+<td>Required if <em>chat_id</em> and <em>message_id</em> are not specified. Identifier of the inline message</td>
+</tr>
+<tr>
+<td>media</td>
+<td><a href="#inputmedia">InputMedia</a></td>
+<td>Yes</td>
+<td>A JSON-serialized object for a new media content of the message</td>
+</tr>
+<tr>
+<td>reply_markup</td>
+<td><a href="#inlinekeyboardmarkup">InlineKeyboardMarkup</a></td>
+<td>Optional</td>
+<td>A JSON-serialized object for a new <a href="/bots/features#inline-keyboards">inline keyboard</a>.</td>
+</tr>
+</tbody>
+</table>
+<h4><a class="anchor" name="editmessagelivelocation" href="#editmessagelivelocation"><i class="anchor-icon"></i></a>editMessageLiveLocation</h4>
+<p>Use this method to edit live location messages. A location can be edited until its <em>live_period</em> expires or editing is explicitly disabled by a call to <a href="#stopmessagelivelocation">stopMessageLiveLocation</a>. On success, if the edited message is not an inline message, the edited <a href="#message">Message</a> is returned, otherwise <em>True</em> is returned.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>business_connection_id</td>
+<td>String</td>
+<td>Optional</td>
+<td>Unique identifier of the business connection on behalf of which the message to be edited was sent</td>
+</tr>
+<tr>
+<td>chat_id</td>
+<td>Integer or String</td>
+<td>Optional</td>
+<td>Required if <em>inline_message_id</em> is not specified. Unique identifier for the target chat or username of the target channel (in the format <code>@channelusername</code>)</td>
+</tr>
+<tr>
+<td>message_id</td>
+<td>Integer</td>
+<td>Optional</td>
+<td>Required if <em>inline_message_id</em> is not specified. Identifier of the message to edit</td>
+</tr>
+<tr>
+<td>inline_message_id</td>
+<td>String</td>
+<td>Optional</td>
+<td>Required if <em>chat_id</em> and <em>message_id</em> are not specified. Identifier of the inline message</td>
+</tr>
+<tr>
+<td>latitude</td>
+<td>Float</td>
+<td>Yes</td>
+<td>Latitude of new location</td>
+</tr>
+<tr>
+<td>longitude</td>
+<td>Float</td>
+<td>Yes</td>
+<td>Longitude of new location</td>
+</tr>
+<tr>
+<td>live_period</td>
+<td>Integer</td>
+<td>Optional</td>
+<td>New period in seconds during which the location can be updated, starting from the message send date. If 0x7FFFFFFF is specified, then the location can be updated forever. Otherwise, the new value must not exceed the current <em>live_period</em> by more than a day, and the live location expiration date must remain within the next 90 days. If not specified, then <em>live_period</em> remains unchanged</td>
+</tr>
+<tr>
+<td>horizontal_accuracy</td>
+<td>Float</td>
+<td>Optional</td>
+<td>The radius of uncertainty for the location, measured in meters; 0-1500</td>
+</tr>
+<tr>
+<td>heading</td>
+<td>Integer</td>
+<td>Optional</td>
+<td>Direction in which the user is moving, in degrees. Must be between 1 and 360 if specified.</td>
+</tr>
+<tr>
+<td>proximity_alert_radius</td>
+<td>Integer</td>
+<td>Optional</td>
+<td>The maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified.</td>
+</tr>
+<tr>
+<td>reply_markup</td>
+<td><a href="#inlinekeyboardmarkup">InlineKeyboardMarkup</a></td>
+<td>Optional</td>
+<td>A JSON-serialized object for a new <a href="/bots/features#inline-keyboards">inline keyboard</a>.</td>
+</tr>
+</tbody>
+</table>
+<h4><a class="anchor" name="stopmessagelivelocation" href="#stopmessagelivelocation"><i class="anchor-icon"></i></a>stopMessageLiveLocation</h4>
+<p>Use this method to stop updating a live location message before <em>live_period</em> expires. On success, if the message is not an inline message, the edited <a href="#message">Message</a> is returned, otherwise <em>True</em> is returned.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>business_connection_id</td>
+<td>String</td>
+<td>Optional</td>
+<td>Unique identifier of the business connection on behalf of which the message to be edited was sent</td>
+</tr>
+<tr>
+<td>chat_id</td>
+<td>Integer or String</td>
+<td>Optional</td>
+<td>Required if <em>inline_message_id</em> is not specified. Unique identifier for the target chat or username of the target channel (in the format <code>@channelusername</code>)</td>
+</tr>
+<tr>
+<td>message_id</td>
+<td>Integer</td>
+<td>Optional</td>
+<td>Required if <em>inline_message_id</em> is not specified. Identifier of the message with live location to stop</td>
+</tr>
+<tr>
+<td>inline_message_id</td>
+<td>String</td>
+<td>Optional</td>
+<td>Required if <em>chat_id</em> and <em>message_id</em> are not specified. Identifier of the inline message</td>
+</tr>
+<tr>
+<td>reply_markup</td>
+<td><a href="#inlinekeyboardmarkup">InlineKeyboardMarkup</a></td>
+<td>Optional</td>
+<td>A JSON-serialized object for a new <a href="/bots/features#inline-keyboards">inline keyboard</a>.</td>
+</tr>
+</tbody>
+</table>
+<h4><a class="anchor" name="editmessagechecklist" href="#editmessagechecklist"><i class="anchor-icon"></i></a>editMessageChecklist</h4>
+<p>Use this method to edit a checklist on behalf of a connected business account. On success, the edited <a href="#message">Message</a> is returned.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>business_connection_id</td>
+<td>String</td>
+<td>Yes</td>
+<td>Unique identifier of the business connection on behalf of which the message will be sent</td>
+</tr>
+<tr>
+<td>chat_id</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>Unique identifier for the target chat</td>
+</tr>
+<tr>
+<td>message_id</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>Unique identifier for the target message</td>
+</tr>
+<tr>
+<td>checklist</td>
+<td><a href="#inputchecklist">InputChecklist</a></td>
+<td>Yes</td>
+<td>A JSON-serialized object for the new checklist</td>
+</tr>
+<tr>
+<td>reply_markup</td>
+<td><a href="#inlinekeyboardmarkup">InlineKeyboardMarkup</a></td>
+<td>Optional</td>
+<td>A JSON-serialized object for the new <a href="/bots/features#inline-keyboards">inline keyboard</a> for the message</td>
+</tr>
+</tbody>
+</table>
+<h4><a class="anchor" name="editmessagereplymarkup" href="#editmessagereplymarkup"><i class="anchor-icon"></i></a>editMessageReplyMarkup</h4>
+<p>Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited <a href="#message">Message</a> is returned, otherwise <em>True</em> is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within <strong>48 hours</strong> from the time they were sent.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>business_connection_id</td>
+<td>String</td>
+<td>Optional</td>
+<td>Unique identifier of the business connection on behalf of which the message to be edited was sent</td>
+</tr>
+<tr>
+<td>chat_id</td>
+<td>Integer or String</td>
+<td>Optional</td>
+<td>Required if <em>inline_message_id</em> is not specified. Unique identifier for the target chat or username of the target channel (in the format <code>@channelusername</code>)</td>
+</tr>
+<tr>
+<td>message_id</td>
+<td>Integer</td>
+<td>Optional</td>
+<td>Required if <em>inline_message_id</em> is not specified. Identifier of the message to edit</td>
+</tr>
+<tr>
+<td>inline_message_id</td>
+<td>String</td>
+<td>Optional</td>
+<td>Required if <em>chat_id</em> and <em>message_id</em> are not specified. Identifier of the inline message</td>
+</tr>
+<tr>
+<td>reply_markup</td>
+<td><a href="#inlinekeyboardmarkup">InlineKeyboardMarkup</a></td>
+<td>Optional</td>
+<td>A JSON-serialized object for an <a href="/bots/features#inline-keyboards">inline keyboard</a>.</td>
+</tr>
+</tbody>
+</table>
+<h4><a class="anchor" name="stoppoll" href="#stoppoll"><i class="anchor-icon"></i></a>stopPoll</h4>
+<p>Use this method to stop a poll which was sent by the bot. On success, the stopped <a href="#poll">Poll</a> is returned.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>business_connection_id</td>
+<td>String</td>
+<td>Optional</td>
+<td>Unique identifier of the business connection on behalf of which the message to be edited was sent</td>
+</tr>
+<tr>
+<td>chat_id</td>
+<td>Integer or String</td>
+<td>Yes</td>
+<td>Unique identifier for the target chat or username of the target channel (in the format <code>@channelusername</code>)</td>
+</tr>
+<tr>
+<td>message_id</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>Identifier of the original message with the poll</td>
+</tr>
+<tr>
+<td>reply_markup</td>
+<td><a href="#inlinekeyboardmarkup">InlineKeyboardMarkup</a></td>
+<td>Optional</td>
+<td>A JSON-serialized object for a new message <a href="/bots/features#inline-keyboards">inline keyboard</a>.</td>
+</tr>
+</tbody>
+</table>
+<h4><a class="anchor" name="approvesuggestedpost" href="#approvesuggestedpost"><i class="anchor-icon"></i></a>approveSuggestedPost</h4>
+<p>Use this method to approve a suggested post in a direct messages chat. The bot must have the &#39;can_post_messages&#39; administrator right in the corresponding channel chat. Returns <em>True</em> on success.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>chat_id</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>Unique identifier for the target direct messages chat</td>
+</tr>
+<tr>
+<td>message_id</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>Identifier of a suggested post message to approve</td>
+</tr>
+<tr>
+<td>send_date</td>
+<td>Integer</td>
+<td>Optional</td>
+<td>Point in time (Unix timestamp) when the post is expected to be published; omit if the date has already been specified when the suggested post was created. If specified, then the date must be not more than 2678400 seconds (30 days) in the future</td>
+</tr>
+</tbody>
+</table>
+<h4><a class="anchor" name="declinesuggestedpost" href="#declinesuggestedpost"><i class="anchor-icon"></i></a>declineSuggestedPost</h4>
+<p>Use this method to decline a suggested post in a direct messages chat. The bot must have the &#39;can_manage_direct_messages&#39; administrator right in the corresponding channel chat. Returns <em>True</em> on success.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>chat_id</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>Unique identifier for the target direct messages chat</td>
+</tr>
+<tr>
+<td>message_id</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>Identifier of a suggested post message to decline</td>
+</tr>
+<tr>
+<td>comment</td>
+<td>String</td>
+<td>Optional</td>
+<td>Comment for the creator of the suggested post; 0-128 characters</td>
+</tr>
+</tbody>
+</table>
+<h4><a class="anchor" name="deletemessage" href="#deletemessage"><i class="anchor-icon"></i></a>deleteMessage</h4>
+<p>Use this method to delete a message, including service messages, with the following limitations:<br>- A message can only be deleted if it was sent less than 48 hours ago.<br>- Service messages about a supergroup, channel, or forum topic creation can&#39;t be deleted.<br>- A dice message in a private chat can only be deleted if it was sent more than 24 hours ago.<br>- Bots can delete outgoing messages in private chats, groups, and supergroups.<br>- Bots can delete incoming messages in private chats.<br>- Bots granted <em>can_post_messages</em> permissions can delete outgoing messages in channels.<br>- If the bot is an administrator of a group, it can delete any message there.<br>- If the bot has <em>can_delete_messages</em> administrator right in a supergroup or a channel, it can delete any message there.<br>- If the bot has <em>can_manage_direct_messages</em> administrator right in a channel, it can delete any message in the corresponding direct messages chat.<br>Returns <em>True</em> on success.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>chat_id</td>
+<td>Integer or String</td>
+<td>Yes</td>
+<td>Unique identifier for the target chat or username of the target channel (in the format <code>@channelusername</code>)</td>
+</tr>
+<tr>
+<td>message_id</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>Identifier of the message to delete</td>
+</tr>
+</tbody>
+</table>
+<h4><a class="anchor" name="deletemessages" href="#deletemessages"><i class="anchor-icon"></i></a>deleteMessages</h4>
+<p>Use this method to delete multiple messages simultaneously. If some of the specified messages can&#39;t be found, they are skipped. Returns <em>True</em> on success.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>chat_id</td>
+<td>Integer or String</td>
+<td>Yes</td>
+<td>Unique identifier for the target chat or username of the target channel (in the format <code>@channelusername</code>)</td>
+</tr>
+<tr>
+<td>message_ids</td>
+<td>Array of Integer</td>
+<td>Yes</td>
+<td>A JSON-serialized list of 1-100 identifiers of messages to delete. See <a href="#deletemessage">deleteMessage</a> for limitations on which messages can be deleted</td>
+</tr>
+</tbody>
+</table>

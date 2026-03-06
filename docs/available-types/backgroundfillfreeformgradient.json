@@ -1,0 +1,27 @@
+{
+  "name": "BackgroundFillFreeformGradient",
+  "anchor": "backgroundfillfreeformgradient",
+  "description": [
+    "The background is a freeform gradient that rotates after every message in the chat."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "type",
+        "type": "String",
+        "description": "Type of the background fill, always “freeform_gradient”"
+      },
+      {
+        "field": "colors",
+        "type": "Array of Integer",
+        "description": "A list of the 3 or 4 base colors that are used to generate the freeform gradient in the RGB24 format"
+      }
+    ]
+  },
+  "notes": []
+}

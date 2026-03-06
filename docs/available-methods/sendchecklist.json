@@ -1,0 +1,66 @@
+{
+  "name": "sendChecklist",
+  "anchor": "sendchecklist",
+  "description": [
+    "Use this method to send a checklist on behalf of a connected business account. On success, the sent Message is returned."
+  ],
+  "table": {
+    "headers": [
+      "Parameter",
+      "Type",
+      "Required",
+      "Description"
+    ],
+    "rows": [
+      {
+        "parameter": "business_connection_id",
+        "type": "String",
+        "required": "Yes",
+        "description": "Unique identifier of the business connection on behalf of which the message will be sent"
+      },
+      {
+        "parameter": "chat_id",
+        "type": "Integer",
+        "required": "Yes",
+        "description": "Unique identifier for the target chat"
+      },
+      {
+        "parameter": "checklist",
+        "type": "InputChecklist",
+        "required": "Yes",
+        "description": "A JSON-serialized object for the checklist to send"
+      },
+      {
+        "parameter": "disable_notification",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Sends the message silently. Users will receive a notification with no sound."
+      },
+      {
+        "parameter": "protect_content",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Protects the contents of the sent message from forwarding and saving"
+      },
+      {
+        "parameter": "message_effect_id",
+        "type": "String",
+        "required": "Optional",
+        "description": "Unique identifier of the message effect to be added to the message"
+      },
+      {
+        "parameter": "reply_parameters",
+        "type": "ReplyParameters",
+        "required": "Optional",
+        "description": "A JSON-serialized object for description of the message to reply to"
+      },
+      {
+        "parameter": "reply_markup",
+        "type": "InlineKeyboardMarkup",
+        "required": "Optional",
+        "description": "A JSON-serialized object for an inline keyboard"
+      }
+    ]
+  },
+  "notes": []
+}

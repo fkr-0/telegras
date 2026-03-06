@@ -1,0 +1,37 @@
+{
+  "name": "InputTextMessageContent",
+  "anchor": "inputtextmessagecontent",
+  "description": [
+    "Represents the content of a text message to be sent as the result of an inline query."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "message_text",
+        "type": "String",
+        "description": "Text of the message to be sent, 1-4096 characters"
+      },
+      {
+        "field": "parse_mode",
+        "type": "String",
+        "description": "Optional . Mode for parsing entities in the message text. See formatting options for more details."
+      },
+      {
+        "field": "entities",
+        "type": "Array of MessageEntity",
+        "description": "Optional . List of special entities that appear in message text, which can be specified instead of parse_mode"
+      },
+      {
+        "field": "link_preview_options",
+        "type": "LinkPreviewOptions",
+        "description": "Optional . Link preview generation options for the message"
+      }
+    ]
+  },
+  "notes": []
+}

@@ -1,0 +1,57 @@
+{
+  "name": "Chat",
+  "anchor": "chat",
+  "description": [
+    "This object represents a chat."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "id",
+        "type": "Integer",
+        "description": "Unique identifier for this chat. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this identifier."
+      },
+      {
+        "field": "type",
+        "type": "String",
+        "description": "Type of the chat, can be either “private”, “group”, “supergroup” or “channel”"
+      },
+      {
+        "field": "title",
+        "type": "String",
+        "description": "Optional . Title, for supergroups, channels and group chats"
+      },
+      {
+        "field": "username",
+        "type": "String",
+        "description": "Optional . Username, for private chats, supergroups and channels if available"
+      },
+      {
+        "field": "first_name",
+        "type": "String",
+        "description": "Optional . First name of the other party in a private chat"
+      },
+      {
+        "field": "last_name",
+        "type": "String",
+        "description": "Optional . Last name of the other party in a private chat"
+      },
+      {
+        "field": "is_forum",
+        "type": "True",
+        "description": "Optional . True , if the supergroup chat is a forum (has topics enabled)"
+      },
+      {
+        "field": "is_direct_messages",
+        "type": "True",
+        "description": "Optional . True , if the chat is the direct messages chat of a channel"
+      }
+    ]
+  },
+  "notes": []
+}

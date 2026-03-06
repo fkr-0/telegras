@@ -1,0 +1,42 @@
+{
+  "name": "ChatShared",
+  "anchor": "chatshared",
+  "description": [
+    "This object contains information about a chat that was shared with the bot using a KeyboardButtonRequestChat button."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "request_id",
+        "type": "Integer",
+        "description": "Identifier of the request"
+      },
+      {
+        "field": "chat_id",
+        "type": "Integer",
+        "description": "Identifier of the shared chat. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier. The bot may not have access to the chat and could be unable to use this identifier, unless the chat is already known to the bot by some other means."
+      },
+      {
+        "field": "title",
+        "type": "String",
+        "description": "Optional . Title of the chat, if the title was requested by the bot."
+      },
+      {
+        "field": "username",
+        "type": "String",
+        "description": "Optional . Username of the chat, if the username was requested by the bot and available."
+      },
+      {
+        "field": "photo",
+        "type": "Array of PhotoSize",
+        "description": "Optional . Available sizes of the chat photo, if the photo was requested by the bot"
+      }
+    ]
+  },
+  "notes": []
+}

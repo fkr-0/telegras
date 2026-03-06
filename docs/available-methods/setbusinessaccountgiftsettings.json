@@ -1,0 +1,36 @@
+{
+  "name": "setBusinessAccountGiftSettings",
+  "anchor": "setbusinessaccountgiftsettings",
+  "description": [
+    "Changes the privacy settings pertaining to incoming gifts in a managed business account. Requires the can_change_gift_settings business bot right. Returns True on success."
+  ],
+  "table": {
+    "headers": [
+      "Parameter",
+      "Type",
+      "Required",
+      "Description"
+    ],
+    "rows": [
+      {
+        "parameter": "business_connection_id",
+        "type": "String",
+        "required": "Yes",
+        "description": "Unique identifier of the business connection"
+      },
+      {
+        "parameter": "show_gift_button",
+        "type": "Boolean",
+        "required": "Yes",
+        "description": "Pass True , if a button for sending a gift to the user or by the business account must always be shown in the input field"
+      },
+      {
+        "parameter": "accepted_gift_types",
+        "type": "AcceptedGiftTypes",
+        "required": "Yes",
+        "description": "Types of gifts accepted by the business account"
+      }
+    ]
+  },
+  "notes": []
+}

@@ -1,0 +1,27 @@
+{
+  "name": "ReactionType",
+  "anchor": "reactiontype",
+  "description": [
+    "This object describes the type of a reaction. Currently, it can be one of"
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "type",
+        "type": "String",
+        "description": "Type of the reaction, always “emoji”"
+      },
+      {
+        "field": "emoji",
+        "type": "String",
+        "description": "Reaction emoji. Currently, it can be one of \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \", \" \""
+      }
+    ]
+  },
+  "notes": []
+}

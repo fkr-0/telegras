@@ -1,0 +1,30 @@
+{
+  "name": "getChatMember",
+  "anchor": "getchatmember",
+  "description": [
+    "Use this method to get information about a member of a chat. The method is only guaranteed to work for other users if the bot is an administrator in the chat. Returns a ChatMember object on success."
+  ],
+  "table": {
+    "headers": [
+      "Parameter",
+      "Type",
+      "Required",
+      "Description"
+    ],
+    "rows": [
+      {
+        "parameter": "chat_id",
+        "type": "Integer or String",
+        "required": "Yes",
+        "description": "Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername )"
+      },
+      {
+        "parameter": "user_id",
+        "type": "Integer",
+        "required": "Yes",
+        "description": "Unique identifier of the target user"
+      }
+    ]
+  },
+  "notes": []
+}

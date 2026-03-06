@@ -1,0 +1,32 @@
+{
+  "name": "BusinessIntro",
+  "anchor": "businessintro",
+  "description": [
+    "Contains information about the start page settings of a Telegram Business account."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "title",
+        "type": "String",
+        "description": "Optional . Title text of the business intro"
+      },
+      {
+        "field": "message",
+        "type": "String",
+        "description": "Optional . Message text of the business intro"
+      },
+      {
+        "field": "sticker",
+        "type": "Sticker",
+        "description": "Optional . Sticker of the business intro"
+      }
+    ]
+  },
+  "notes": []
+}

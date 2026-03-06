@@ -1,0 +1,22 @@
+{
+  "name": "StarTransactions",
+  "anchor": "startransactions",
+  "description": [
+    "Contains a list of Telegram Star transactions."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "transactions",
+        "type": "Array of StarTransaction",
+        "description": "The list of transactions"
+      }
+    ]
+  },
+  "notes": []
+}

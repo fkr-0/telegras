@@ -1,0 +1,42 @@
+{
+  "name": "ForumTopic",
+  "anchor": "forumtopic",
+  "description": [
+    "This object represents a forum topic."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "message_thread_id",
+        "type": "Integer",
+        "description": "Unique identifier of the forum topic"
+      },
+      {
+        "field": "name",
+        "type": "String",
+        "description": "Name of the topic"
+      },
+      {
+        "field": "icon_color",
+        "type": "Integer",
+        "description": "Color of the topic icon in RGB format"
+      },
+      {
+        "field": "icon_custom_emoji_id",
+        "type": "String",
+        "description": "Optional . Unique identifier of the custom emoji shown as the topic icon"
+      },
+      {
+        "field": "is_name_implicit",
+        "type": "True",
+        "description": "Optional . True , if the name of the topic wasn't specified explicitly by its creator and likely needs to be changed by the bot"
+      }
+    ]
+  },
+  "notes": []
+}

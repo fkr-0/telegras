@@ -1,0 +1,22 @@
+{
+  "name": "ReactionTypePaid",
+  "anchor": "reactiontypepaid",
+  "description": [
+    "The reaction is paid."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "type",
+        "type": "String",
+        "description": "Type of the reaction, always “paid”"
+      }
+    ]
+  },
+  "notes": []
+}

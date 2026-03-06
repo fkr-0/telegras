@@ -1,0 +1,32 @@
+{
+  "name": "Birthdate",
+  "anchor": "birthdate",
+  "description": [
+    "Describes the birthdate of a user."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "day",
+        "type": "Integer",
+        "description": "Day of the user's birth; 1-31"
+      },
+      {
+        "field": "month",
+        "type": "Integer",
+        "description": "Month of the user's birth; 1-12"
+      },
+      {
+        "field": "year",
+        "type": "Integer",
+        "description": "Optional . Year of the user's birth"
+      }
+    ]
+  },
+  "notes": []
+}

@@ -1,0 +1,37 @@
+{
+  "name": "ChatMember",
+  "anchor": "chatmember",
+  "description": [
+    "This object contains information about one member of a chat. Currently, the following 6 types of chat members are supported:"
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "status",
+        "type": "String",
+        "description": "The member's status in the chat, always “creator”"
+      },
+      {
+        "field": "user",
+        "type": "User",
+        "description": "Information about the user"
+      },
+      {
+        "field": "is_anonymous",
+        "type": "Boolean",
+        "description": "True , if the user's presence in the chat is hidden"
+      },
+      {
+        "field": "custom_title",
+        "type": "String",
+        "description": "Optional . Custom title for this user"
+      }
+    ]
+  },
+  "notes": []
+}

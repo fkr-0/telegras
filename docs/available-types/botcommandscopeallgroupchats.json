@@ -1,0 +1,22 @@
+{
+  "name": "BotCommandScopeAllGroupChats",
+  "anchor": "botcommandscopeallgroupchats",
+  "description": [
+    "Represents the scope of bot commands, covering all group and supergroup chats."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "type",
+        "type": "String",
+        "description": "Scope type, must be all_group_chats"
+      }
+    ]
+  },
+  "notes": []
+}

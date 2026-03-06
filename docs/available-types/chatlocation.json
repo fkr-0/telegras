@@ -1,0 +1,27 @@
+{
+  "name": "ChatLocation",
+  "anchor": "chatlocation",
+  "description": [
+    "Represents a location to which a chat is connected."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "location",
+        "type": "Location",
+        "description": "The location to which the supergroup is connected. Can't be a live location."
+      },
+      {
+        "field": "address",
+        "type": "String",
+        "description": "Location address; 1-64 characters, as defined by the chat owner"
+      }
+    ]
+  },
+  "notes": []
+}

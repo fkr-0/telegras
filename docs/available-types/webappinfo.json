@@ -1,0 +1,22 @@
+{
+  "name": "WebAppInfo",
+  "anchor": "webappinfo",
+  "description": [
+    "Describes a Web App ."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "url",
+        "type": "String",
+        "description": "An HTTPS URL of a Web App to be opened with additional data as specified in Initializing Web Apps"
+      }
+    ]
+  },
+  "notes": []
+}

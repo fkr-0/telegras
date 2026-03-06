@@ -1,0 +1,22 @@
+{
+  "name": "RevenueWithdrawalStatePending",
+  "anchor": "revenuewithdrawalstatepending",
+  "description": [
+    "The withdrawal is in progress."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "type",
+        "type": "String",
+        "description": "Type of the state, always “pending”"
+      }
+    ]
+  },
+  "notes": []
+}

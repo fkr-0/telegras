@@ -1,0 +1,32 @@
+{
+  "name": "InputPollOption",
+  "anchor": "inputpolloption",
+  "description": [
+    "This object contains information about one answer option in a poll to be sent."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "text",
+        "type": "String",
+        "description": "Option text, 1-100 characters"
+      },
+      {
+        "field": "text_parse_mode",
+        "type": "String",
+        "description": "Optional . Mode for parsing entities in the text. See formatting options for more details. Currently, only custom emoji entities are allowed"
+      },
+      {
+        "field": "text_entities",
+        "type": "Array of MessageEntity",
+        "description": "Optional . A JSON-serialized list of special entities that appear in the poll option text. It can be specified instead of text_parse_mode"
+      }
+    ]
+  },
+  "notes": []
+}

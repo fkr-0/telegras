@@ -1,0 +1,22 @@
+{
+  "name": "VideoChatEnded",
+  "anchor": "videochatended",
+  "description": [
+    "This object represents a service message about a video chat ended in the chat."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "duration",
+        "type": "Integer",
+        "description": "Video chat duration in seconds"
+      }
+    ]
+  },
+  "notes": []
+}

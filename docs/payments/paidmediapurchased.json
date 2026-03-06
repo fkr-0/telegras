@@ -1,0 +1,27 @@
+{
+  "name": "PaidMediaPurchased",
+  "anchor": "paidmediapurchased",
+  "description": [
+    "This object contains information about a paid media purchase."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "from",
+        "type": "User",
+        "description": "User who purchased the media"
+      },
+      {
+        "field": "paid_media_payload",
+        "type": "String",
+        "description": "Bot-specified paid media payload"
+      }
+    ]
+  },
+  "notes": []
+}

@@ -1,0 +1,62 @@
+{
+  "name": "Audio",
+  "anchor": "audio",
+  "description": [
+    "This object represents an audio file to be treated as music by the Telegram clients."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "file_id",
+        "type": "String",
+        "description": "Identifier for this file, which can be used to download or reuse the file"
+      },
+      {
+        "field": "file_unique_id",
+        "type": "String",
+        "description": "Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file."
+      },
+      {
+        "field": "duration",
+        "type": "Integer",
+        "description": "Duration of the audio in seconds as defined by the sender"
+      },
+      {
+        "field": "performer",
+        "type": "String",
+        "description": "Optional . Performer of the audio as defined by the sender or by audio tags"
+      },
+      {
+        "field": "title",
+        "type": "String",
+        "description": "Optional . Title of the audio as defined by the sender or by audio tags"
+      },
+      {
+        "field": "file_name",
+        "type": "String",
+        "description": "Optional . Original filename as defined by the sender"
+      },
+      {
+        "field": "mime_type",
+        "type": "String",
+        "description": "Optional . MIME type of the file as defined by the sender"
+      },
+      {
+        "field": "file_size",
+        "type": "Integer",
+        "description": "Optional . File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value."
+      },
+      {
+        "field": "thumbnail",
+        "type": "PhotoSize",
+        "description": "Optional . Thumbnail of the album cover to which the music file belongs"
+      }
+    ]
+  },
+  "notes": []
+}

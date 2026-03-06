@@ -1,0 +1,22 @@
+{
+  "name": "ChatBoostAdded",
+  "anchor": "chatboostadded",
+  "description": [
+    "This object represents a service message about a user boosting a chat."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "boost_count",
+        "type": "Integer",
+        "description": "Number of boosts added by the user"
+      }
+    ]
+  },
+  "notes": []
+}

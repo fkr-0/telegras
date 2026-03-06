@@ -1,0 +1,24 @@
+{
+  "name": "getCustomEmojiStickers",
+  "anchor": "getcustomemojistickers",
+  "description": [
+    "Use this method to get information about custom emoji stickers by their identifiers. Returns an Array of Sticker objects."
+  ],
+  "table": {
+    "headers": [
+      "Parameter",
+      "Type",
+      "Required",
+      "Description"
+    ],
+    "rows": [
+      {
+        "parameter": "custom_emoji_ids",
+        "type": "Array of String",
+        "required": "Yes",
+        "description": "A JSON-serialized list of custom emoji identifiers. At most 200 custom emoji identifiers can be specified."
+      }
+    ]
+  },
+  "notes": []
+}

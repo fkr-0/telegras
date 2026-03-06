@@ -1,0 +1,27 @@
+{
+  "name": "PaidMediaPhoto",
+  "anchor": "paidmediaphoto",
+  "description": [
+    "The paid media is a photo."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "type",
+        "type": "String",
+        "description": "Type of the paid media, always “photo”"
+      },
+      {
+        "field": "photo",
+        "type": "Array of PhotoSize",
+        "description": "The photo"
+      }
+    ]
+  },
+  "notes": []
+}

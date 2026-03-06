@@ -1,0 +1,62 @@
+{
+  "name": "WebhookInfo",
+  "anchor": "webhookinfo",
+  "description": [
+    "Describes the current status of a webhook."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "url",
+        "type": "String",
+        "description": "Webhook URL, may be empty if webhook is not set up"
+      },
+      {
+        "field": "has_custom_certificate",
+        "type": "Boolean",
+        "description": "True , if a custom certificate was provided for webhook certificate checks"
+      },
+      {
+        "field": "pending_update_count",
+        "type": "Integer",
+        "description": "Number of updates awaiting delivery"
+      },
+      {
+        "field": "ip_address",
+        "type": "String",
+        "description": "Optional . Currently used webhook IP address"
+      },
+      {
+        "field": "last_error_date",
+        "type": "Integer",
+        "description": "Optional . Unix time for the most recent error that happened when trying to deliver an update via webhook"
+      },
+      {
+        "field": "last_error_message",
+        "type": "String",
+        "description": "Optional . Error message in human-readable format for the most recent error that happened when trying to deliver an update via webhook"
+      },
+      {
+        "field": "last_synchronization_error_date",
+        "type": "Integer",
+        "description": "Optional . Unix time of the most recent error that happened when trying to synchronize available updates with Telegram datacenters"
+      },
+      {
+        "field": "max_connections",
+        "type": "Integer",
+        "description": "Optional . The maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery"
+      },
+      {
+        "field": "allowed_updates",
+        "type": "Array of String",
+        "description": "Optional . A list of update types the bot is subscribed to. Defaults to all update types except chat_member"
+      }
+    ]
+  },
+  "notes": []
+}

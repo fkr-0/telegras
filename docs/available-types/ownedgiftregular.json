@@ -1,0 +1,92 @@
+{
+  "name": "OwnedGiftRegular",
+  "anchor": "ownedgiftregular",
+  "description": [
+    "Describes a regular gift owned by a user or a chat."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "type",
+        "type": "String",
+        "description": "Type of the gift, always “regular”"
+      },
+      {
+        "field": "gift",
+        "type": "Gift",
+        "description": "Information about the regular gift"
+      },
+      {
+        "field": "owned_gift_id",
+        "type": "String",
+        "description": "Optional . Unique identifier of the gift for the bot; for gifts received on behalf of business accounts only"
+      },
+      {
+        "field": "sender_user",
+        "type": "User",
+        "description": "Optional . Sender of the gift if it is a known user"
+      },
+      {
+        "field": "send_date",
+        "type": "Integer",
+        "description": "Date the gift was sent in Unix time"
+      },
+      {
+        "field": "text",
+        "type": "String",
+        "description": "Optional . Text of the message that was added to the gift"
+      },
+      {
+        "field": "entities",
+        "type": "Array of MessageEntity",
+        "description": "Optional . Special entities that appear in the text"
+      },
+      {
+        "field": "is_private",
+        "type": "True",
+        "description": "Optional . True , if the sender and gift text are shown only to the gift receiver; otherwise, everyone will be able to see them"
+      },
+      {
+        "field": "is_saved",
+        "type": "True",
+        "description": "Optional . True , if the gift is displayed on the account's profile page; for gifts received on behalf of business accounts only"
+      },
+      {
+        "field": "can_be_upgraded",
+        "type": "True",
+        "description": "Optional . True , if the gift can be upgraded to a unique gift; for gifts received on behalf of business accounts only"
+      },
+      {
+        "field": "was_refunded",
+        "type": "True",
+        "description": "Optional . True , if the gift was refunded and isn't available anymore"
+      },
+      {
+        "field": "convert_star_count",
+        "type": "Integer",
+        "description": "Optional . Number of Telegram Stars that can be claimed by the receiver instead of the gift; omitted if the gift cannot be converted to Telegram Stars; for gifts received on behalf of business accounts only"
+      },
+      {
+        "field": "prepaid_upgrade_star_count",
+        "type": "Integer",
+        "description": "Optional . Number of Telegram Stars that were paid for the ability to upgrade the gift"
+      },
+      {
+        "field": "is_upgrade_separate",
+        "type": "True",
+        "description": "Optional . True , if the gift's upgrade was purchased after the gift was sent; for gifts received on behalf of business accounts only"
+      },
+      {
+        "field": "unique_gift_number",
+        "type": "Integer",
+        "description": "Optional . Unique number reserved for this gift when upgraded. See the number field in UniqueGift"
+      }
+    ]
+  },
+  "notes": []
+}

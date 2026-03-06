@@ -1,0 +1,54 @@
+{
+  "name": "answerInlineQuery",
+  "anchor": "answerinlinequery",
+  "description": [
+    "Use this method to send answers to an inline query. On success, True is returned. No more than 50 results per query are allowed."
+  ],
+  "table": {
+    "headers": [
+      "Parameter",
+      "Type",
+      "Required",
+      "Description"
+    ],
+    "rows": [
+      {
+        "parameter": "inline_query_id",
+        "type": "String",
+        "required": "Yes",
+        "description": "Unique identifier for the answered query"
+      },
+      {
+        "parameter": "results",
+        "type": "Array of InlineQueryResult",
+        "required": "Yes",
+        "description": "A JSON-serialized array of results for the inline query"
+      },
+      {
+        "parameter": "cache_time",
+        "type": "Integer",
+        "required": "Optional",
+        "description": "The maximum amount of time in seconds that the result of the inline query may be cached on the server. Defaults to 300."
+      },
+      {
+        "parameter": "is_personal",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True if results may be cached on the server side only for the user that sent the query. By default, results may be returned to any user who sends the same query."
+      },
+      {
+        "parameter": "next_offset",
+        "type": "String",
+        "required": "Optional",
+        "description": "Pass the offset that a client should send in the next query with the same text to receive more results. Pass an empty string if there are no more results or if you don't support pagination. Offset length can't exceed 64 bytes."
+      },
+      {
+        "parameter": "button",
+        "type": "InlineQueryResultsButton",
+        "required": "Optional",
+        "description": "A JSON-serialized object describing a button to be shown above inline query results"
+      }
+    ]
+  },
+  "notes": []
+}

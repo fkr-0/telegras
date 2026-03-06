@@ -1,0 +1,37 @@
+{
+  "name": "ChatMemberOwner",
+  "anchor": "chatmemberowner",
+  "description": [
+    "Represents a chat member that owns the chat and has all administrator privileges."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "status",
+        "type": "String",
+        "description": "The member's status in the chat, always “creator”"
+      },
+      {
+        "field": "user",
+        "type": "User",
+        "description": "Information about the user"
+      },
+      {
+        "field": "is_anonymous",
+        "type": "Boolean",
+        "description": "True , if the user's presence in the chat is hidden"
+      },
+      {
+        "field": "custom_title",
+        "type": "String",
+        "description": "Optional . Custom title for this user"
+      }
+    ]
+  },
+  "notes": []
+}

@@ -1,0 +1,27 @@
+{
+  "name": "ChatBoostSource",
+  "anchor": "chatboostsource",
+  "description": [
+    "This object describes the source of a chat boost. It can be one of"
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "source",
+        "type": "String",
+        "description": "Source of the boost, always “premium”"
+      },
+      {
+        "field": "user",
+        "type": "User",
+        "description": "User that boosted the chat"
+      }
+    ]
+  },
+  "notes": []
+}

@@ -1,0 +1,24 @@
+{
+  "name": "getChatAdministrators",
+  "anchor": "getchatadministrators",
+  "description": [
+    "Use this method to get a list of administrators in a chat, which aren't bots. Returns an Array of ChatMember objects."
+  ],
+  "table": {
+    "headers": [
+      "Parameter",
+      "Type",
+      "Required",
+      "Description"
+    ],
+    "rows": [
+      {
+        "parameter": "chat_id",
+        "type": "Integer or String",
+        "required": "Yes",
+        "description": "Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername )"
+      }
+    ]
+  },
+  "notes": []
+}

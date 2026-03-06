@@ -1,0 +1,22 @@
+{
+  "name": "TransactionPartnerTelegramAds",
+  "anchor": "transactionpartnertelegramads",
+  "description": [
+    "Describes a withdrawal transaction to the Telegram Ads platform."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "type",
+        "type": "String",
+        "description": "Type of the transaction partner, always “telegram_ads”"
+      }
+    ]
+  },
+  "notes": []
+}

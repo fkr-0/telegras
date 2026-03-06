@@ -1,0 +1,67 @@
+{
+  "name": "InlineQueryResult",
+  "anchor": "inlinequeryresult",
+  "description": [
+    "This object represents one result of an inline query. Telegram clients currently support results of the following 20 types:"
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "type",
+        "type": "String",
+        "description": "Type of the result, must be article"
+      },
+      {
+        "field": "id",
+        "type": "String",
+        "description": "Unique identifier for this result, 1-64 Bytes"
+      },
+      {
+        "field": "title",
+        "type": "String",
+        "description": "Title of the result"
+      },
+      {
+        "field": "input_message_content",
+        "type": "InputMessageContent",
+        "description": "Content of the message to be sent"
+      },
+      {
+        "field": "reply_markup",
+        "type": "InlineKeyboardMarkup",
+        "description": "Optional . Inline keyboard attached to the message"
+      },
+      {
+        "field": "url",
+        "type": "String",
+        "description": "Optional . URL of the result"
+      },
+      {
+        "field": "description",
+        "type": "String",
+        "description": "Optional . Short description of the result"
+      },
+      {
+        "field": "thumbnail_url",
+        "type": "String",
+        "description": "Optional . Url of the thumbnail for the result"
+      },
+      {
+        "field": "thumbnail_width",
+        "type": "Integer",
+        "description": "Optional . Thumbnail width"
+      },
+      {
+        "field": "thumbnail_height",
+        "type": "Integer",
+        "description": "Optional . Thumbnail height"
+      }
+    ]
+  },
+  "notes": []
+}

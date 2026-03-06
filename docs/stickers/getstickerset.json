@@ -1,0 +1,24 @@
+{
+  "name": "getStickerSet",
+  "anchor": "getstickerset",
+  "description": [
+    "Use this method to get a sticker set. On success, a StickerSet object is returned."
+  ],
+  "table": {
+    "headers": [
+      "Parameter",
+      "Type",
+      "Required",
+      "Description"
+    ],
+    "rows": [
+      {
+        "parameter": "name",
+        "type": "String",
+        "required": "Yes",
+        "description": "Name of the sticker set"
+      }
+    ]
+  },
+  "notes": []
+}

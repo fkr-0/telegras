@@ -1,0 +1,72 @@
+{
+  "name": "InlineQueryResultContact",
+  "anchor": "inlinequeryresultcontact",
+  "description": [
+    "Represents a contact with a phone number. By default, this contact will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the contact."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "type",
+        "type": "String",
+        "description": "Type of the result, must be contact"
+      },
+      {
+        "field": "id",
+        "type": "String",
+        "description": "Unique identifier for this result, 1-64 Bytes"
+      },
+      {
+        "field": "phone_number",
+        "type": "String",
+        "description": "Contact's phone number"
+      },
+      {
+        "field": "first_name",
+        "type": "String",
+        "description": "Contact's first name"
+      },
+      {
+        "field": "last_name",
+        "type": "String",
+        "description": "Optional . Contact's last name"
+      },
+      {
+        "field": "vcard",
+        "type": "String",
+        "description": "Optional . Additional data about the contact in the form of a vCard , 0-2048 bytes"
+      },
+      {
+        "field": "reply_markup",
+        "type": "InlineKeyboardMarkup",
+        "description": "Optional . Inline keyboard attached to the message"
+      },
+      {
+        "field": "input_message_content",
+        "type": "InputMessageContent",
+        "description": "Optional . Content of the message to be sent instead of the contact"
+      },
+      {
+        "field": "thumbnail_url",
+        "type": "String",
+        "description": "Optional . Url of the thumbnail for the result"
+      },
+      {
+        "field": "thumbnail_width",
+        "type": "Integer",
+        "description": "Optional . Thumbnail width"
+      },
+      {
+        "field": "thumbnail_height",
+        "type": "Integer",
+        "description": "Optional . Thumbnail height"
+      }
+    ]
+  },
+  "notes": []
+}

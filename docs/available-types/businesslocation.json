@@ -1,0 +1,27 @@
+{
+  "name": "BusinessLocation",
+  "anchor": "businesslocation",
+  "description": [
+    "Contains information about the location of a Telegram Business account."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "address",
+        "type": "String",
+        "description": "Address of the business"
+      },
+      {
+        "field": "location",
+        "type": "Location",
+        "description": "Optional . Location of the business"
+      }
+    ]
+  },
+  "notes": []
+}

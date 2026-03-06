@@ -1,0 +1,22 @@
+{
+  "name": "VideoChatStarted",
+  "anchor": "videochatstarted",
+  "description": [
+    "This object represents a service message about a video chat started in the chat. Currently holds no information."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "duration",
+        "type": "Integer",
+        "description": "Video chat duration in seconds"
+      }
+    ]
+  },
+  "notes": []
+}

@@ -1,0 +1,22 @@
+{
+  "name": "BotCommandScope",
+  "anchor": "botcommandscope",
+  "description": [
+    "This object represents the scope to which bot commands are applied. Currently, the following 7 scopes are supported:"
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "type",
+        "type": "String",
+        "description": "Scope type, must be default"
+      }
+    ]
+  },
+  "notes": []
+}

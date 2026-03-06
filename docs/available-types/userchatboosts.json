@@ -1,0 +1,22 @@
+{
+  "name": "UserChatBoosts",
+  "anchor": "userchatboosts",
+  "description": [
+    "This object represents a list of boosts added to a chat by a user."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "boosts",
+        "type": "Array of ChatBoost",
+        "description": "The list of boosts added to the chat by the user"
+      }
+    ]
+  },
+  "notes": []
+}

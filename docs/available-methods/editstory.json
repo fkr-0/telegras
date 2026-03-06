@@ -1,0 +1,60 @@
+{
+  "name": "editStory",
+  "anchor": "editstory",
+  "description": [
+    "Edits a story previously posted by the bot on behalf of a managed business account. Requires the can_manage_stories business bot right. Returns Story on success."
+  ],
+  "table": {
+    "headers": [
+      "Parameter",
+      "Type",
+      "Required",
+      "Description"
+    ],
+    "rows": [
+      {
+        "parameter": "business_connection_id",
+        "type": "String",
+        "required": "Yes",
+        "description": "Unique identifier of the business connection"
+      },
+      {
+        "parameter": "story_id",
+        "type": "Integer",
+        "required": "Yes",
+        "description": "Unique identifier of the story to edit"
+      },
+      {
+        "parameter": "content",
+        "type": "InputStoryContent",
+        "required": "Yes",
+        "description": "Content of the story"
+      },
+      {
+        "parameter": "caption",
+        "type": "String",
+        "required": "Optional",
+        "description": "Caption of the story, 0-2048 characters after entities parsing"
+      },
+      {
+        "parameter": "parse_mode",
+        "type": "String",
+        "required": "Optional",
+        "description": "Mode for parsing entities in the story caption. See formatting options for more details."
+      },
+      {
+        "parameter": "caption_entities",
+        "type": "Array of MessageEntity",
+        "required": "Optional",
+        "description": "A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode"
+      },
+      {
+        "parameter": "areas",
+        "type": "Array of StoryArea",
+        "required": "Optional",
+        "description": "A JSON-serialized list of clickable areas to be shown on the story"
+      }
+    ]
+  },
+  "notes": []
+}

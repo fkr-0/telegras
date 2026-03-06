@@ -1,0 +1,27 @@
+{
+  "name": "StoryArea",
+  "anchor": "storyarea",
+  "description": [
+    "Describes a clickable area on a story media."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "position",
+        "type": "StoryAreaPosition",
+        "description": "Position of the area"
+      },
+      {
+        "field": "type",
+        "type": "StoryAreaType",
+        "description": "Type of the area"
+      }
+    ]
+  },
+  "notes": []
+}

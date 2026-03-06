@@ -1,0 +1,22 @@
+{
+  "name": "Gifts",
+  "anchor": "gifts",
+  "description": [
+    "This object represent a list of gifts."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "gifts",
+        "type": "Array of Gift",
+        "description": "The list of gifts"
+      }
+    ]
+  },
+  "notes": []
+}

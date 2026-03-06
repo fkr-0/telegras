@@ -1,0 +1,30 @@
+{
+  "name": "verifyUser",
+  "anchor": "verifyuser",
+  "description": [
+    "Verifies a user on behalf of the organization which is represented by the bot. Returns True on success."
+  ],
+  "table": {
+    "headers": [
+      "Parameter",
+      "Type",
+      "Required",
+      "Description"
+    ],
+    "rows": [
+      {
+        "parameter": "user_id",
+        "type": "Integer",
+        "required": "Yes",
+        "description": "Unique identifier of the target user"
+      },
+      {
+        "parameter": "custom_description",
+        "type": "String",
+        "required": "Optional",
+        "description": "Custom description for the verification; 0-70 characters. Must be empty if the organization isn't allowed to provide a custom verification description."
+      }
+    ]
+  },
+  "notes": []
+}

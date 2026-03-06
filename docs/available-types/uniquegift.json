@@ -1,0 +1,77 @@
+{
+  "name": "UniqueGift",
+  "anchor": "uniquegift",
+  "description": [
+    "This object describes a unique gift that was upgraded from a regular gift."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "gift_id",
+        "type": "String",
+        "description": "Identifier of the regular gift from which the gift was upgraded"
+      },
+      {
+        "field": "base_name",
+        "type": "String",
+        "description": "Human-readable name of the regular gift from which this unique gift was upgraded"
+      },
+      {
+        "field": "name",
+        "type": "String",
+        "description": "Unique name of the gift. This name can be used in https://t.me/nft/... links and story areas"
+      },
+      {
+        "field": "number",
+        "type": "Integer",
+        "description": "Unique number of the upgraded gift among gifts upgraded from the same regular gift"
+      },
+      {
+        "field": "model",
+        "type": "UniqueGiftModel",
+        "description": "Model of the gift"
+      },
+      {
+        "field": "symbol",
+        "type": "UniqueGiftSymbol",
+        "description": "Symbol of the gift"
+      },
+      {
+        "field": "backdrop",
+        "type": "UniqueGiftBackdrop",
+        "description": "Backdrop of the gift"
+      },
+      {
+        "field": "is_premium",
+        "type": "True",
+        "description": "Optional . True , if the original regular gift was exclusively purchaseable by Telegram Premium subscribers"
+      },
+      {
+        "field": "is_burned",
+        "type": "True",
+        "description": "Optional . True , if the gift was used to craft another gift and isn't available anymore"
+      },
+      {
+        "field": "is_from_blockchain",
+        "type": "True",
+        "description": "Optional . True , if the gift is assigned from the TON blockchain and can't be resold or transferred in Telegram"
+      },
+      {
+        "field": "colors",
+        "type": "UniqueGiftColors",
+        "description": "Optional . The color scheme that can be used by the gift's owner for the chat's name, replies to messages and link previews; for business account gifts and gifts that are currently on sale only"
+      },
+      {
+        "field": "publisher_chat",
+        "type": "Chat",
+        "description": "Optional . Information about the chat that published the gift"
+      }
+    ]
+  },
+  "notes": []
+}

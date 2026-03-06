@@ -1,0 +1,27 @@
+{
+  "name": "BotCommandScopeChat",
+  "anchor": "botcommandscopechat",
+  "description": [
+    "Represents the scope of bot commands, covering a specific chat."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "type",
+        "type": "String",
+        "description": "Scope type, must be chat"
+      },
+      {
+        "field": "chat_id",
+        "type": "Integer or String",
+        "description": "Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername ). Channel direct messages chats and channel chats aren't supported."
+      }
+    ]
+  },
+  "notes": []
+}

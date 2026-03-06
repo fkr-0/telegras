@@ -1,0 +1,37 @@
+{
+  "name": "PollAnswer",
+  "anchor": "pollanswer",
+  "description": [
+    "This object represents an answer of a user in a non-anonymous poll."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "poll_id",
+        "type": "String",
+        "description": "Unique poll identifier"
+      },
+      {
+        "field": "voter_chat",
+        "type": "Chat",
+        "description": "Optional . The chat that changed the answer to the poll, if the voter is anonymous"
+      },
+      {
+        "field": "user",
+        "type": "User",
+        "description": "Optional . The user that changed the answer to the poll, if the voter isn't anonymous"
+      },
+      {
+        "field": "option_ids",
+        "type": "Array of Integer",
+        "description": "0-based identifiers of chosen answer options. May be empty if the vote was retracted."
+      }
+    ]
+  },
+  "notes": []
+}

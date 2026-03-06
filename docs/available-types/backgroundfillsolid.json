@@ -1,0 +1,27 @@
+{
+  "name": "BackgroundFillSolid",
+  "anchor": "backgroundfillsolid",
+  "description": [
+    "The background is filled using the selected color."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "type",
+        "type": "String",
+        "description": "Type of the background fill, always “solid”"
+      },
+      {
+        "field": "color",
+        "type": "Integer",
+        "description": "The color of the background fill in the RGB24 format"
+      }
+    ]
+  },
+  "notes": []
+}

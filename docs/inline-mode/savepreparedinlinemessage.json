@@ -1,0 +1,54 @@
+{
+  "name": "savePreparedInlineMessage",
+  "anchor": "savepreparedinlinemessage",
+  "description": [
+    "Stores a message that can be sent by a user of a Mini App. Returns a PreparedInlineMessage object."
+  ],
+  "table": {
+    "headers": [
+      "Parameter",
+      "Type",
+      "Required",
+      "Description"
+    ],
+    "rows": [
+      {
+        "parameter": "user_id",
+        "type": "Integer",
+        "required": "Yes",
+        "description": "Unique identifier of the target user that can use the prepared message"
+      },
+      {
+        "parameter": "result",
+        "type": "InlineQueryResult",
+        "required": "Yes",
+        "description": "A JSON-serialized object describing the message to be sent"
+      },
+      {
+        "parameter": "allow_user_chats",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True if the message can be sent to private chats with users"
+      },
+      {
+        "parameter": "allow_bot_chats",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True if the message can be sent to private chats with bots"
+      },
+      {
+        "parameter": "allow_group_chats",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True if the message can be sent to group and supergroup chats"
+      },
+      {
+        "parameter": "allow_channel_chats",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True if the message can be sent to channel chats"
+      }
+    ]
+  },
+  "notes": []
+}

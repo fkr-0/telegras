@@ -1,0 +1,22 @@
+{
+  "name": "MenuButtonDefault",
+  "anchor": "menubuttondefault",
+  "description": [
+    "Describes that no specific value for the menu button was set."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "type",
+        "type": "String",
+        "description": "Type of the button, must be default"
+      }
+    ]
+  },
+  "notes": []
+}

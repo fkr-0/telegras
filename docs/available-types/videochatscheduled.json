@@ -1,0 +1,22 @@
+{
+  "name": "VideoChatScheduled",
+  "anchor": "videochatscheduled",
+  "description": [
+    "This object represents a service message about a video chat scheduled in the chat."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "start_date",
+        "type": "Integer",
+        "description": "Point in time (Unix timestamp) when the video chat is supposed to be started by a chat administrator"
+      }
+    ]
+  },
+  "notes": []
+}

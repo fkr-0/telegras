@@ -1,0 +1,30 @@
+{
+  "name": "removeMyProfilePhoto",
+  "anchor": "removemyprofilephoto",
+  "description": [
+    "Removes the profile photo of the bot. Requires no parameters. Returns True on success."
+  ],
+  "table": {
+    "headers": [
+      "Parameter",
+      "Type",
+      "Required",
+      "Description"
+    ],
+    "rows": [
+      {
+        "parameter": "chat_id",
+        "type": "Integer",
+        "required": "Optional",
+        "description": "Unique identifier for the target private chat. If not specified, default bot's menu button will be changed"
+      },
+      {
+        "parameter": "menu_button",
+        "type": "MenuButton",
+        "required": "Optional",
+        "description": "A JSON-serialized object for the bot's new menu button. Defaults to MenuButtonDefault"
+      }
+    ]
+  },
+  "notes": []
+}

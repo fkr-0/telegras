@@ -1,0 +1,47 @@
+{
+  "name": "UniqueGiftColors",
+  "anchor": "uniquegiftcolors",
+  "description": [
+    "This object contains information about the color scheme for a user's name, message replies and link previews based on a unique gift."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "model_custom_emoji_id",
+        "type": "String",
+        "description": "Custom emoji identifier of the unique gift's model"
+      },
+      {
+        "field": "symbol_custom_emoji_id",
+        "type": "String",
+        "description": "Custom emoji identifier of the unique gift's symbol"
+      },
+      {
+        "field": "light_theme_main_color",
+        "type": "Integer",
+        "description": "Main color used in light themes; RGB format"
+      },
+      {
+        "field": "light_theme_other_colors",
+        "type": "Array of Integer",
+        "description": "List of 1-3 additional colors used in light themes; RGB format"
+      },
+      {
+        "field": "dark_theme_main_color",
+        "type": "Integer",
+        "description": "Main color used in dark themes; RGB format"
+      },
+      {
+        "field": "dark_theme_other_colors",
+        "type": "Array of Integer",
+        "description": "List of 1-3 additional colors used in dark themes; RGB format"
+      }
+    ]
+  },
+  "notes": []
+}

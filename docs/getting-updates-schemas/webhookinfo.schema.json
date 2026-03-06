@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "WebhookInfo",
+  "type": "object",
+  "properties": {
+    "url": {
+      "description": "Webhook URL, may be empty if webhook is not set up",
+      "type": "string"
+    },
+    "has_custom_certificate": {
+      "description": "True , if a custom certificate was provided for webhook certificate checks",
+      "type": "boolean"
+    },
+    "pending_update_count": {
+      "description": "Number of updates awaiting delivery",
+      "type": "integer"
+    },
+    "ip_address": {
+      "description": "Optional . Currently used webhook IP address",
+      "type": "string"
+    },
+    "last_error_date": {
+      "description": "Optional . Unix time for the most recent error that happened when trying to deliver an update via webhook",
+      "type": "integer"
+    },
+    "last_error_message": {
+      "description": "Optional . Error message in human-readable format for the most recent error that happened when trying to deliver an update via webhook",
+      "type": "string"
+    },
+    "last_synchronization_error_date": {
+      "description": "Optional . Unix time of the most recent error that happened when trying to synchronize available updates with Telegram datacenters",
+      "type": "integer"
+    },
+    "max_connections": {
+      "description": "Optional . The maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery",
+      "type": "integer"
+    },
+    "allowed_updates": {
+      "description": "Optional . A list of update types the bot is subscribed to. Defaults to all update types except chat_member",
+      "type": "string"
+    }
+  },
+  "required": [
+    "url",
+    "has_custom_certificate",
+    "pending_update_count"
+  ]
+}

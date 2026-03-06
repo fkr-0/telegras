@@ -1,0 +1,42 @@
+{
+  "name": "getForumTopicIconStickers",
+  "anchor": "getforumtopiciconstickers",
+  "description": [
+    "Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects."
+  ],
+  "table": {
+    "headers": [
+      "Parameter",
+      "Type",
+      "Required",
+      "Description"
+    ],
+    "rows": [
+      {
+        "parameter": "chat_id",
+        "type": "Integer or String",
+        "required": "Yes",
+        "description": "Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername )"
+      },
+      {
+        "parameter": "name",
+        "type": "String",
+        "required": "Yes",
+        "description": "Topic name, 1-128 characters"
+      },
+      {
+        "parameter": "icon_color",
+        "type": "Integer",
+        "required": "Optional",
+        "description": "Color of the topic icon in RGB format. Currently, must be one of 7322096 (0x6FB9F0), 16766590 (0xFFD67E), 13338331 (0xCB86DB), 9367192 (0x8EEE98), 16749490 (0xFF93B2), or 16478047 (0xFB6F5F)"
+      },
+      {
+        "parameter": "icon_custom_emoji_id",
+        "type": "String",
+        "required": "Optional",
+        "description": "Unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers."
+      }
+    ]
+  },
+  "notes": []
+}
