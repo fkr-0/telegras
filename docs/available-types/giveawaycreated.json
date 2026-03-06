@@ -1,0 +1,22 @@
+{
+  "name": "GiveawayCreated",
+  "anchor": "giveawaycreated",
+  "description": [
+    "This object represents a service message about the creation of a scheduled giveaway."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "prize_star_count",
+        "type": "Integer",
+        "description": "Optional . The number of Telegram Stars to be split between giveaway winners; for Telegram Star giveaways only"
+      }
+    ]
+  },
+  "notes": []
+}

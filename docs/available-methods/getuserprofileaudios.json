@@ -1,0 +1,36 @@
+{
+  "name": "getUserProfileAudios",
+  "anchor": "getuserprofileaudios",
+  "description": [
+    "Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object."
+  ],
+  "table": {
+    "headers": [
+      "Parameter",
+      "Type",
+      "Required",
+      "Description"
+    ],
+    "rows": [
+      {
+        "parameter": "user_id",
+        "type": "Integer",
+        "required": "Yes",
+        "description": "Unique identifier of the target user"
+      },
+      {
+        "parameter": "offset",
+        "type": "Integer",
+        "required": "Optional",
+        "description": "Sequential number of the first audio to be returned. By default, all audios are returned."
+      },
+      {
+        "parameter": "limit",
+        "type": "Integer",
+        "required": "Optional",
+        "description": "Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100."
+      }
+    ]
+  },
+  "notes": []
+}

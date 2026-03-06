@@ -1,0 +1,156 @@
+{
+  "name": "sendPoll",
+  "anchor": "sendpoll",
+  "description": [
+    "Use this method to send a native poll. On success, the sent Message is returned."
+  ],
+  "table": {
+    "headers": [
+      "Parameter",
+      "Type",
+      "Required",
+      "Description"
+    ],
+    "rows": [
+      {
+        "parameter": "business_connection_id",
+        "type": "String",
+        "required": "Optional",
+        "description": "Unique identifier of the business connection on behalf of which the message will be sent"
+      },
+      {
+        "parameter": "chat_id",
+        "type": "Integer or String",
+        "required": "Yes",
+        "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername ). Polls can't be sent to channel direct messages chats."
+      },
+      {
+        "parameter": "message_thread_id",
+        "type": "Integer",
+        "required": "Optional",
+        "description": "Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only"
+      },
+      {
+        "parameter": "question",
+        "type": "String",
+        "required": "Yes",
+        "description": "Poll question, 1-300 characters"
+      },
+      {
+        "parameter": "question_parse_mode",
+        "type": "String",
+        "required": "Optional",
+        "description": "Mode for parsing entities in the question. See formatting options for more details. Currently, only custom emoji entities are allowed"
+      },
+      {
+        "parameter": "question_entities",
+        "type": "Array of MessageEntity",
+        "required": "Optional",
+        "description": "A JSON-serialized list of special entities that appear in the poll question. It can be specified instead of question_parse_mode"
+      },
+      {
+        "parameter": "options",
+        "type": "Array of InputPollOption",
+        "required": "Yes",
+        "description": "A JSON-serialized list of 2-12 answer options"
+      },
+      {
+        "parameter": "is_anonymous",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "True , if the poll needs to be anonymous, defaults to True"
+      },
+      {
+        "parameter": "type",
+        "type": "String",
+        "required": "Optional",
+        "description": "Poll type, “quiz” or “regular”, defaults to “regular”"
+      },
+      {
+        "parameter": "allows_multiple_answers",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "True , if the poll allows multiple answers, ignored for polls in quiz mode, defaults to False"
+      },
+      {
+        "parameter": "correct_option_id",
+        "type": "Integer",
+        "required": "Optional",
+        "description": "0-based identifier of the correct answer option, required for polls in quiz mode"
+      },
+      {
+        "parameter": "explanation",
+        "type": "String",
+        "required": "Optional",
+        "description": "Text that is shown when a user chooses an incorrect answer or taps on the lamp icon in a quiz-style poll, 0-200 characters with at most 2 line feeds after entities parsing"
+      },
+      {
+        "parameter": "explanation_parse_mode",
+        "type": "String",
+        "required": "Optional",
+        "description": "Mode for parsing entities in the explanation. See formatting options for more details."
+      },
+      {
+        "parameter": "explanation_entities",
+        "type": "Array of MessageEntity",
+        "required": "Optional",
+        "description": "A JSON-serialized list of special entities that appear in the poll explanation. It can be specified instead of explanation_parse_mode"
+      },
+      {
+        "parameter": "open_period",
+        "type": "Integer",
+        "required": "Optional",
+        "description": "Amount of time in seconds the poll will be active after creation, 5-600. Can't be used together with close_date ."
+      },
+      {
+        "parameter": "close_date",
+        "type": "Integer",
+        "required": "Optional",
+        "description": "Point in time (Unix timestamp) when the poll will be automatically closed. Must be at least 5 and no more than 600 seconds in the future. Can't be used together with open_period ."
+      },
+      {
+        "parameter": "is_closed",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True if the poll needs to be immediately closed. This can be useful for poll preview."
+      },
+      {
+        "parameter": "disable_notification",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Sends the message silently . Users will receive a notification with no sound."
+      },
+      {
+        "parameter": "protect_content",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Protects the contents of the sent message from forwarding and saving"
+      },
+      {
+        "parameter": "allow_paid_broadcast",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance"
+      },
+      {
+        "parameter": "message_effect_id",
+        "type": "String",
+        "required": "Optional",
+        "description": "Unique identifier of the message effect to be added to the message; for private chats only"
+      },
+      {
+        "parameter": "reply_parameters",
+        "type": "ReplyParameters",
+        "required": "Optional",
+        "description": "Description of the message to reply to"
+      },
+      {
+        "parameter": "reply_markup",
+        "type": "InlineKeyboardMarkup or ReplyKeyboardMarkup or ReplyKeyboardRemove or ForceReply",
+        "required": "Optional",
+        "description": "Additional interface options. A JSON-serialized object for an inline keyboard , custom reply keyboard , instructions to remove a reply keyboard or to force a reply from the user"
+      }
+    ]
+  },
+  "notes": []
+}

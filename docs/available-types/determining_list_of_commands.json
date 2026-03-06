@@ -1,0 +1,23 @@
+{
+  "name": "Determining list of commands",
+  "anchor": "determining-list-of-commands",
+  "description": [
+    "The following algorithm is used to determine the list of commands for a particular user viewing the bot menu. The first list of commands which is set is returned:",
+    "Commands in the chat with the bot"
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "type",
+        "type": "String",
+        "description": "Scope type, must be default"
+      }
+    ]
+  },
+  "notes": []
+}

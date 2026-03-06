@@ -1,0 +1,47 @@
+{
+  "name": "BackgroundTypePattern",
+  "anchor": "backgroundtypepattern",
+  "description": [
+    "The background is a .PNG or .TGV (gzipped subset of SVG with MIME type “application/x-tgwallpattern”) pattern to be combined with the background fill chosen by the user."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "type",
+        "type": "String",
+        "description": "Type of the background, always “pattern”"
+      },
+      {
+        "field": "document",
+        "type": "Document",
+        "description": "Document with the pattern"
+      },
+      {
+        "field": "fill",
+        "type": "BackgroundFill",
+        "description": "The background fill that is combined with the pattern"
+      },
+      {
+        "field": "intensity",
+        "type": "Integer",
+        "description": "Intensity of the pattern when it is shown above the filled background; 0-100"
+      },
+      {
+        "field": "is_inverted",
+        "type": "True",
+        "description": "Optional . True , if the background fill must be applied only to the pattern itself. All other pixels are black in this case. For dark themes only"
+      },
+      {
+        "field": "is_moving",
+        "type": "True",
+        "description": "Optional . True , if the background moves slightly when the device is tilted"
+      }
+    ]
+  },
+  "notes": []
+}

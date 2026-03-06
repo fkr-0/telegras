@@ -1,0 +1,30 @@
+{
+  "name": "setStickerKeywords",
+  "anchor": "setstickerkeywords",
+  "description": [
+    "Use this method to change search keywords assigned to a regular or custom emoji sticker. The sticker must belong to a sticker set created by the bot. Returns True on success."
+  ],
+  "table": {
+    "headers": [
+      "Parameter",
+      "Type",
+      "Required",
+      "Description"
+    ],
+    "rows": [
+      {
+        "parameter": "sticker",
+        "type": "String",
+        "required": "Yes",
+        "description": "File identifier of the sticker"
+      },
+      {
+        "parameter": "keywords",
+        "type": "Array of String",
+        "required": "Optional",
+        "description": "A JSON-serialized list of 0-20 search keywords for the sticker with total length of up to 64 characters"
+      }
+    ]
+  },
+  "notes": []
+}

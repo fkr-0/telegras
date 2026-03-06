@@ -1,0 +1,88 @@
+{
+  "name": "Accent colors",
+  "anchor": "accent-colors",
+  "description": [
+    "Colors with identifiers 0 (red), 1 (orange), 2 (purple/violet), 3 (green), 4 (cyan), 5 (blue), 6 (pink) can be customized by app themes. Additionally, the following colors in RGB format are currently in use.",
+    "Color identifier Light colors Dark colors 7 E15052 F9AE63 FF9380 992F37 8 E0802B FAC534 ECB04E C35714 9 A05FF3 F48FFF C697FF 5E31C8 10 27A910 A7DC57 A7EB6E 167E2D 11 27ACCE 82E8D6 40D8D0 045C7F 12 3391D4 7DD3F0 52BFFF 0B5494 13 DD4371 FFBE9F FF86A6 8E366E 14 247BED F04856 FFFFFF 3FA2FE E5424F FFFFFF 15 D67722 1EA011 FFFFFF FF905E 32A527 FFFFFF 16 179E42 E84A3F FFFFFF 66D364 D5444F FFFFFF 17 2894AF 6FC456 FFFFFF 22BCE2 3DA240 FFFFFF 18 0C9AB3 FFAD95 FFE6B5 22BCE2 FF9778 FFDA6B 19 7757D6 F79610 FFDE8E 9791FF F2731D FFDB59 20 1585CF F2AB1D FFFFFF 3DA6EB EEA51D FFFFFF Profile accent colors Currently, the following colors in RGB format are in use for profile backgrounds. Color identifier Light colors Dark colors 0 BA5650 9C4540 1 C27C3E 945E2C 2 956AC8 715099 3 49A355 33713B 4 3E97AD 387E87 5 5A8FBB 477194 6 B85378 944763 7 7F8B95 435261 8 C9565D D97C57 994343 AC583E 9 CF7244 CC9433 8F552F A17232 10 9662D4 B966B6 634691 9250A2 11 3D9755 89A650 296A43 5F8F44 12 3D95BA 50AD98 306C7C 3E987E 13 538BC2 4DA8BD 38618C 458BA1 14 B04F74 D1666D 884160 A65259 15 637482 7B8A97 53606E 384654 Inline mode objects Objects and methods used in the inline mode are described in the Inline mode section ."
+  ],
+  "table": {
+    "headers": [
+      "Color identifier",
+      "Light colors",
+      "Dark colors"
+    ],
+    "rows": [
+      {
+        "color identifier": "7",
+        "light colors": "E15052 F9AE63",
+        "dark colors": "FF9380 992F37"
+      },
+      {
+        "color identifier": "8",
+        "light colors": "E0802B FAC534",
+        "dark colors": "ECB04E C35714"
+      },
+      {
+        "color identifier": "9",
+        "light colors": "A05FF3 F48FFF",
+        "dark colors": "C697FF 5E31C8"
+      },
+      {
+        "color identifier": "10",
+        "light colors": "27A910 A7DC57",
+        "dark colors": "A7EB6E 167E2D"
+      },
+      {
+        "color identifier": "11",
+        "light colors": "27ACCE 82E8D6",
+        "dark colors": "40D8D0 045C7F"
+      },
+      {
+        "color identifier": "12",
+        "light colors": "3391D4 7DD3F0",
+        "dark colors": "52BFFF 0B5494"
+      },
+      {
+        "color identifier": "13",
+        "light colors": "DD4371 FFBE9F",
+        "dark colors": "FF86A6 8E366E"
+      },
+      {
+        "color identifier": "14",
+        "light colors": "247BED F04856 FFFFFF",
+        "dark colors": "3FA2FE E5424F FFFFFF"
+      },
+      {
+        "color identifier": "15",
+        "light colors": "D67722 1EA011 FFFFFF",
+        "dark colors": "FF905E 32A527 FFFFFF"
+      },
+      {
+        "color identifier": "16",
+        "light colors": "179E42 E84A3F FFFFFF",
+        "dark colors": "66D364 D5444F FFFFFF"
+      },
+      {
+        "color identifier": "17",
+        "light colors": "2894AF 6FC456 FFFFFF",
+        "dark colors": "22BCE2 3DA240 FFFFFF"
+      },
+      {
+        "color identifier": "18",
+        "light colors": "0C9AB3 FFAD95 FFE6B5",
+        "dark colors": "22BCE2 FF9778 FFDA6B"
+      },
+      {
+        "color identifier": "19",
+        "light colors": "7757D6 F79610 FFDE8E",
+        "dark colors": "9791FF F2731D FFDB59"
+      },
+      {
+        "color identifier": "20",
+        "light colors": "1585CF F2AB1D FFFFFF",
+        "dark colors": "3DA6EB EEA51D FFFFFF"
+      }
+    ]
+  },
+  "notes": []
+}

@@ -1,0 +1,30 @@
+{
+  "name": "deleteStory",
+  "anchor": "deletestory",
+  "description": [
+    "Deletes a story previously posted by the bot on behalf of a managed business account. Requires the can_manage_stories business bot right. Returns True on success."
+  ],
+  "table": {
+    "headers": [
+      "Parameter",
+      "Type",
+      "Required",
+      "Description"
+    ],
+    "rows": [
+      {
+        "parameter": "business_connection_id",
+        "type": "String",
+        "required": "Yes",
+        "description": "Unique identifier of the business connection"
+      },
+      {
+        "parameter": "story_id",
+        "type": "Integer",
+        "required": "Yes",
+        "description": "Unique identifier of the story to delete"
+      }
+    ]
+  },
+  "notes": []
+}

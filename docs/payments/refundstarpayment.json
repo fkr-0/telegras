@@ -1,0 +1,30 @@
+{
+  "name": "refundStarPayment",
+  "anchor": "refundstarpayment",
+  "description": [
+    "Refunds a successful payment in Telegram Stars . Returns True on success."
+  ],
+  "table": {
+    "headers": [
+      "Parameter",
+      "Type",
+      "Required",
+      "Description"
+    ],
+    "rows": [
+      {
+        "parameter": "user_id",
+        "type": "Integer",
+        "required": "Yes",
+        "description": "Identifier of the user whose payment will be refunded"
+      },
+      {
+        "parameter": "telegram_payment_charge_id",
+        "type": "String",
+        "required": "Yes",
+        "description": "Telegram payment identifier"
+      }
+    ]
+  },
+  "notes": []
+}

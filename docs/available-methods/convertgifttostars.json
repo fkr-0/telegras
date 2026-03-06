@@ -1,0 +1,30 @@
+{
+  "name": "convertGiftToStars",
+  "anchor": "convertgifttostars",
+  "description": [
+    "Converts a given regular gift to Telegram Stars. Requires the can_convert_gifts_to_stars business bot right. Returns True on success."
+  ],
+  "table": {
+    "headers": [
+      "Parameter",
+      "Type",
+      "Required",
+      "Description"
+    ],
+    "rows": [
+      {
+        "parameter": "business_connection_id",
+        "type": "String",
+        "required": "Yes",
+        "description": "Unique identifier of the business connection"
+      },
+      {
+        "parameter": "owned_gift_id",
+        "type": "String",
+        "required": "Yes",
+        "description": "Unique identifier of the regular gift that should be converted to Telegram Stars"
+      }
+    ]
+  },
+  "notes": []
+}

@@ -1,0 +1,32 @@
+{
+  "name": "OwnedGifts",
+  "anchor": "ownedgifts",
+  "description": [
+    "Contains the list of gifts received and owned by a user or a chat."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "total_count",
+        "type": "Integer",
+        "description": "The total number of gifts owned by the user or the chat"
+      },
+      {
+        "field": "gifts",
+        "type": "Array of OwnedGift",
+        "description": "The list of gifts"
+      },
+      {
+        "field": "next_offset",
+        "type": "String",
+        "description": "Optional . Offset for the next request. If empty, then there are no more results"
+      }
+    ]
+  },
+  "notes": []
+}

@@ -1,0 +1,60 @@
+{
+  "name": "CallbackGame",
+  "anchor": "callbackgame",
+  "description": [
+    "A placeholder, currently holds no information. Use BotFather to set up your game."
+  ],
+  "table": {
+    "headers": [
+      "Parameter",
+      "Type",
+      "Required",
+      "Description"
+    ],
+    "rows": [
+      {
+        "parameter": "user_id",
+        "type": "Integer",
+        "required": "Yes",
+        "description": "User identifier"
+      },
+      {
+        "parameter": "score",
+        "type": "Integer",
+        "required": "Yes",
+        "description": "New score, must be non-negative"
+      },
+      {
+        "parameter": "force",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True if the high score is allowed to decrease. This can be useful when fixing mistakes or banning cheaters"
+      },
+      {
+        "parameter": "disable_edit_message",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True if the game message should not be automatically edited to include the current scoreboard"
+      },
+      {
+        "parameter": "chat_id",
+        "type": "Integer",
+        "required": "Optional",
+        "description": "Required if inline_message_id is not specified. Unique identifier for the target chat"
+      },
+      {
+        "parameter": "message_id",
+        "type": "Integer",
+        "required": "Optional",
+        "description": "Required if inline_message_id is not specified. Identifier of the sent message"
+      },
+      {
+        "parameter": "inline_message_id",
+        "type": "String",
+        "required": "Optional",
+        "description": "Required if chat_id and message_id are not specified. Identifier of the inline message"
+      }
+    ]
+  },
+  "notes": []
+}

@@ -1,0 +1,22 @@
+{
+  "name": "ChatBackground",
+  "anchor": "chatbackground",
+  "description": [
+    "This object represents a chat background."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "type",
+        "type": "BackgroundType",
+        "description": "Type of the background"
+      }
+    ]
+  },
+  "notes": []
+}

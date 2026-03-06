@@ -1,0 +1,67 @@
+{
+  "name": "InlineQueryResultCachedDocument",
+  "anchor": "inlinequeryresultcacheddocument",
+  "description": [
+    "Represents a link to a file stored on the Telegram servers. By default, this file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the file."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "type",
+        "type": "String",
+        "description": "Type of the result, must be document"
+      },
+      {
+        "field": "id",
+        "type": "String",
+        "description": "Unique identifier for this result, 1-64 bytes"
+      },
+      {
+        "field": "title",
+        "type": "String",
+        "description": "Title for the result"
+      },
+      {
+        "field": "document_file_id",
+        "type": "String",
+        "description": "A valid file identifier for the file"
+      },
+      {
+        "field": "description",
+        "type": "String",
+        "description": "Optional . Short description of the result"
+      },
+      {
+        "field": "caption",
+        "type": "String",
+        "description": "Optional . Caption of the document to be sent, 0-1024 characters after entities parsing"
+      },
+      {
+        "field": "parse_mode",
+        "type": "String",
+        "description": "Optional . Mode for parsing entities in the document caption. See formatting options for more details."
+      },
+      {
+        "field": "caption_entities",
+        "type": "Array of MessageEntity",
+        "description": "Optional . List of special entities that appear in the caption, which can be specified instead of parse_mode"
+      },
+      {
+        "field": "reply_markup",
+        "type": "InlineKeyboardMarkup",
+        "description": "Optional . Inline keyboard attached to the message"
+      },
+      {
+        "field": "input_message_content",
+        "type": "InputMessageContent",
+        "description": "Optional . Content of the message to be sent instead of the file"
+      }
+    ]
+  },
+  "notes": []
+}

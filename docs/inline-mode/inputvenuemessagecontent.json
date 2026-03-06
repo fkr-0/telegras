@@ -1,0 +1,57 @@
+{
+  "name": "InputVenueMessageContent",
+  "anchor": "inputvenuemessagecontent",
+  "description": [
+    "Represents the content of a venue message to be sent as the result of an inline query."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "latitude",
+        "type": "Float",
+        "description": "Latitude of the venue in degrees"
+      },
+      {
+        "field": "longitude",
+        "type": "Float",
+        "description": "Longitude of the venue in degrees"
+      },
+      {
+        "field": "title",
+        "type": "String",
+        "description": "Name of the venue"
+      },
+      {
+        "field": "address",
+        "type": "String",
+        "description": "Address of the venue"
+      },
+      {
+        "field": "foursquare_id",
+        "type": "String",
+        "description": "Optional . Foursquare identifier of the venue, if known"
+      },
+      {
+        "field": "foursquare_type",
+        "type": "String",
+        "description": "Optional . Foursquare type of the venue, if known. (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)"
+      },
+      {
+        "field": "google_place_id",
+        "type": "String",
+        "description": "Optional . Google Places identifier of the venue"
+      },
+      {
+        "field": "google_place_type",
+        "type": "String",
+        "description": "Optional . Google Places type of the venue. (See supported types .)"
+      }
+    ]
+  },
+  "notes": []
+}

@@ -1,0 +1,22 @@
+{
+  "name": "ChatOwnerChanged",
+  "anchor": "chatownerchanged",
+  "description": [
+    "Describes a service message about an ownership change in the chat."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "new_owner",
+        "type": "User",
+        "description": "The new owner of the chat"
+      }
+    ]
+  },
+  "notes": []
+}

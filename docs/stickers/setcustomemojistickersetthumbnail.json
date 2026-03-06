@@ -1,0 +1,30 @@
+{
+  "name": "setCustomEmojiStickerSetThumbnail",
+  "anchor": "setcustomemojistickersetthumbnail",
+  "description": [
+    "Use this method to set the thumbnail of a custom emoji sticker set. Returns True on success."
+  ],
+  "table": {
+    "headers": [
+      "Parameter",
+      "Type",
+      "Required",
+      "Description"
+    ],
+    "rows": [
+      {
+        "parameter": "name",
+        "type": "String",
+        "required": "Yes",
+        "description": "Sticker set name"
+      },
+      {
+        "parameter": "custom_emoji_id",
+        "type": "String",
+        "required": "Optional",
+        "description": "Custom emoji identifier of a sticker from the sticker set; pass an empty string to drop the thumbnail and use the first sticker as the thumbnail."
+      }
+    ]
+  },
+  "notes": []
+}

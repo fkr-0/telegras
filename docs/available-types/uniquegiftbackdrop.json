@@ -1,0 +1,32 @@
+{
+  "name": "UniqueGiftBackdrop",
+  "anchor": "uniquegiftbackdrop",
+  "description": [
+    "This object describes the backdrop of a unique gift."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "name",
+        "type": "String",
+        "description": "Name of the backdrop"
+      },
+      {
+        "field": "colors",
+        "type": "UniqueGiftBackdropColors",
+        "description": "Colors of the backdrop"
+      },
+      {
+        "field": "rarity_per_mille",
+        "type": "Integer",
+        "description": "The number of unique gifts that receive this backdrop for every 1000 gifts upgraded"
+      }
+    ]
+  },
+  "notes": []
+}

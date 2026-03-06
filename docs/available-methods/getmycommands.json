@@ -1,0 +1,30 @@
+{
+  "name": "getMyCommands",
+  "anchor": "getmycommands",
+  "description": [
+    "Use this method to get the current list of the bot's commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren't set, an empty list is returned."
+  ],
+  "table": {
+    "headers": [
+      "Parameter",
+      "Type",
+      "Required",
+      "Description"
+    ],
+    "rows": [
+      {
+        "parameter": "scope",
+        "type": "BotCommandScope",
+        "required": "Optional",
+        "description": "A JSON-serialized object, describing scope of users. Defaults to BotCommandScopeDefault ."
+      },
+      {
+        "parameter": "language_code",
+        "type": "String",
+        "required": "Optional",
+        "description": "A two-letter ISO 639-1 language code or an empty string"
+      }
+    ]
+  },
+  "notes": []
+}

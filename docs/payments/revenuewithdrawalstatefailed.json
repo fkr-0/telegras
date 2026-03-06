@@ -1,0 +1,22 @@
+{
+  "name": "RevenueWithdrawalStateFailed",
+  "anchor": "revenuewithdrawalstatefailed",
+  "description": [
+    "The withdrawal failed and the transaction was refunded."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "type",
+        "type": "String",
+        "description": "Type of the state, always “failed”"
+      }
+    ]
+  },
+  "notes": []
+}

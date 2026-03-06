@@ -1,0 +1,32 @@
+{
+  "name": "ChatMemberBanned",
+  "anchor": "chatmemberbanned",
+  "description": [
+    "Represents a chat member that was banned in the chat and can't return to the chat or view chat messages."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "status",
+        "type": "String",
+        "description": "The member's status in the chat, always “kicked”"
+      },
+      {
+        "field": "user",
+        "type": "User",
+        "description": "Information about the user"
+      },
+      {
+        "field": "until_date",
+        "type": "Integer",
+        "description": "Date when restrictions will be lifted for this user; Unix time. If 0, then the user is banned forever"
+      }
+    ]
+  },
+  "notes": []
+}

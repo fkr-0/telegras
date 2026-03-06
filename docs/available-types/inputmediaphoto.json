@@ -1,0 +1,52 @@
+{
+  "name": "InputMediaPhoto",
+  "anchor": "inputmediaphoto",
+  "description": [
+    "Represents a photo to be sent."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "type",
+        "type": "String",
+        "description": "Type of the result, must be photo"
+      },
+      {
+        "field": "media",
+        "type": "String",
+        "description": "File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files »"
+      },
+      {
+        "field": "caption",
+        "type": "String",
+        "description": "Optional . Caption of the photo to be sent, 0-1024 characters after entities parsing"
+      },
+      {
+        "field": "parse_mode",
+        "type": "String",
+        "description": "Optional . Mode for parsing entities in the photo caption. See formatting options for more details."
+      },
+      {
+        "field": "caption_entities",
+        "type": "Array of MessageEntity",
+        "description": "Optional . List of special entities that appear in the caption, which can be specified instead of parse_mode"
+      },
+      {
+        "field": "show_caption_above_media",
+        "type": "Boolean",
+        "description": "Optional . Pass True , if the caption must be shown above the message media"
+      },
+      {
+        "field": "has_spoiler",
+        "type": "Boolean",
+        "description": "Optional . Pass True if the photo needs to be covered with a spoiler animation"
+      }
+    ]
+  },
+  "notes": []
+}

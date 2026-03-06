@@ -1,0 +1,32 @@
+{
+  "name": "UniqueGiftSymbol",
+  "anchor": "uniquegiftsymbol",
+  "description": [
+    "This object describes the symbol shown on the pattern of a unique gift."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "name",
+        "type": "String",
+        "description": "Name of the symbol"
+      },
+      {
+        "field": "sticker",
+        "type": "Sticker",
+        "description": "The sticker that represents the unique gift"
+      },
+      {
+        "field": "rarity_per_mille",
+        "type": "Integer",
+        "description": "The number of unique gifts that receive this model for every 1000 gifts upgraded"
+      }
+    ]
+  },
+  "notes": []
+}

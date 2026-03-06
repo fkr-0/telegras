@@ -1,0 +1,42 @@
+{
+  "name": "InlineQueryResultCachedSticker",
+  "anchor": "inlinequeryresultcachedsticker",
+  "description": [
+    "Represents a link to a sticker stored on the Telegram servers. By default, this sticker will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the sticker."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "type",
+        "type": "String",
+        "description": "Type of the result, must be sticker"
+      },
+      {
+        "field": "id",
+        "type": "String",
+        "description": "Unique identifier for this result, 1-64 bytes"
+      },
+      {
+        "field": "sticker_file_id",
+        "type": "String",
+        "description": "A valid file identifier of the sticker"
+      },
+      {
+        "field": "reply_markup",
+        "type": "InlineKeyboardMarkup",
+        "description": "Optional . Inline keyboard attached to the message"
+      },
+      {
+        "field": "input_message_content",
+        "type": "InputMessageContent",
+        "description": "Optional . Content of the message to be sent instead of the sticker"
+      }
+    ]
+  },
+  "notes": []
+}

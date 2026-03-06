@@ -1,0 +1,67 @@
+{
+  "name": "EncryptedPassportElement",
+  "anchor": "encryptedpassportelement",
+  "description": [
+    "Describes documents or other Telegram Passport elements shared with the bot by the user."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "type",
+        "type": "String",
+        "description": "Element type. One of “personal_details”, “passport”, “driver_license”, “identity_card”, “internal_passport”, “address”, “utility_bill”, “bank_statement”, “rental_agreement”, “passport_registration”, “temporary_registration”, “phone_number”, “email”."
+      },
+      {
+        "field": "data",
+        "type": "String",
+        "description": "Optional . Base64-encoded encrypted Telegram Passport element data provided by the user; available only for “personal_details”, “passport”, “driver_license”, “identity_card”, “internal_passport” and “address” types. Can be decrypted and verified using the accompanying EncryptedCredentials ."
+      },
+      {
+        "field": "phone_number",
+        "type": "String",
+        "description": "Optional . User's verified phone number; available only for “phone_number” type"
+      },
+      {
+        "field": "email",
+        "type": "String",
+        "description": "Optional . User's verified email address; available only for “email” type"
+      },
+      {
+        "field": "files",
+        "type": "Array of PassportFile",
+        "description": "Optional . Array of encrypted files with documents provided by the user; available only for “utility_bill”, “bank_statement”, “rental_agreement”, “passport_registration” and “temporary_registration” types. Files can be decrypted and verified using the accompanying EncryptedCredentials ."
+      },
+      {
+        "field": "front_side",
+        "type": "PassportFile",
+        "description": "Optional . Encrypted file with the front side of the document, provided by the user; available only for “passport”, “driver_license”, “identity_card” and “internal_passport”. The file can be decrypted and verified using the accompanying EncryptedCredentials ."
+      },
+      {
+        "field": "reverse_side",
+        "type": "PassportFile",
+        "description": "Optional . Encrypted file with the reverse side of the document, provided by the user; available only for “driver_license” and “identity_card”. The file can be decrypted and verified using the accompanying EncryptedCredentials ."
+      },
+      {
+        "field": "selfie",
+        "type": "PassportFile",
+        "description": "Optional . Encrypted file with the selfie of the user holding a document, provided by the user; available if requested for “passport”, “driver_license”, “identity_card” and “internal_passport”. The file can be decrypted and verified using the accompanying EncryptedCredentials ."
+      },
+      {
+        "field": "translation",
+        "type": "Array of PassportFile",
+        "description": "Optional . Array of encrypted files with translated versions of documents provided by the user; available if requested for “passport”, “driver_license”, “identity_card”, “internal_passport”, “utility_bill”, “bank_statement”, “rental_agreement”, “passport_registration” and “temporary_registration” types. Files can be decrypted and verified using the accompanying EncryptedCredentials ."
+      },
+      {
+        "field": "hash",
+        "type": "String",
+        "description": "Base64-encoded element hash for using in PassportElementErrorUnspecified"
+      }
+    ]
+  },
+  "notes": []
+}

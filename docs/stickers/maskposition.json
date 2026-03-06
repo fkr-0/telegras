@@ -1,0 +1,37 @@
+{
+  "name": "MaskPosition",
+  "anchor": "maskposition",
+  "description": [
+    "This object describes the position on faces where a mask should be placed by default."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "point",
+        "type": "String",
+        "description": "The part of the face relative to which the mask should be placed. One of “forehead”, “eyes”, “mouth”, or “chin”."
+      },
+      {
+        "field": "x_shift",
+        "type": "Float",
+        "description": "Shift by X-axis measured in widths of the mask scaled to the face size, from left to right. For example, choosing -1.0 will place mask just to the left of the default mask position."
+      },
+      {
+        "field": "y_shift",
+        "type": "Float",
+        "description": "Shift by Y-axis measured in heights of the mask scaled to the face size, from top to bottom. For example, 1.0 will place the mask just below the default mask position."
+      },
+      {
+        "field": "scale",
+        "type": "Float",
+        "description": "Mask scaling coefficient. For example, 2.0 means double size."
+      }
+    ]
+  },
+  "notes": []
+}

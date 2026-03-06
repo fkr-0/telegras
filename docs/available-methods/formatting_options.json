@@ -1,0 +1,81 @@
+{
+  "name": "Formatting options",
+  "anchor": "formatting-options",
+  "description": [
+    "The Bot API supports basic formatting for messages. You can use bold, italic, underlined, strikethrough, spoiler text, block quotations as well as inline links and pre-formatted code in your bots' messages. Telegram clients will render them accordingly. You can specify text entities directly, or use markdown-style or HTML-style formatting.",
+    "Note that Telegram clients will display an alert to the user before opening an inline link ('Open this link?' together with the full URL).",
+    "Message entities can be nested, providing following restrictions are met: - If two entities have common characters, then one of them is fully contained inside another. - bold , italic , underline , strikethrough , and spoiler entities can contain and can be part of any other entities, except pre and code . - blockquote and expandable_blockquote entities can't be nested. - All other entities can't contain each other.",
+    "Links tg://user?id=<user_id> can be used to mention a user by their identifier without using a username. Please note:"
+  ],
+  "table": {
+    "headers": [
+      "Parameter",
+      "Type",
+      "Required",
+      "Description"
+    ],
+    "rows": [
+      {
+        "parameter": "chat_id",
+        "type": "Integer or String",
+        "required": "Yes",
+        "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername )"
+      },
+      {
+        "parameter": "message_thread_id",
+        "type": "Integer",
+        "required": "Optional",
+        "description": "Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only"
+      },
+      {
+        "parameter": "direct_messages_topic_id",
+        "type": "Integer",
+        "required": "Optional",
+        "description": "Identifier of the direct messages topic to which the message will be forwarded; required if the message is forwarded to a direct messages chat"
+      },
+      {
+        "parameter": "from_chat_id",
+        "type": "Integer or String",
+        "required": "Yes",
+        "description": "Unique identifier for the chat where the original message was sent (or channel username in the format @channelusername )"
+      },
+      {
+        "parameter": "video_start_timestamp",
+        "type": "Integer",
+        "required": "Optional",
+        "description": "New start timestamp for the forwarded video in the message"
+      },
+      {
+        "parameter": "disable_notification",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Sends the message silently . Users will receive a notification with no sound."
+      },
+      {
+        "parameter": "protect_content",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Protects the contents of the forwarded message from forwarding and saving"
+      },
+      {
+        "parameter": "message_effect_id",
+        "type": "String",
+        "required": "Optional",
+        "description": "Unique identifier of the message effect to be added to the message; only available when forwarding to private chats"
+      },
+      {
+        "parameter": "suggested_post_parameters",
+        "type": "SuggestedPostParameters",
+        "required": "Optional",
+        "description": "A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only"
+      },
+      {
+        "parameter": "message_id",
+        "type": "Integer",
+        "required": "Yes",
+        "description": "Message identifier in the chat specified in from_chat_id"
+      }
+    ]
+  },
+  "notes": []
+}

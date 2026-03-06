@@ -1,0 +1,32 @@
+{
+  "name": "InaccessibleMessage",
+  "anchor": "inaccessiblemessage",
+  "description": [
+    "This object describes a message that was deleted or is otherwise inaccessible to the bot."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "chat",
+        "type": "Chat",
+        "description": "Chat the message belonged to"
+      },
+      {
+        "field": "message_id",
+        "type": "Integer",
+        "description": "Unique message identifier inside the chat"
+      },
+      {
+        "field": "date",
+        "type": "Integer",
+        "description": "Always 0. The field can be used to differentiate regular and inaccessible messages."
+      }
+    ]
+  },
+  "notes": []
+}

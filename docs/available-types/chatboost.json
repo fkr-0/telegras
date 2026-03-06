@@ -1,0 +1,37 @@
+{
+  "name": "ChatBoost",
+  "anchor": "chatboost",
+  "description": [
+    "This object contains information about a chat boost."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "boost_id",
+        "type": "String",
+        "description": "Unique identifier of the boost"
+      },
+      {
+        "field": "add_date",
+        "type": "Integer",
+        "description": "Point in time (Unix timestamp) when the chat was boosted"
+      },
+      {
+        "field": "expiration_date",
+        "type": "Integer",
+        "description": "Point in time (Unix timestamp) when the boost will automatically expire, unless the booster's Telegram Premium subscription is prolonged"
+      },
+      {
+        "field": "source",
+        "type": "ChatBoostSource",
+        "description": "Source of the added boost"
+      }
+    ]
+  },
+  "notes": []
+}

@@ -1,0 +1,24 @@
+{
+  "name": "getChatMenuButton",
+  "anchor": "getchatmenubutton",
+  "description": [
+    "Use this method to get the current value of the bot's menu button in a private chat, or the default menu button. Returns MenuButton on success."
+  ],
+  "table": {
+    "headers": [
+      "Parameter",
+      "Type",
+      "Required",
+      "Description"
+    ],
+    "rows": [
+      {
+        "parameter": "chat_id",
+        "type": "Integer",
+        "required": "Optional",
+        "description": "Unique identifier for the target private chat. If not specified, default bot's menu button will be returned"
+      }
+    ]
+  },
+  "notes": []
+}

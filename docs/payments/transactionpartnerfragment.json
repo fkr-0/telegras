@@ -1,0 +1,27 @@
+{
+  "name": "TransactionPartnerFragment",
+  "anchor": "transactionpartnerfragment",
+  "description": [
+    "Describes a withdrawal transaction with Fragment."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "type",
+        "type": "String",
+        "description": "Type of the transaction partner, always “fragment”"
+      },
+      {
+        "field": "withdrawal_state",
+        "type": "RevenueWithdrawalState",
+        "description": "Optional . State of the transaction if the transaction is outgoing"
+      }
+    ]
+  },
+  "notes": []
+}

@@ -1,0 +1,37 @@
+{
+  "name": "ChatMemberMember",
+  "anchor": "chatmembermember",
+  "description": [
+    "Represents a chat member that has no additional privileges or restrictions."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "status",
+        "type": "String",
+        "description": "The member's status in the chat, always “member”"
+      },
+      {
+        "field": "tag",
+        "type": "String",
+        "description": "Optional . Tag of the member"
+      },
+      {
+        "field": "user",
+        "type": "User",
+        "description": "Information about the user"
+      },
+      {
+        "field": "until_date",
+        "type": "Integer",
+        "description": "Optional . Date when the user's subscription will expire; Unix time"
+      }
+    ]
+  },
+  "notes": []
+}

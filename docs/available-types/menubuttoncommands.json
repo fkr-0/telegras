@@ -1,0 +1,22 @@
+{
+  "name": "MenuButtonCommands",
+  "anchor": "menubuttoncommands",
+  "description": [
+    "Represents a menu button, which opens the bot's list of commands."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "type",
+        "type": "String",
+        "description": "Type of the button, must be commands"
+      }
+    ]
+  },
+  "notes": []
+}

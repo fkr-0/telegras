@@ -1,0 +1,37 @@
+{
+  "name": "PaidMedia",
+  "anchor": "paidmedia",
+  "description": [
+    "This object describes paid media. Currently, it can be one of"
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "type",
+        "type": "String",
+        "description": "Type of the paid media, always “preview”"
+      },
+      {
+        "field": "width",
+        "type": "Integer",
+        "description": "Optional . Media width as defined by the sender"
+      },
+      {
+        "field": "height",
+        "type": "Integer",
+        "description": "Optional . Media height as defined by the sender"
+      },
+      {
+        "field": "duration",
+        "type": "Integer",
+        "description": "Optional . Duration of the media in seconds as defined by the sender"
+      }
+    ]
+  },
+  "notes": []
+}

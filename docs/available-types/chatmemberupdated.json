@@ -1,0 +1,57 @@
+{
+  "name": "ChatMemberUpdated",
+  "anchor": "chatmemberupdated",
+  "description": [
+    "This object represents changes in the status of a chat member."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "chat",
+        "type": "Chat",
+        "description": "Chat the user belongs to"
+      },
+      {
+        "field": "from",
+        "type": "User",
+        "description": "Performer of the action, which resulted in the change"
+      },
+      {
+        "field": "date",
+        "type": "Integer",
+        "description": "Date the change was done in Unix time"
+      },
+      {
+        "field": "old_chat_member",
+        "type": "ChatMember",
+        "description": "Previous information about the chat member"
+      },
+      {
+        "field": "new_chat_member",
+        "type": "ChatMember",
+        "description": "New information about the chat member"
+      },
+      {
+        "field": "invite_link",
+        "type": "ChatInviteLink",
+        "description": "Optional . Chat invite link, which was used by the user to join the chat; for joining by invite link events only."
+      },
+      {
+        "field": "via_join_request",
+        "type": "Boolean",
+        "description": "Optional . True , if the user joined the chat after sending a direct join request without using an invite link and being approved by an administrator"
+      },
+      {
+        "field": "via_chat_folder_invite_link",
+        "type": "Boolean",
+        "description": "Optional . True , if the user joined the chat via a chat folder invite link"
+      }
+    ]
+  },
+  "notes": []
+}

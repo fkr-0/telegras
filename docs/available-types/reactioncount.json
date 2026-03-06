@@ -1,0 +1,27 @@
+{
+  "name": "ReactionCount",
+  "anchor": "reactioncount",
+  "description": [
+    "Represents a reaction added to a message along with the number of times it was added."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "type",
+        "type": "ReactionType",
+        "description": "Type of the reaction"
+      },
+      {
+        "field": "total_count",
+        "type": "Integer",
+        "description": "Number of times the reaction was added"
+      }
+    ]
+  },
+  "notes": []
+}

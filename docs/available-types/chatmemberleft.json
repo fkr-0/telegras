@@ -1,0 +1,27 @@
+{
+  "name": "ChatMemberLeft",
+  "anchor": "chatmemberleft",
+  "description": [
+    "Represents a chat member that isn't currently a member of the chat, but may join it themselves."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "status",
+        "type": "String",
+        "description": "The member's status in the chat, always “left”"
+      },
+      {
+        "field": "user",
+        "type": "User",
+        "description": "Information about the user"
+      }
+    ]
+  },
+  "notes": []
+}

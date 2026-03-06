@@ -1,0 +1,84 @@
+{
+  "name": "getBusinessAccountGifts",
+  "anchor": "getbusinessaccountgifts",
+  "description": [
+    "Returns the gifts received and owned by a managed business account. Requires the can_view_gifts_and_stars business bot right. Returns OwnedGifts on success."
+  ],
+  "table": {
+    "headers": [
+      "Parameter",
+      "Type",
+      "Required",
+      "Description"
+    ],
+    "rows": [
+      {
+        "parameter": "business_connection_id",
+        "type": "String",
+        "required": "Yes",
+        "description": "Unique identifier of the business connection"
+      },
+      {
+        "parameter": "exclude_unsaved",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True to exclude gifts that aren't saved to the account's profile page"
+      },
+      {
+        "parameter": "exclude_saved",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True to exclude gifts that are saved to the account's profile page"
+      },
+      {
+        "parameter": "exclude_unlimited",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True to exclude gifts that can be purchased an unlimited number of times"
+      },
+      {
+        "parameter": "exclude_limited_upgradable",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True to exclude gifts that can be purchased a limited number of times and can be upgraded to unique"
+      },
+      {
+        "parameter": "exclude_limited_non_upgradable",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True to exclude gifts that can be purchased a limited number of times and can't be upgraded to unique"
+      },
+      {
+        "parameter": "exclude_unique",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True to exclude unique gifts"
+      },
+      {
+        "parameter": "exclude_from_blockchain",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True to exclude gifts that were assigned from the TON blockchain and can't be resold or transferred in Telegram"
+      },
+      {
+        "parameter": "sort_by_price",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True to sort results by gift price instead of send date. Sorting is applied before pagination."
+      },
+      {
+        "parameter": "offset",
+        "type": "String",
+        "required": "Optional",
+        "description": "Offset of the first entry to return as received from the previous request; use empty string to get the first chunk of results"
+      },
+      {
+        "parameter": "limit",
+        "type": "Integer",
+        "required": "Optional",
+        "description": "The maximum number of gifts to be returned; 1-100. Defaults to 100"
+      }
+    ]
+  },
+  "notes": []
+}

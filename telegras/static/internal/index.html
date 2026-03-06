@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>telegras internal overview</title>
+  <style>
+    :root {
+      --bg: #f4f6f8;
+      --card: #ffffff;
+      --ink: #1f2933;
+      --muted: #52606d;
+      --accent: #0f766e;
+      --accent-2: #0b5f59;
+      --border: #d9e2ec;
+      --warn: #b45309;
+      --ok: #166534;
+      --bad: #991b1b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, #f8fafc 0%, var(--bg) 100%);
+      color: var(--ink);
+    }
+    header {
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+      background: #fff;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    h1 { margin: 0; font-size: 20px; color: var(--accent-2); }
+    .token { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    input, textarea, button, select {
+      font: inherit;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 10px;
+      background: #fff;
+      color: var(--ink);
+    }
+    textarea { width: 100%; min-height: 110px; }
+    button { background: var(--accent); color: #fff; border-color: var(--accent); cursor: pointer; }
+    button.secondary { background: #fff; color: var(--accent-2); border-color: var(--accent-2); }
+    main {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 12px;
+      padding: 12px;
+    }
+    section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      box-shadow: 0 1px 4px rgba(15, 23, 42, 0.06);
+    }
+    section h2 { margin: 0 0 8px; font-size: 14px; text-transform: uppercase; color: var(--accent-2); }
+    .status { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+    .ok { color: var(--ok); }
+    .bad { color: var(--bad); }
+    .warn { color: var(--warn); }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; }
+    pre {
+      margin: 0;
+      padding: 10px;
+      border-radius: 8px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      overflow: auto;
+      font-family: "IBM Plex Mono", "Fira Code", monospace;
+      font-size: 12px;
+      line-height: 1.35;
+      max-height: 320px;
+    }
+    ul.compact {
+      margin: 0;
+      padding-left: 16px;
+      max-height: 260px;
+      overflow: auto;
+      font-size: 13px;
+    }
+    ul.compact li { margin: 4px 0; cursor: pointer; }
+    ul.compact li:hover { color: var(--accent-2); }
+    .full { grid-column: 1 / -1; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>telegras internal overview</h1>
+    <div class="token">
+      <label for="token">Token</label>
+      <input id="token" type="password" placeholder="INTROSPECTION_TOKEN" />
+      <button id="save-token" class="secondary">save</button>
+      <button id="refresh-all">refresh</button>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h2>Config</h2>
+      <div class="status" id="config-status">idle</div>
+      <pre id="config-out">{}</pre>
+    </section>
+
+    <section>
+      <h2>Webhook Control</h2>
+      <div class="row" style="margin-bottom:8px;">
+        <button id="webhook-status-btn" class="secondary">query status</button>
+        <button id="webhook-delete-btn">delete webhook</button>
+        <label for="webhook-drop-pending">drop pending</label>
+        <input id="webhook-drop-pending" type="checkbox" />
+      </div>
+      <div class="status" id="webhook-status">idle</div>
+      <pre id="webhook-out">{}</pre>
+    </section>
+
+    <section>
+      <h2>Handler Stats</h2>
+      <div class="row" style="margin-bottom:8px;">
+        <input id="handler-filter" placeholder="filter handler..." />
+      </div>
+      <div class="status" id="handlers-status">idle</div>
+      <pre id="handlers-out">[]</pre>
+    </section>
+
+    <section>
+      <h2>Match Criteria</h2>
+      <div class="status" id="criteria-status">idle</div>
+      <pre id="criteria-out">{}</pre>
+    </section>
+
+    <section class="full">
+      <h2>Webhook Executions</h2>
+      <div class="row" style="margin-bottom:8px;">
+        <input id="exec-filter" placeholder="filter by attachment/update/chat..." style="min-width:260px;" />
+        <select id="exec-sort">
+          <option value="desc">newest first</option>
+          <option value="asc">oldest first</option>
+        </select>
+        <button id="load-executions" class="secondary">reload</button>
+      </div>
+      <div class="status" id="exec-status">idle</div>
+      <div class="row">
+        <div style="flex:1; min-width:280px;">
+          <ul id="exec-list" class="compact"></ul>
+        </div>
+        <div style="flex:2; min-width:320px;">
+          <pre id="exec-detail">{}</pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="full">
+      <h2>Attachments</h2>
+      <div class="row" style="margin-bottom:8px;">
+        <button id="load-attachments" class="secondary">reload</button>
+        <button id="use-basic-template" class="secondary">basic template</button>
+        <button id="use-chain-template" class="secondary">chain template</button>
+      </div>
+      <div class="status" id="attachments-status">idle</div>
+      <pre id="attachments-out">[]</pre>
+      <hr />
+      <div class="row" style="margin-bottom:8px;">
+        <input id="attach-name" placeholder="name" />
+        <input id="attach-handler" placeholder="handler (optional when using handler_chain)" style="flex:1;" />
+      </div>
+      <textarea id="attach-json" placeholder='attachment JSON extras'></textarea>
+      <div class="row">
+        <button id="create-attachment">create/update</button>
+        <button id="delete-attachment" class="secondary">delete by name</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    const tokenKey = "telegras.introspection.token";
+    let executionsCache = [];
+
+    function getToken() { return $("token").value.trim(); }
+
+    function setStatus(id, msg, cls = "") {
+      const el = $(id);
+      el.className = `status ${cls}`;
+      el.textContent = msg;
+    }
+
+    function pretty(id, data) { $(id).textContent = JSON.stringify(data, null, 2); }
+
+    async function api(path, opts = {}) {
+      const token = getToken();
+      const headers = Object.assign({}, opts.headers || {});
+      if (token) headers["Authorization"] = `Bearer ${token}`;
+      if (opts.body && !headers["Content-Type"]) headers["Content-Type"] = "application/json";
+
+      const res = await fetch(path, { ...opts, headers });
+      const text = await res.text();
+      let body = null;
+      try { body = text ? JSON.parse(text) : null; } catch { body = text; }
+      if (!res.ok) throw new Error(`${res.status} ${res.statusText}: ${typeof body === "string" ? body : JSON.stringify(body)}`);
+      return body;
+    }
+
+    async function loadConfig() {
+      setStatus("config-status", "loading…");
+      try {
+        pretty("config-out", await api("/internal/introspection/config"));
+        setStatus("config-status", "ok", "ok");
+      } catch (e) { setStatus("config-status", String(e), "bad"); }
+    }
+
+    async function loadWebhookStatus() {
+      setStatus("webhook-status", "loading…");
+      try {
+        const row = await api("/internal/introspection/webhook/status");
+        pretty("webhook-out", row);
+        setStatus("webhook-status", "ok", "ok");
+      } catch (e) {
+        setStatus("webhook-status", String(e), "bad");
+      }
+    }
+
+    async function deleteWebhook() {
+      setStatus("webhook-status", "deleting…", "warn");
+      const drop = $("webhook-drop-pending").checked;
+      try {
+        const row = await api("/internal/introspection/webhook", {
+          method: "DELETE",
+          body: JSON.stringify({ drop_pending_updates: drop })
+        });
+        pretty("webhook-out", row);
+        setStatus("webhook-status", "deleted", "ok");
+      } catch (e) {
+        setStatus("webhook-status", String(e), "bad");
+      }
+    }
+
+    async function loadExecutions() {
+      setStatus("exec-status", "loading…");
+      try {
+        executionsCache = await api("/internal/introspection/webhook-executions");
+        renderExecutionList();
+        setStatus("exec-status", `ok (${executionsCache.length})`, "ok");
+      } catch (e) { setStatus("exec-status", String(e), "bad"); }
+    }
+
+    function renderExecutionList() {
+      const filter = $("exec-filter").value.trim().toLowerCase();
+      const sort = $("exec-sort").value;
+      const list = $("exec-list");
+      list.innerHTML = "";
+
+      const rows = executionsCache
+        .filter((row) => {
+          if (!filter) return true;
+          const text = JSON.stringify({
+            id: row.id,
+            update_id: row.update_id,
+            chat_id: row.chat_id,
+            matched_attachments: row.matched_attachments,
+          }).toLowerCase();
+          return text.includes(filter);
+        })
+        .sort((a, b) => {
+          const va = new Date(a.received_at).getTime();
+          const vb = new Date(b.received_at).getTime();
+          return sort === "asc" ? va - vb : vb - va;
+        });
+
+      for (const row of rows) {
+        const li = document.createElement("li");
+        li.textContent = `#${row.id} u:${row.update_id ?? "-"} c:${row.chat_id ?? "-"} ${row.overall_status} [${(row.matched_attachments || []).join(",")}]`;
+        li.addEventListener("click", () => loadExecutionDetail(row.id));
+        list.appendChild(li);
+      }
+
+      if (rows.length === 0) {
+        const li = document.createElement("li");
+        li.textContent = "(no executions)";
+        list.appendChild(li);
+      }
+    }
+
+    async function loadExecutionDetail(id) {
+      try {
+        const row = await api(`/internal/introspection/webhook-executions/${id}`);
+        pretty("exec-detail", row);
+      } catch (e) {
+        pretty("exec-detail", { error: String(e) });
+      }
+    }
+
+    async function loadHandlers() {
+      setStatus("handlers-status", "loading…");
+      try {
+        const rows = await api("/internal/introspection/handlers");
+        const q = $("handler-filter").value.trim().toLowerCase();
+        const filtered = rows.filter((r) => !q || (r.handler || "").toLowerCase().includes(q));
+        pretty("handlers-out", filtered);
+        setStatus("handlers-status", `ok (${filtered.length})`, "ok");
+      } catch (e) { setStatus("handlers-status", String(e), "bad"); }
+    }
+
+    async function loadCriteria() {
+      setStatus("criteria-status", "loading…");
+      try {
+        pretty("criteria-out", await api("/internal/introspection/match-criteria"));
+        setStatus("criteria-status", "ok", "ok");
+      } catch (e) { setStatus("criteria-status", String(e), "bad"); }
+    }
+
+    async function loadAttachments() {
+      setStatus("attachments-status", "loading…");
+      try {
+        pretty("attachments-out", await api("/internal/introspection/attachments"));
+        setStatus("attachments-status", "ok", "ok");
+      } catch (e) { setStatus("attachments-status", String(e), "bad"); }
+    }
+
+    function presetBasicTemplate() {
+      $("attach-json").value = JSON.stringify({
+        handler_args: ["result='{{ message.title }}'"],
+        when: {
+          op: "leaf",
+          leaf: { field: "chat.type", match: "eq", value: "group" }
+        },
+        parse: {
+          regex: { title: "^(?P<title>[^\\n]+)" },
+          parser_ref: null,
+          allow_partial: true
+        },
+        parse_mode: "warn"
+      }, null, 2);
+    }
+
+    function presetChainTemplate() {
+      $("attach-handler").value = "";
+      $("attach-json").value = JSON.stringify({
+        handler_chain: [
+          { handler: "handlers.python:eval", handler_args: ["title='{{ match.title }}'"] },
+          { handler: "handlers.shell:sh", handler_args: ["echo '{{ message.title }}'"] }
+        ],
+        execution_mode: "sequential",
+        stop_on_error: true,
+        when: {
+          op: "leaf",
+          leaf: { field: "chat.type", match: "eq", value: "group" }
+        },
+        parse: {
+          regex: { title: "^(?P<title>[^\\n]+)" },
+          parser_ref: null,
+          allow_partial: true
+        },
+        parse_mode: "warn"
+      }, null, 2);
+    }
+
+    async function createOrUpdateAttachment() {
+      const name = $("attach-name").value.trim();
+      const handler = $("attach-handler").value.trim();
+      let extra = {};
+      if ($("attach-json").value.trim()) extra = JSON.parse($("attach-json").value);
+      const body = { name, ...extra };
+      if (handler) body.handler = handler;
+
+      await api("/internal/introspection/attachments", {
+        method: "POST",
+        body: JSON.stringify(body)
+      });
+      await loadAttachments();
+    }
+
+    async function deleteAttachment() {
+      const name = $("attach-name").value.trim();
+      if (!name) return;
+      await api(`/internal/introspection/attachments/${encodeURIComponent(name)}`, { method: "DELETE" });
+      await loadAttachments();
+    }
+
+    async function refreshAll() {
+      await Promise.all([loadConfig(), loadWebhookStatus(), loadExecutions(), loadHandlers(), loadCriteria(), loadAttachments()]);
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      const stored = localStorage.getItem(tokenKey);
+      if (stored) $("token").value = stored;
+
+      $("save-token").addEventListener("click", () => {
+        localStorage.setItem(tokenKey, getToken());
+        setStatus("config-status", "token saved", "warn");
+      });
+      $("refresh-all").addEventListener("click", refreshAll);
+      $("webhook-status-btn").addEventListener("click", loadWebhookStatus);
+      $("webhook-delete-btn").addEventListener("click", deleteWebhook);
+      $("load-executions").addEventListener("click", loadExecutions);
+      $("exec-filter").addEventListener("input", renderExecutionList);
+      $("exec-sort").addEventListener("change", renderExecutionList);
+      $("handler-filter").addEventListener("input", loadHandlers);
+      $("load-attachments").addEventListener("click", loadAttachments);
+      $("use-basic-template").addEventListener("click", presetBasicTemplate);
+      $("use-chain-template").addEventListener("click", presetChainTemplate);
+      $("create-attachment").addEventListener("click", async () => {
+        try {
+          await createOrUpdateAttachment();
+          setStatus("attachments-status", "attachment saved", "ok");
+        } catch (e) { setStatus("attachments-status", String(e), "bad"); }
+      });
+      $("delete-attachment").addEventListener("click", async () => {
+        try {
+          await deleteAttachment();
+          setStatus("attachments-status", "attachment deleted", "ok");
+        } catch (e) { setStatus("attachments-status", String(e), "bad"); }
+      });
+
+      refreshAll();
+    });
+  </script>
+</body>
+</html>

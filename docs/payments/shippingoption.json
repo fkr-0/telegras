@@ -1,0 +1,32 @@
+{
+  "name": "ShippingOption",
+  "anchor": "shippingoption",
+  "description": [
+    "This object represents one shipping option."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "id",
+        "type": "String",
+        "description": "Shipping option identifier"
+      },
+      {
+        "field": "title",
+        "type": "String",
+        "description": "Option title"
+      },
+      {
+        "field": "prices",
+        "type": "Array of LabeledPrice",
+        "description": "List of price portions"
+      }
+    ]
+  },
+  "notes": []
+}

@@ -1,0 +1,30 @@
+{
+  "name": "getUserChatBoosts",
+  "anchor": "getuserchatboosts",
+  "description": [
+    "Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object."
+  ],
+  "table": {
+    "headers": [
+      "Parameter",
+      "Type",
+      "Required",
+      "Description"
+    ],
+    "rows": [
+      {
+        "parameter": "chat_id",
+        "type": "Integer or String",
+        "required": "Yes",
+        "description": "Unique identifier for the chat or username of the channel (in the format @channelusername )"
+      },
+      {
+        "parameter": "user_id",
+        "type": "Integer",
+        "required": "Yes",
+        "description": "Unique identifier of the target user"
+      }
+    ]
+  },
+  "notes": []
+}

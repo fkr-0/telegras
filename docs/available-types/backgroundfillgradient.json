@@ -1,0 +1,37 @@
+{
+  "name": "BackgroundFillGradient",
+  "anchor": "backgroundfillgradient",
+  "description": [
+    "The background is a gradient fill."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "type",
+        "type": "String",
+        "description": "Type of the background fill, always “gradient”"
+      },
+      {
+        "field": "top_color",
+        "type": "Integer",
+        "description": "Top color of the gradient in the RGB24 format"
+      },
+      {
+        "field": "bottom_color",
+        "type": "Integer",
+        "description": "Bottom color of the gradient in the RGB24 format"
+      },
+      {
+        "field": "rotation_angle",
+        "type": "Integer",
+        "description": "Clockwise rotation angle of the background fill in degrees; 0-359"
+      }
+    ]
+  },
+  "notes": []
+}

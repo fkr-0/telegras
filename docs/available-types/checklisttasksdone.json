@@ -1,0 +1,32 @@
+{
+  "name": "ChecklistTasksDone",
+  "anchor": "checklisttasksdone",
+  "description": [
+    "Describes a service message about checklist tasks marked as done or not done."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "checklist_message",
+        "type": "Message",
+        "description": "Optional . Message containing the checklist whose tasks were marked as done or not done. Note that the Message object in this field will not contain the reply_to_message field even if it itself is a reply."
+      },
+      {
+        "field": "marked_as_done_task_ids",
+        "type": "Array of Integer",
+        "description": "Optional . Identifiers of the tasks that were marked as done"
+      },
+      {
+        "field": "marked_as_not_done_task_ids",
+        "type": "Array of Integer",
+        "description": "Optional . Identifiers of the tasks that were marked as not done"
+      }
+    ]
+  },
+  "notes": []
+}

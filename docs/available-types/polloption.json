@@ -1,0 +1,32 @@
+{
+  "name": "PollOption",
+  "anchor": "polloption",
+  "description": [
+    "This object contains information about one answer option in a poll."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "text",
+        "type": "String",
+        "description": "Option text, 1-100 characters"
+      },
+      {
+        "field": "text_entities",
+        "type": "Array of MessageEntity",
+        "description": "Optional . Special entities that appear in the option text . Currently, only custom emoji entities are allowed in poll option texts"
+      },
+      {
+        "field": "voter_count",
+        "type": "Integer",
+        "description": "Number of users that voted for this option"
+      }
+    ]
+  },
+  "notes": []
+}

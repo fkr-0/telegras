@@ -1,0 +1,32 @@
+{
+  "name": "BackgroundType",
+  "anchor": "backgroundtype",
+  "description": [
+    "This object describes the type of a background. Currently, it can be one of"
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "type",
+        "type": "String",
+        "description": "Type of the background, always “fill”"
+      },
+      {
+        "field": "fill",
+        "type": "BackgroundFill",
+        "description": "The background fill"
+      },
+      {
+        "field": "dark_theme_dimming",
+        "type": "Integer",
+        "description": "Dimming of the background in dark themes, as a percentage; 0-100"
+      }
+    ]
+  },
+  "notes": []
+}

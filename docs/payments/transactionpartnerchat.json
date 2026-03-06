@@ -1,0 +1,32 @@
+{
+  "name": "TransactionPartnerChat",
+  "anchor": "transactionpartnerchat",
+  "description": [
+    "Describes a transaction with a chat."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "type",
+        "type": "String",
+        "description": "Type of the transaction partner, always “chat”"
+      },
+      {
+        "field": "chat",
+        "type": "Chat",
+        "description": "Information about the chat"
+      },
+      {
+        "field": "gift",
+        "type": "Gift",
+        "description": "Optional . The gift sent to the chat by the bot"
+      }
+    ]
+  },
+  "notes": []
+}

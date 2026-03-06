@@ -1,0 +1,37 @@
+{
+  "name": "ShippingQuery",
+  "anchor": "shippingquery",
+  "description": [
+    "This object contains information about an incoming shipping query."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "id",
+        "type": "String",
+        "description": "Unique query identifier"
+      },
+      {
+        "field": "from",
+        "type": "User",
+        "description": "User who sent the query"
+      },
+      {
+        "field": "invoice_payload",
+        "type": "String",
+        "description": "Bot-specified invoice payload"
+      },
+      {
+        "field": "shipping_address",
+        "type": "ShippingAddress",
+        "description": "User specified shipping address"
+      }
+    ]
+  },
+  "notes": []
+}

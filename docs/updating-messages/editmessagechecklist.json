@@ -1,0 +1,48 @@
+{
+  "name": "editMessageChecklist",
+  "anchor": "editmessagechecklist",
+  "description": [
+    "Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned."
+  ],
+  "table": {
+    "headers": [
+      "Parameter",
+      "Type",
+      "Required",
+      "Description"
+    ],
+    "rows": [
+      {
+        "parameter": "business_connection_id",
+        "type": "String",
+        "required": "Yes",
+        "description": "Unique identifier of the business connection on behalf of which the message will be sent"
+      },
+      {
+        "parameter": "chat_id",
+        "type": "Integer",
+        "required": "Yes",
+        "description": "Unique identifier for the target chat"
+      },
+      {
+        "parameter": "message_id",
+        "type": "Integer",
+        "required": "Yes",
+        "description": "Unique identifier for the target message"
+      },
+      {
+        "parameter": "checklist",
+        "type": "InputChecklist",
+        "required": "Yes",
+        "description": "A JSON-serialized object for the new checklist"
+      },
+      {
+        "parameter": "reply_markup",
+        "type": "InlineKeyboardMarkup",
+        "required": "Optional",
+        "description": "A JSON-serialized object for the new inline keyboard for the message"
+      }
+    ]
+  },
+  "notes": []
+}

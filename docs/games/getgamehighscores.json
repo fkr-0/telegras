@@ -1,0 +1,42 @@
+{
+  "name": "getGameHighScores",
+  "anchor": "getgamehighscores",
+  "description": [
+    "Use this method to get data for high score tables. Will return the score of the specified user and several of their neighbors in a game. Returns an Array of GameHighScore objects."
+  ],
+  "table": {
+    "headers": [
+      "Parameter",
+      "Type",
+      "Required",
+      "Description"
+    ],
+    "rows": [
+      {
+        "parameter": "user_id",
+        "type": "Integer",
+        "required": "Yes",
+        "description": "Target user id"
+      },
+      {
+        "parameter": "chat_id",
+        "type": "Integer",
+        "required": "Optional",
+        "description": "Required if inline_message_id is not specified. Unique identifier for the target chat"
+      },
+      {
+        "parameter": "message_id",
+        "type": "Integer",
+        "required": "Optional",
+        "description": "Required if inline_message_id is not specified. Identifier of the sent message"
+      },
+      {
+        "parameter": "inline_message_id",
+        "type": "String",
+        "required": "Optional",
+        "description": "Required if chat_id and message_id are not specified. Identifier of the inline message"
+      }
+    ]
+  },
+  "notes": []
+}

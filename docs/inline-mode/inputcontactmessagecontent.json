@@ -1,0 +1,37 @@
+{
+  "name": "InputContactMessageContent",
+  "anchor": "inputcontactmessagecontent",
+  "description": [
+    "Represents the content of a contact message to be sent as the result of an inline query."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "phone_number",
+        "type": "String",
+        "description": "Contact's phone number"
+      },
+      {
+        "field": "first_name",
+        "type": "String",
+        "description": "Contact's first name"
+      },
+      {
+        "field": "last_name",
+        "type": "String",
+        "description": "Optional . Contact's last name"
+      },
+      {
+        "field": "vcard",
+        "type": "String",
+        "description": "Optional . Additional data about the contact in the form of a vCard , 0-2048 bytes"
+      }
+    ]
+  },
+  "notes": []
+}

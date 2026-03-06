@@ -1,0 +1,54 @@
+{
+  "name": "editChatInviteLink",
+  "anchor": "editchatinvitelink",
+  "description": [
+    "Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object."
+  ],
+  "table": {
+    "headers": [
+      "Parameter",
+      "Type",
+      "Required",
+      "Description"
+    ],
+    "rows": [
+      {
+        "parameter": "chat_id",
+        "type": "Integer or String",
+        "required": "Yes",
+        "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername )"
+      },
+      {
+        "parameter": "invite_link",
+        "type": "String",
+        "required": "Yes",
+        "description": "The invite link to edit"
+      },
+      {
+        "parameter": "name",
+        "type": "String",
+        "required": "Optional",
+        "description": "Invite link name; 0-32 characters"
+      },
+      {
+        "parameter": "expire_date",
+        "type": "Integer",
+        "required": "Optional",
+        "description": "Point in time (Unix timestamp) when the link will expire"
+      },
+      {
+        "parameter": "member_limit",
+        "type": "Integer",
+        "required": "Optional",
+        "description": "The maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999"
+      },
+      {
+        "parameter": "creates_join_request",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "True , if users joining the chat via the link need to be approved by chat administrators. If True , member_limit can't be specified"
+      }
+    ]
+  },
+  "notes": []
+}

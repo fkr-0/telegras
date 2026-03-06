@@ -1,0 +1,54 @@
+{
+  "name": "repostStory",
+  "anchor": "repoststory",
+  "description": [
+    "Reposts a story on behalf of a business account from another business account. Both business accounts must be managed by the same bot, and the story on the source account must have been posted (or reposted) by the bot. Requires the can_manage_stories business bot right for both business accounts. Returns Story on success."
+  ],
+  "table": {
+    "headers": [
+      "Parameter",
+      "Type",
+      "Required",
+      "Description"
+    ],
+    "rows": [
+      {
+        "parameter": "business_connection_id",
+        "type": "String",
+        "required": "Yes",
+        "description": "Unique identifier of the business connection"
+      },
+      {
+        "parameter": "from_chat_id",
+        "type": "Integer",
+        "required": "Yes",
+        "description": "Unique identifier of the chat which posted the story that should be reposted"
+      },
+      {
+        "parameter": "from_story_id",
+        "type": "Integer",
+        "required": "Yes",
+        "description": "Unique identifier of the story that should be reposted"
+      },
+      {
+        "parameter": "active_period",
+        "type": "Integer",
+        "required": "Yes",
+        "description": "Period after which the story is moved to the archive, in seconds; must be one of 6 * 3600 , 12 * 3600 , 86400 , or 2 * 86400"
+      },
+      {
+        "parameter": "post_to_chat_page",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True to keep the story accessible after it expires"
+      },
+      {
+        "parameter": "protect_content",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True if the content of the story must be protected from forwarding and screenshotting"
+      }
+    ]
+  },
+  "notes": []
+}

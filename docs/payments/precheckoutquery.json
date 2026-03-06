@@ -1,0 +1,52 @@
+{
+  "name": "PreCheckoutQuery",
+  "anchor": "precheckoutquery",
+  "description": [
+    "This object contains information about an incoming pre-checkout query."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "id",
+        "type": "String",
+        "description": "Unique query identifier"
+      },
+      {
+        "field": "from",
+        "type": "User",
+        "description": "User who sent the query"
+      },
+      {
+        "field": "currency",
+        "type": "String",
+        "description": "Three-letter ISO 4217 currency code, or “XTR” for payments in Telegram Stars"
+      },
+      {
+        "field": "total_amount",
+        "type": "Integer",
+        "description": "Total price in the smallest units of the currency (integer, not float/double). For example, for a price of US$ 1.45 pass amount = 145 . See the exp parameter in currencies.json , it shows the number of digits past the decimal point for each currency (2 for the majority of currencies)."
+      },
+      {
+        "field": "invoice_payload",
+        "type": "String",
+        "description": "Bot-specified invoice payload"
+      },
+      {
+        "field": "shipping_option_id",
+        "type": "String",
+        "description": "Optional . Identifier of the shipping option chosen by the user"
+      },
+      {
+        "field": "order_info",
+        "type": "OrderInfo",
+        "description": "Optional . Order information provided by the user"
+      }
+    ]
+  },
+  "notes": []
+}

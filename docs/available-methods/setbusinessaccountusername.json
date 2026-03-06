@@ -1,0 +1,30 @@
+{
+  "name": "setBusinessAccountUsername",
+  "anchor": "setbusinessaccountusername",
+  "description": [
+    "Changes the username of a managed business account. Requires the can_change_username business bot right. Returns True on success."
+  ],
+  "table": {
+    "headers": [
+      "Parameter",
+      "Type",
+      "Required",
+      "Description"
+    ],
+    "rows": [
+      {
+        "parameter": "business_connection_id",
+        "type": "String",
+        "required": "Yes",
+        "description": "Unique identifier of the business connection"
+      },
+      {
+        "parameter": "username",
+        "type": "String",
+        "required": "Optional",
+        "description": "The new value of the username for the business account; 0-32 characters"
+      }
+    ]
+  },
+  "notes": []
+}

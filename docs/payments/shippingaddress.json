@@ -1,0 +1,47 @@
+{
+  "name": "ShippingAddress",
+  "anchor": "shippingaddress",
+  "description": [
+    "This object represents a shipping address."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "country_code",
+        "type": "String",
+        "description": "Two-letter ISO 3166-1 alpha-2 country code"
+      },
+      {
+        "field": "state",
+        "type": "String",
+        "description": "State, if applicable"
+      },
+      {
+        "field": "city",
+        "type": "String",
+        "description": "City"
+      },
+      {
+        "field": "street_line1",
+        "type": "String",
+        "description": "First line for the address"
+      },
+      {
+        "field": "street_line2",
+        "type": "String",
+        "description": "Second line for the address"
+      },
+      {
+        "field": "post_code",
+        "type": "String",
+        "description": "Address post code"
+      }
+    ]
+  },
+  "notes": []
+}

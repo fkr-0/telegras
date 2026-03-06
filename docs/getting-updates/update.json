@@ -1,0 +1,137 @@
+{
+  "name": "Update",
+  "anchor": "update",
+  "description": [
+    "This object represents an incoming update. At most one of the optional parameters can be present in any given update."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "update_id",
+        "type": "Integer",
+        "description": "The update's unique identifier. Update identifiers start from a certain positive number and increase sequentially. This identifier becomes especially handy if you're using webhooks , since it allows you to ignore repeated updates or to restore the correct update sequence, should they get out of order. If there are no new updates for at least a week, then identifier of the next update will be chosen randomly instead of sequentially."
+      },
+      {
+        "field": "message",
+        "type": "Message",
+        "description": "Optional . New incoming message of any kind - text, photo, sticker, etc."
+      },
+      {
+        "field": "edited_message",
+        "type": "Message",
+        "description": "Optional . New version of a message that is known to the bot and was edited. This update may at times be triggered by changes to message fields that are either unavailable or not actively used by your bot."
+      },
+      {
+        "field": "channel_post",
+        "type": "Message",
+        "description": "Optional . New incoming channel post of any kind - text, photo, sticker, etc."
+      },
+      {
+        "field": "edited_channel_post",
+        "type": "Message",
+        "description": "Optional . New version of a channel post that is known to the bot and was edited. This update may at times be triggered by changes to message fields that are either unavailable or not actively used by your bot."
+      },
+      {
+        "field": "business_connection",
+        "type": "BusinessConnection",
+        "description": "Optional . The bot was connected to or disconnected from a business account, or a user edited an existing connection with the bot"
+      },
+      {
+        "field": "business_message",
+        "type": "Message",
+        "description": "Optional . New message from a connected business account"
+      },
+      {
+        "field": "edited_business_message",
+        "type": "Message",
+        "description": "Optional . New version of a message from a connected business account"
+      },
+      {
+        "field": "deleted_business_messages",
+        "type": "BusinessMessagesDeleted",
+        "description": "Optional . Messages were deleted from a connected business account"
+      },
+      {
+        "field": "message_reaction",
+        "type": "MessageReactionUpdated",
+        "description": "Optional . A reaction to a message was changed by a user. The bot must be an administrator in the chat and must explicitly specify \"message_reaction\" in the list of allowed_updates to receive these updates. The update isn't received for reactions set by bots."
+      },
+      {
+        "field": "message_reaction_count",
+        "type": "MessageReactionCountUpdated",
+        "description": "Optional . Reactions to a message with anonymous reactions were changed. The bot must be an administrator in the chat and must explicitly specify \"message_reaction_count\" in the list of allowed_updates to receive these updates. The updates are grouped and can be sent with delay up to a few minutes."
+      },
+      {
+        "field": "inline_query",
+        "type": "InlineQuery",
+        "description": "Optional . New incoming inline query"
+      },
+      {
+        "field": "chosen_inline_result",
+        "type": "ChosenInlineResult",
+        "description": "Optional . The result of an inline query that was chosen by a user and sent to their chat partner. Please see our documentation on the feedback collecting for details on how to enable these updates for your bot."
+      },
+      {
+        "field": "callback_query",
+        "type": "CallbackQuery",
+        "description": "Optional . New incoming callback query"
+      },
+      {
+        "field": "shipping_query",
+        "type": "ShippingQuery",
+        "description": "Optional . New incoming shipping query. Only for invoices with flexible price"
+      },
+      {
+        "field": "pre_checkout_query",
+        "type": "PreCheckoutQuery",
+        "description": "Optional . New incoming pre-checkout query. Contains full information about checkout"
+      },
+      {
+        "field": "purchased_paid_media",
+        "type": "PaidMediaPurchased",
+        "description": "Optional . A user purchased paid media with a non-empty payload sent by the bot in a non-channel chat"
+      },
+      {
+        "field": "poll",
+        "type": "Poll",
+        "description": "Optional . New poll state. Bots receive only updates about manually stopped polls and polls, which are sent by the bot"
+      },
+      {
+        "field": "poll_answer",
+        "type": "PollAnswer",
+        "description": "Optional . A user changed their answer in a non-anonymous poll. Bots receive new votes only in polls that were sent by the bot itself."
+      },
+      {
+        "field": "my_chat_member",
+        "type": "ChatMemberUpdated",
+        "description": "Optional . The bot's chat member status was updated in a chat. For private chats, this update is received only when the bot is blocked or unblocked by the user."
+      },
+      {
+        "field": "chat_member",
+        "type": "ChatMemberUpdated",
+        "description": "Optional . A chat member's status was updated in a chat. The bot must be an administrator in the chat and must explicitly specify \"chat_member\" in the list of allowed_updates to receive these updates."
+      },
+      {
+        "field": "chat_join_request",
+        "type": "ChatJoinRequest",
+        "description": "Optional . A request to join the chat has been sent. The bot must have the can_invite_users administrator right in the chat to receive these updates."
+      },
+      {
+        "field": "chat_boost",
+        "type": "ChatBoostUpdated",
+        "description": "Optional . A chat boost was added or changed. The bot must be an administrator in the chat to receive these updates."
+      },
+      {
+        "field": "removed_chat_boost",
+        "type": "ChatBoostRemoved",
+        "description": "Optional . A boost was removed from a chat. The bot must be an administrator in the chat to receive these updates."
+      }
+    ]
+  },
+  "notes": []
+}

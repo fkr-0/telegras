@@ -1,0 +1,47 @@
+{
+  "name": "ChecklistTask",
+  "anchor": "checklisttask",
+  "description": [
+    "Describes a task in a checklist."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "id",
+        "type": "Integer",
+        "description": "Unique identifier of the task"
+      },
+      {
+        "field": "text",
+        "type": "String",
+        "description": "Text of the task"
+      },
+      {
+        "field": "text_entities",
+        "type": "Array of MessageEntity",
+        "description": "Optional . Special entities that appear in the task text"
+      },
+      {
+        "field": "completed_by_user",
+        "type": "User",
+        "description": "Optional . User that completed the task; omitted if the task wasn't completed by a user"
+      },
+      {
+        "field": "completed_by_chat",
+        "type": "Chat",
+        "description": "Optional . Chat that completed the task; omitted if the task wasn't completed by a chat"
+      },
+      {
+        "field": "completion_date",
+        "type": "Integer",
+        "description": "Optional . Point in time (Unix timestamp) when the task was completed; 0 if the task wasn't completed"
+      }
+    ]
+  },
+  "notes": []
+}

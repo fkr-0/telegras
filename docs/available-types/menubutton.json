@@ -1,0 +1,22 @@
+{
+  "name": "MenuButton",
+  "anchor": "menubutton",
+  "description": [
+    "This object describes the bot's menu button in a private chat. It should be one of"
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "type",
+        "type": "String",
+        "description": "Type of the button, must be commands"
+      }
+    ]
+  },
+  "notes": []
+}

@@ -1,0 +1,92 @@
+{
+  "name": "InlineQueryResultVenue",
+  "anchor": "inlinequeryresultvenue",
+  "description": [
+    "Represents a venue. By default, the venue will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the venue."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "type",
+        "type": "String",
+        "description": "Type of the result, must be venue"
+      },
+      {
+        "field": "id",
+        "type": "String",
+        "description": "Unique identifier for this result, 1-64 Bytes"
+      },
+      {
+        "field": "latitude",
+        "type": "Float",
+        "description": "Latitude of the venue location in degrees"
+      },
+      {
+        "field": "longitude",
+        "type": "Float",
+        "description": "Longitude of the venue location in degrees"
+      },
+      {
+        "field": "title",
+        "type": "String",
+        "description": "Title of the venue"
+      },
+      {
+        "field": "address",
+        "type": "String",
+        "description": "Address of the venue"
+      },
+      {
+        "field": "foursquare_id",
+        "type": "String",
+        "description": "Optional . Foursquare identifier of the venue if known"
+      },
+      {
+        "field": "foursquare_type",
+        "type": "String",
+        "description": "Optional . Foursquare type of the venue, if known. (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)"
+      },
+      {
+        "field": "google_place_id",
+        "type": "String",
+        "description": "Optional . Google Places identifier of the venue"
+      },
+      {
+        "field": "google_place_type",
+        "type": "String",
+        "description": "Optional . Google Places type of the venue. (See supported types .)"
+      },
+      {
+        "field": "reply_markup",
+        "type": "InlineKeyboardMarkup",
+        "description": "Optional . Inline keyboard attached to the message"
+      },
+      {
+        "field": "input_message_content",
+        "type": "InputMessageContent",
+        "description": "Optional . Content of the message to be sent instead of the venue"
+      },
+      {
+        "field": "thumbnail_url",
+        "type": "String",
+        "description": "Optional . Url of the thumbnail for the result"
+      },
+      {
+        "field": "thumbnail_width",
+        "type": "Integer",
+        "description": "Optional . Thumbnail width"
+      },
+      {
+        "field": "thumbnail_height",
+        "type": "Integer",
+        "description": "Optional . Thumbnail height"
+      }
+    ]
+  },
+  "notes": []
+}

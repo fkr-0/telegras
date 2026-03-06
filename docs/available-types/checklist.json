@@ -1,0 +1,42 @@
+{
+  "name": "Checklist",
+  "anchor": "checklist",
+  "description": [
+    "Describes a checklist."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "title",
+        "type": "String",
+        "description": "Title of the checklist"
+      },
+      {
+        "field": "title_entities",
+        "type": "Array of MessageEntity",
+        "description": "Optional . Special entities that appear in the checklist title"
+      },
+      {
+        "field": "tasks",
+        "type": "Array of ChecklistTask",
+        "description": "List of tasks in the checklist"
+      },
+      {
+        "field": "others_can_add_tasks",
+        "type": "True",
+        "description": "Optional . True , if users other than the creator of the list can add tasks to the list"
+      },
+      {
+        "field": "others_can_mark_tasks_as_done",
+        "type": "True",
+        "description": "Optional . True , if users other than the creator of the list can mark tasks as done or not done"
+      }
+    ]
+  },
+  "notes": []
+}

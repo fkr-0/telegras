@@ -1,0 +1,54 @@
+{
+  "name": "createNewStickerSet",
+  "anchor": "createnewstickerset",
+  "description": [
+    "Use this method to create a new sticker set owned by a user. The bot will be able to edit the sticker set thus created. Returns True on success."
+  ],
+  "table": {
+    "headers": [
+      "Parameter",
+      "Type",
+      "Required",
+      "Description"
+    ],
+    "rows": [
+      {
+        "parameter": "user_id",
+        "type": "Integer",
+        "required": "Yes",
+        "description": "User identifier of created sticker set owner"
+      },
+      {
+        "parameter": "name",
+        "type": "String",
+        "required": "Yes",
+        "description": "Short name of sticker set, to be used in t.me/addstickers/ URLs (e.g., animals ). Can contain only English letters, digits and underscores. Must begin with a letter, can't contain consecutive underscores and must end in \"_by_<bot_username>\" . <bot_username> is case insensitive. 1-64 characters."
+      },
+      {
+        "parameter": "title",
+        "type": "String",
+        "required": "Yes",
+        "description": "Sticker set title, 1-64 characters"
+      },
+      {
+        "parameter": "stickers",
+        "type": "Array of InputSticker",
+        "required": "Yes",
+        "description": "A JSON-serialized list of 1-50 initial stickers to be added to the sticker set"
+      },
+      {
+        "parameter": "sticker_type",
+        "type": "String",
+        "required": "Optional",
+        "description": "Type of stickers in the set, pass “regular”, “mask”, or “custom_emoji”. By default, a regular sticker set is created."
+      },
+      {
+        "parameter": "needs_repainting",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True if stickers in the sticker set must be repainted to the color of text when used in messages, the accent color if used as emoji status, white on chat photos, or another appropriate color based on context; for custom emoji sticker sets only"
+      }
+    ]
+  },
+  "notes": []
+}

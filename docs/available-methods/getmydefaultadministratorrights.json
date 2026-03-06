@@ -1,0 +1,24 @@
+{
+  "name": "getMyDefaultAdministratorRights",
+  "anchor": "getmydefaultadministratorrights",
+  "description": [
+    "Use this method to get the current default administrator rights of the bot. Returns ChatAdministratorRights on success."
+  ],
+  "table": {
+    "headers": [
+      "Parameter",
+      "Type",
+      "Required",
+      "Description"
+    ],
+    "rows": [
+      {
+        "parameter": "for_channels",
+        "type": "Boolean",
+        "required": "Optional",
+        "description": "Pass True to get default administrator rights of the bot in channels. Otherwise, default administrator rights of the bot for groups and supergroups will be returned."
+      }
+    ]
+  },
+  "notes": []
+}

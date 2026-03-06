@@ -1,0 +1,22 @@
+{
+  "name": "BotShortDescription",
+  "anchor": "botshortdescription",
+  "description": [
+    "This object represents the bot's short description."
+  ],
+  "table": {
+    "headers": [
+      "Field",
+      "Type",
+      "Description"
+    ],
+    "rows": [
+      {
+        "field": "short_description",
+        "type": "String",
+        "description": "The bot's short description"
+      }
+    ]
+  },
+  "notes": []
+}
