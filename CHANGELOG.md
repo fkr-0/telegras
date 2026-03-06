@@ -2,7 +2,7 @@
 
 All notable changes to `telegras` will be documented in this file.
 
-## [1.2.1] - 2026-03-06
+## [0.1.0] - 2026-03-06
 
 ### Added
 - Curated runtime `telegras.api` submodule extracted from reviewed generated Telegram API docs:
