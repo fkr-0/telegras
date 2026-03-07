@@ -12,6 +12,11 @@ The generated Telegram Bot API models live in `tg_api_parsed`. They are copied f
 - `tg_api_parsed.SendMessageRequest`
 - `tg_api_parsed.GetMeResponse`
 
+# CI & Releases
+
+- **CI**: `ci.yml` runs `uv run pytest -q` and `uv run --extra docs mkdocs build --strict` on pushes/PRs against `main`.
+- **Releases**: `publish.yml` triggers on `push` tags `v*`, builds the package, checks artifacts, and publishes to PyPI. Configure a PyPI trusted publisher (OIDC) so `secrets.PYPI_TOKEN` can stay empty while GitHub forwards identity securely. If you prefer the classic API token, create a repository secret named `PYPI_TOKEN`.
+
 ## Local development
 
 - Install: `uv pip install -e .[dev]`
