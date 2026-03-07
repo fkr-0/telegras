@@ -34,6 +34,13 @@ dev = [
   "black>=23.0.0",
   "mypy>=1.7.0",
 ]
+docs = [
+  "mkdocs>=1.6.0",
+  "mkdocs-material>=9.5.0",
+  "mkdocstrings[python]>=0.25.0",
+  "interrogate>=1.7.0",
+  "pydoclint>=0.7.0",
+]
 
 [tool.hatch.build.targets.wheel]
 packages = ["telegras"]
@@ -43,6 +50,10 @@ start = "uvicorn telegras.app:app --reload"
 test = "pytest"
 cov = "pytest --cov=telegras"
 lint = "ruff check telegras tests"
+lint-docstrings = "ruff check --select D --ignore D100,D101,D102,D103,D104,D105,D106,D107,D202,D203,D212,D213,D403 telegras"
+docstring-coverage = "interrogate telegras"
+docstring-consistency = "pydoclint --config=pyproject.toml telegras"
+docs-build = "mkdocs build --strict"
 format = "ruff format telegras tests"
 typecheck = "mypy telegras"
 
@@ -54,3 +65,23 @@ addopts = "-q"
 
 [dependency-groups]
 dev = ["pytest", "pytest-asyncio", "pytest-cov", "ruff", "black", "mypy"]
+docs = ["mkdocs", "mkdocs-material", "mkdocstrings[python]", "interrogate", "pydoclint"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.interrogate]
+fail-under = 6
+exclude = ["tests", "docs", "alembic", "dist", "data", ".venv"]
+ignore-init-method = true
+ignore-init-module = true
+ignore-magic = true
+ignore-module = false
+
+[tool.pydoclint]
+style = "google"
+exclude = "\\.git|\\.tox|tests|alembic"
+arg-type-hints-in-docstring = false
+check-return-types = true
+check-yield-types = true
+skip-checking-short-docstrings = true
