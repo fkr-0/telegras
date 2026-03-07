@@ -28,3 +28,10 @@ class SetWebhookRequest(BaseModel):
     allowed_updates: list[str] | None = None
     drop_pending_updates: bool | None = None
     secret_token: str | None = Field(default=None, min_length=1, max_length=256)
+
+
+class GetUpdatesRequest(BaseModel):
+    offset: int | None = None
+    limit: int | None = Field(default=None, ge=1, le=100)
+    timeout: int | None = Field(default=None, ge=0)
+    allowed_updates: list[str] | None = None
