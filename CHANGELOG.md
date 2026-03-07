@@ -2,7 +2,14 @@
 
 All notable changes to `telegras` will be documented in this file.
 
-## [0.2.0] - 2026-03-07
+## [0.3.0] - 2026-03-07
+
+### Added
+- Additional assurance that CI installs `uv` so workflow runs succeed on GitHub Actions.
+- Release workflow `publish.yml` now bumps via tags `v*`, builds with `uv build`, validates artifacts, and pushes to PyPI via trusted publisher/OIDC.
+-
+### Changed
+- Documentation and changelog mention the CI/release improvements, and the version metadata now reflects 0.3.0.
 
 ### Added
 - `tg_api_parsed`, a copy of the curated Telegram API extraction, now distributed alongside `telegras` so dependent services can share the same reviewed models.
