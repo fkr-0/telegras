@@ -12,3 +12,4 @@ htmlcov
 __pycache__/
 data/*.db
 uv.lock
+dist/
