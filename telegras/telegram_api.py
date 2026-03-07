@@ -1,7 +1,12 @@
 from __future__ import annotations
 
 from telegras.api.client import TelegramBotAPI
-from telegras.api.getting_updates import SetWebhookRequest, WebhookInfo
+from telegras.api.getting_updates import (
+    GetUpdatesRequest,
+    SetWebhookRequest,
+    Update,
+    WebhookInfo,
+)
 from telegras.api.methods import SendMessageRequest, GetMeResponse
 
 
@@ -45,3 +50,19 @@ async def delete_webhook(*, drop_pending_updates: bool | None = None) -> dict:
     return await _client().delete_webhook(
         drop_pending_updates=drop_pending_updates,
     )
+
+
+async def get_updates(
+    *,
+    offset: int | None = None,
+    limit: int | None = None,
+    timeout: int | None = None,
+    allowed_updates: list[str] | None = None,
+) -> list[Update]:
+    request = GetUpdatesRequest(
+        offset=offset,
+        limit=limit,
+        timeout=timeout,
+        allowed_updates=allowed_updates,
+    )
+    return await _client().get_updates(request)

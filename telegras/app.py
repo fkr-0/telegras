@@ -1,8 +1,10 @@
 from __future__ import annotations
 
+import asyncio
+import logging
 import os
 from asyncio import Lock
-from contextlib import asynccontextmanager
+from contextlib import asynccontextmanager, suppress
 from pathlib import Path
 from typing import Any
 
@@ -13,8 +15,9 @@ from fastapi.responses import HTMLResponse
 
 from telegras import telegram_api
 from telegras.persistence import repository
-from telegras.persistence.db import get_session, init_db
+from telegras.persistence.db import SessionLocal, get_session, init_db
 from telegras.persistence.schemas import PublicationRead, TelegramInteractionRead
+from telegras.settings import AppSettings, BotMode
 from telegras.services.ingestion import TelegramIngestionService
 from telegras.api.getting_updates import Update as TelegramUpdate
 from telegras.webhook_attachments import (
@@ -28,6 +31,7 @@ from telegras.webhook_attachments import (
 
 _db_init_lock = Lock()
 _db_initialized = False
+log = logging.getLogger("telegras.app")
 
 
 class SendMessageRequest(BaseModel):
@@ -95,12 +99,6 @@ async def _ensure_db_ready() -> None:
         _db_initialized = True
 
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    await _ensure_db_ready()
-    yield
-
-
 def _read_bearer_token(authorization: str | None) -> str | None:
     if not authorization:
         return None
@@ -131,18 +129,77 @@ async def _registry_from_db(session: AsyncSession) -> WebhookAttachmentRegistry:
     return registry
 
 
+async def _run_polling_loop(
+    *,
+    service: TelegramIngestionService,
+    settings: AppSettings,
+) -> None:
+    offset: int | None = None
+    log.info(
+        "BOT_MODE=polling enabled (timeout=%ss)",
+        settings.polling_timeout_seconds,
+    )
+
+    while True:
+        try:
+            updates = await telegram_api.get_updates(
+                offset=offset,
+                timeout=settings.polling_timeout_seconds,
+            )
+
+            if not updates:
+                await asyncio.sleep(settings.polling_idle_sleep_seconds)
+                continue
+
+            for update in updates:
+                async with SessionLocal() as session:
+                    await service.ingest(session, update)
+                    await session.commit()
+                offset = update.update_id + 1
+        except asyncio.CancelledError:
+            raise
+        except Exception:
+            log.exception("Polling loop failed; retrying")
+            await asyncio.sleep(settings.polling_error_backoff_seconds)
+
+
 def create_app() -> FastAPI:
+    settings = AppSettings.from_env()
     app = FastAPI(
         title="telegras",
         description=(
             "Telegram + FastAPI bridge with persistent interaction history "
             "and pluggable publication backends."
         ),
-        version="1.0.0",
-        lifespan=lifespan,
+        version="0.1.0",
     )
 
     service = TelegramIngestionService()
+
+    @asynccontextmanager
+    async def lifespan(_: FastAPI):
+        await _ensure_db_ready()
+        polling_task: asyncio.Task[None] | None = None
+        if settings.bot_mode == BotMode.POLLING:
+            try:
+                await telegram_api.delete_webhook(drop_pending_updates=False)
+            except Exception:
+                log.exception(
+                    "Failed to delete webhook before starting polling; continuing",
+                )
+            polling_task = asyncio.create_task(
+                _run_polling_loop(service=service, settings=settings),
+                name="telegras-polling-loop",
+            )
+        try:
+            yield
+        finally:
+            if polling_task is not None:
+                polling_task.cancel()
+                with suppress(asyncio.CancelledError):
+                    await polling_task
+
+    app.router.lifespan_context = lifespan
 
     @app.get("/healthz")
     async def healthz() -> dict[str, str]:
@@ -387,6 +444,7 @@ def create_app() -> FastAPI:
             }
 
         return {
+            "runtime": {"bot_mode": settings.bot_mode.value},
             "bot_api": bot_api,
             "last_webhook_trigger": last_payload,
             "handler_bindings": [

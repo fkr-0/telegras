@@ -4,7 +4,7 @@ import os
 
 import httpx
 
-from .getting_updates import SetWebhookRequest, WebhookInfo
+from .getting_updates import GetUpdatesRequest, SetWebhookRequest, Update, WebhookInfo
 from .methods import GetMeResponse, SendMessageRequest
 
 
@@ -51,6 +51,16 @@ class TelegramBotAPI:
         if drop_pending_updates is not None:
             payload["drop_pending_updates"] = drop_pending_updates
         return await self._post("deleteWebhook", payload)
+
+    async def get_updates(self, request: GetUpdatesRequest) -> list[Update]:
+        payload = await self._post(
+            "getUpdates",
+            request.model_dump(mode="json", exclude_none=True),
+        )
+        if payload.get("ok") is False:
+            raise RuntimeError(payload.get("description", "Telegram getUpdates failed"))
+        result = payload.get("result", [])
+        return [Update.model_validate(item) for item in result]
 
     async def get_me(self) -> GetMeResponse:
         payload = await self._get("getMe")
