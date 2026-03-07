@@ -1,0 +1,17 @@
+services:
+  telegras:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: telegras:latest
+    restart: unless-stopped
+    env_file:
+      - ../.env
+    environment:
+      TELEGRAM_BOT_TOKEN: "${TELEGRAM_BOT_TOKEN}"
+      TELEGRAM_WEBHOOK_SECRET: "${TELEGRAM_WEBHOOK_SECRET}"
+      PUBLIC_BASE_URL: "${PUBLIC_BASE_URL}"
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../data:/app/data:rw

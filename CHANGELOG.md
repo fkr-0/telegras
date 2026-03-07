@@ -2,6 +2,18 @@
 
 All notable changes to `telegras` will be documented in this file.
 
+## [0.2.0] - 2026-03-07
+
+### Added
+- `tg_api_parsed`, a copy of the curated Telegram API extraction, now distributed alongside `telegras` so dependent services can share the same reviewed models.
+- `tg_api_parsed` re-exports only the types that the runtime uses (`Update`, `WebhookInfo`, `SetWebhookRequest`, `SendMessageRequest`, `GetMeResponse`).
+- README notes about the centralized API package.
+
+### Changed
+- Docker assets now reference the `telegras` package and include `tg_api_parsed`, ensuring the container matches the library layout.
+- `pyproject.toml` now packages `tg_api_parsed`.
+- Updated docs and tooling to describe the centralized parsed API.
+
 ## [0.1.0] - 2026-03-06
 
 ### Added

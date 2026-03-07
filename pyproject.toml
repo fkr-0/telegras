@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "telegras"
-version = "0.1.0"
+version = "0.2.0"
 description = "Telegram + FastAPI ingestion core with pluggable publication backends"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -35,7 +35,7 @@ dev = [
   "mypy>=1.7.0",
 ]
 docs = [
-  "mkdocs>=1.6.0",
+  "mkdocs<2.0.0",
   "mkdocs-material>=9.5.0",
   "mkdocstrings[python]>=0.25.0",
   "interrogate>=1.7.0",
@@ -43,7 +43,7 @@ docs = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["telegras"]
+packages = ["telegras", "tg_api_parsed"]
 
 [tool.hatch.envs.default.scripts]
 start = "uvicorn telegras.app:app --reload"
