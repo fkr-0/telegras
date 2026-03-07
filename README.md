@@ -2,6 +2,16 @@
 
 Standalone Telegram ingestion core extracted from `tg-wp-bridge`.
 
+# Parsed Telegram API
+
+The generated Telegram Bot API models live in `tg_api_parsed`. They are copied from the reviewed `telegram-api-extract` artifacts and expose only the types used by `telegras`:
+
+- `tg_api_parsed.Update`
+- `tg_api_parsed.WebhookInfo`
+- `tg_api_parsed.SetWebhookRequest`
+- `tg_api_parsed.SendMessageRequest`
+- `tg_api_parsed.GetMeResponse`
+
 ## Local development
 
 - Install: `uv pip install -e .[dev]`
