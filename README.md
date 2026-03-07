@@ -8,6 +8,18 @@ Standalone Telegram ingestion core extracted from `tg-wp-bridge`.
 - Run API: `uv run uvicorn telegras.app:app --reload`
 - Run tests: `uv run pytest`
 
+## Bot mode
+
+Set `BOT_MODE` to control update transport:
+
+- `webhook` (default)
+- `polling`
+
+Examples:
+
+- `BOT_MODE=webhook uv run uvicorn telegras.app:app --reload`
+- `BOT_MODE=polling uv run uvicorn telegras.app:app --reload`
+
 ## API submodule
 
 `telegras` now includes a curated Telegram API runtime subset in `telegras.api`:
@@ -201,6 +213,10 @@ Execute matching attachments for an incoming update:
   - Available variables: `message`, `chat`, `update`, `log`
   - Result: serializable `locals` snapshot
 
+For the complete user guide to matcher expressions and handler execution, see:
+
+- `docs/webhook-attachments.md`
+
 ### Template fields for `handler_args`
 
 `{{ ... }}` placeholders are supported:
@@ -216,3 +232,15 @@ Execute matching attachments for an incoming update:
 - `{{ update.update_id }}` Telegram update id
 - `{{ update.kind }}` detected update kind
 - `{{ match.<key> }}` parser output values
+
+## Telegram API extraction tooling
+
+Extraction and generation scripts that parse Telegram HTML API docs were moved to:
+
+- `docs/telegram_api_extraction/`
+
+Purpose and script-level documentation:
+
+- `docs/telegram_api_extraction/README.md`
+
+Backward-compatible wrappers remain in `docs/*.py`.
