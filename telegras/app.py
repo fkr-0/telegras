@@ -18,7 +18,7 @@ from telegras import telegram_api
 from telegras.persistence import repository
 from telegras.persistence.db import SessionLocal, get_session, init_db
 from telegras.persistence.schemas import PublicationRead, TelegramInteractionRead
-from telegras.settings import AppSettings, BotMode
+from telegras.settings import AppSettings
 from telegras.services.ingestion import TelegramIngestionService
 from telegras.api.getting_updates import Update as TelegramUpdate
 from telegras.webhook_attachments import (
@@ -183,7 +183,7 @@ def _create_telegras_lifespan(
     async def lifespan(_: FastAPI) -> AsyncIterator[None]:
         await _ensure_db_ready()
         polling_task: asyncio.Task[None] | None = None
-        if settings.bot_mode == BotMode.POLLING:
+        if settings.bot_mode == "polling":
             try:
                 await telegram_api.delete_webhook(drop_pending_updates=False)
             except Exception:
@@ -251,7 +251,7 @@ def create_app(
         The configured FastAPI application (new or provided)
     """
     if settings is None:
-        settings = AppSettings.from_env()
+        settings = AppSettings()
 
     if service is None:
         service = TelegramIngestionService()
@@ -528,7 +528,7 @@ def create_app(
             }
 
         return {
-            "runtime": {"bot_mode": settings.bot_mode.value},
+            "runtime": {"bot_mode": settings.bot_mode},
             "bot_api": bot_api,
             "last_webhook_trigger": last_payload,
             "handler_bindings": [
