@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import httpx
+import logging
+
 from telegras.api.client import TelegramBotAPI
 from telegras.api.getting_updates import (
     GetUpdatesRequest,
@@ -66,3 +69,38 @@ async def get_updates(
         allowed_updates=allowed_updates,
     )
     return await _client().get_updates(request)
+
+
+async def get_file_direct_url(file_id: str) -> str | None:
+    """
+    Given a Telegram file_id, return a direct HTTPS URL for that file.
+
+    Note: This URL is temporary and should be used only to download once.
+    """
+    client = _client()
+    bot_url = f"{client.base_url}/getFile"
+
+    async with httpx.AsyncClient() as http_client:
+        resp = await http_client.get(
+            bot_url,
+            params={"file_id": file_id},
+            timeout=10.0
+        )
+        resp.raise_for_status()
+        data = await resp.json()
+        if not data.get("ok"):
+            log = logging.getLogger("telegras.telegram_api")
+            log.warning("getFile failed: %s", data)
+            return None
+
+        file_path = data["result"]["file_path"]
+        token = client.bot_token
+        return f"https://api.telegram.org/file/bot{token}/{file_path}"
+
+
+async def download_file(file_url: str) -> bytes:
+    """Download a Telegram file via HTTPS."""
+    async with httpx.AsyncClient() as client:
+        resp = await client.get(file_url, timeout=30.0)
+        resp.raise_for_status()
+        return resp.content
