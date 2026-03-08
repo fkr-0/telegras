@@ -31,8 +31,8 @@ def test_default_bot_mode_is_webhook(monkeypatch, tmp_path: Path) -> None:
     monkeypatch.delenv("BOT_MODE", raising=False)
     settings_module = importlib.reload(settings_module)
 
-    settings = settings_module.AppSettings.from_env()
-    assert settings.bot_mode == settings_module.BotMode.WEBHOOK
+    settings = settings_module.AppSettings()
+    assert settings.bot_mode == "webhook"
 
 
 def test_polling_mode_starts_background_ingestion(monkeypatch, tmp_path: Path) -> None:

@@ -30,10 +30,10 @@ async def test_validate_telegram_config_success() -> None:
     with patch("telegras.startup.get_me", mock_get_me):
         result = await validate_telegram_config()
 
-    assert result["bot_token"]["status"] == "ok"
-    assert "test_bot" in result["bot_token"]["message"]
-    assert result["bot_token"]["bot_id"] == 123
-    assert result["bot_token"]["username"] == "test_bot"
+    assert result.status == "ok"
+    assert "test_bot" in result.message
+    assert result.bot_id == 123
+    assert result.username == "test_bot"
 
 
 @pytest.mark.asyncio
@@ -46,8 +46,8 @@ async def test_validate_telegram_config_error() -> None:
     with patch("telegras.startup.get_me", mock_get_me):
         result = await validate_telegram_config()
 
-    assert result["bot_token"]["status"] == "error"
-    assert "Invalid bot token" in result["bot_token"]["message"]
+    assert result.status == "error"
+    assert "Invalid bot token" in result.message
 
 
 @pytest.mark.asyncio
@@ -65,10 +65,10 @@ async def test_validate_webhook_config_configured() -> None:
     with patch("telegras.startup.get_webhook_info", mock_get_webhook_info):
         result = await validate_webhook_config()
 
-    assert result["webhook"]["status"] == "configured"
-    assert "https://example.com/webhook" in result["webhook"]["message"]
-    assert result["webhook"]["url"] == "https://example.com/webhook"
-    assert result["webhook"]["pending_updates"] == 5
+    assert result.status == "configured"
+    assert "https://example.com/webhook" in result.message
+    assert result.url == "https://example.com/webhook"
+    assert result.pending_updates == 5
 
 
 @pytest.mark.asyncio
@@ -83,8 +83,8 @@ async def test_validate_webhook_config_not_configured() -> None:
     with patch("telegras.startup.get_webhook_info", mock_get_webhook_info):
         result = await validate_webhook_config()
 
-    assert result["webhook"]["status"] == "not_configured"
-    assert result["webhook"]["message"] == "No webhook configured"
+    assert result.status == "not_configured"
+    assert result.message == "No webhook configured"
 
 
 @pytest.mark.asyncio
@@ -97,8 +97,8 @@ async def test_validate_webhook_config_error() -> None:
     with patch("telegras.startup.get_webhook_info", mock_get_webhook_info):
         result = await validate_webhook_config()
 
-    assert result["webhook"]["status"] == "error"
-    assert "Network error" in result["webhook"]["message"]
+    assert result.status == "error"
+    assert "Network error" in result.message
 
 
 def test_run_startup_validation_sync_success() -> None:
@@ -128,10 +128,10 @@ def test_run_startup_validation_sync_success() -> None:
         with patch("telegras.startup.get_webhook_info", mock_get_webhook_info):
             result = run_startup_validation_sync()
 
-    assert result["overall"]["status"] == "ok"
-    assert result["overall"]["errors"] == []
-    assert result["telegram"]["bot_token"]["status"] == "ok"
-    assert result["webhook"]["webhook"]["status"] == "configured"
+    assert result.overall_status == "ok"
+    assert result.errors == []
+    assert result.telegram.status == "ok"
+    assert result.webhook.status == "configured"
 
 
 def test_run_startup_validation_sync_with_display() -> None:
@@ -164,9 +164,9 @@ def test_run_startup_validation_sync_with_display() -> None:
         with patch("telegras.startup.get_webhook_info", mock_get_webhook_info):
             result = run_startup_validation_sync(display=display)
 
-    assert result["overall"]["status"] == "ok"
-    assert result["telegram"]["bot_token"]["username"] == "custom_bot"
-    assert result["webhook"]["webhook"]["pending_updates"] == 2
+    assert result.overall_status == "ok"
+    assert result.telegram.username == "custom_bot"
+    assert result.webhook.pending_updates == 2
 
 
 def test_run_startup_validation_sync_failure() -> None:
@@ -184,6 +184,6 @@ def test_run_startup_validation_sync_failure() -> None:
         with patch("telegras.startup.get_webhook_info", mock_get_webhook_info):
             result = run_startup_validation_sync()
 
-    assert result["overall"]["status"] == "failed"
-    assert "bot_token" in result["overall"]["errors"]
-    assert "webhook_not_set" in result["overall"]["errors"]
+    assert result.overall_status == "failed"
+    assert "bot_token" in result.errors
+    assert "webhook" in result.errors
