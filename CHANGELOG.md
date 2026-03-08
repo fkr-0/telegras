@@ -2,6 +2,32 @@
 
 All notable changes to `telegras` will be documented in this file.
 
+## [0.4.3] - 2026-03-09
+
+### Added
+
+- `telegras/handler_registry.py` for unified handler and parser registration.
+- `handler_plugin` and `parser_plugin` decorators to support runtime plugins.
+- `HandlerRegistry` and `HandlerExecutor` for dynamic plugin management.
+- `telegras/matchers.py` for composable matcher expressions and evaluation.
+- `telegras/parsers.py` with `ParserService` for regex and plugin-based parsing.
+- `tests/conftest.py` for CLI invocation.
+- Tests for settings, CLI, registry, and webhook attachment execution.
+- `.env.example` for configuration reference.
+
+### Changed
+
+- Refactored `webhook_attachments` to use the new registry, matchers, and parser service.
+- Overhauled `telegras/cli.py` to use `pydantic-settings` subcommand parsing.
+- Registered default handlers and parsers via decorators in `default_handlers.py`.
+- Updated documentation and removed obsolete plans and attachment docs.
+- Refactored Alembic migration to new schema file; updated `env.py` and script template.
+- Updated handler execution to use the registry and support async handlers.
+
+### Removed
+
+- Obsolete migration and documentation files.
+
 ## [0.4.2] - 2026-03-08
 
 ### Added
