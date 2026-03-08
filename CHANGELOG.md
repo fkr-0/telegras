@@ -2,6 +2,45 @@
 
 All notable changes to `telegras` will be documented in this file.
 
+## [0.4.0] - 2026-03-08
+
+### Added
+- Media download functions from Telegram Bot API:
+  - `get_file_direct_url()` - Get direct download URL for Telegram files
+  - `download_file()` - Download files to bytes or filesystem
+- Message parser module for extracting media and text from Telegram updates:
+  - `TelegramMedia` dataclass for media descriptors
+  - `collect_supported_media()` - Extract all supported media from messages
+  - `extract_message_entity()` - Get message from update (prefers channel_post)
+  - `extract_message_text()` - Extract text or caption from updates
+- Logging utilities with rotation:
+  - `resolve_writable_dir()` - Resolve writable directory with fallback
+  - `rotate_logs()` - Rotate logs by count or size
+  - `record_update_log()` - Record updates and results to disk
+  - `record_error_artifact()` - Write timestamped .error artifacts with traceback
+- DisplayManager class for CLI output:
+  - Rich formatting with automatic TTY detection
+  - Plain text fallback for non-TTY environments
+  - Status printing with icons
+  - Section headers
+- Startup validation utilities:
+  - `validate_telegram_config()` - Validate bot token and connectivity
+  - `validate_webhook_config()` - Check webhook status
+  - `run_startup_validation_sync()` - Run all validations
+- Enhanced CLI with Telegram operations:
+  - `start` - Start the telegras server
+  - `webhook-info` - Display current webhook information
+  - `set-webhook` - Configure Telegram webhook
+  - `delete-webhook` - Delete Telegram webhook
+  - `get-me` - Get bot information
+  - `startup-check` - Run comprehensive diagnostics
+- Standalone entry point `start.py` for running telegras directly
+
+### Changed
+- Refactored `create_app()` to support mounting on existing FastAPI apps
+- Removed module-level app instantiation for better composability
+- Exported new functions in `__init__.py`: `get_file_direct_url`, `download_file`
+
 ## [0.3.2] - 2026-03-08
 
 ### Added
@@ -16,15 +55,13 @@ All notable changes to `telegras` will be documented in this file.
 ### Added
 - Additional assurance that CI installs `uv` so workflow runs succeed on GitHub Actions.
 - Release workflow `publish.yml` now bumps via tags `v*`, builds with `uv build`, validates artifacts, and pushes to PyPI via trusted publisher/OIDC.
-
-### Changed
-- Documentation and changelog mention the CI/release improvements, and the version metadata now reflects 0.3.0.
-
-### Added
 - `tg_api_parsed`, a copy of the curated Telegram API extraction, now distributed alongside `telegras` so dependent services can share the same reviewed models.
 - `tg_api_parsed` re-exports only the types that the runtime uses (`Update`, `WebhookInfo`, `SetWebhookRequest`, `SendMessageRequest`, `GetMeResponse`).
 - README notes about the centralized API package.
 - CI workflow (`ci.yml`) runs tests and strict docs builds on pushes and pull requests; `publish.yml` automates PyPI uploads for `v*` tags via trusted publisher/OIDC.
+
+### Changed
+- Documentation and changelog mention the CI/release improvements, and the version metadata now reflects 0.3.0.
 
 ### Changed
 - Docker assets now reference the `telegras` package and include `tg_api_parsed`, ensuring the container matches the library layout.

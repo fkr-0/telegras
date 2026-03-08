@@ -22,7 +22,8 @@ def _build_app(monkeypatch, tmp_path: Path, *, bot_mode: str | None = None):
     importlib.reload(db_module)
     app_module = importlib.reload(app_module)
     app_module._db_initialized = False
-    return app_module, db_path
+    app = app_module.create_app()
+    return app_module, app, db_path
 
 
 def test_default_bot_mode_is_webhook(monkeypatch, tmp_path: Path) -> None:
@@ -35,7 +36,7 @@ def test_default_bot_mode_is_webhook(monkeypatch, tmp_path: Path) -> None:
 
 
 def test_polling_mode_starts_background_ingestion(monkeypatch, tmp_path: Path) -> None:
-    app_module, db_path = _build_app(monkeypatch, tmp_path, bot_mode="polling")
+    app_module, app, db_path = _build_app(monkeypatch, tmp_path, bot_mode="polling")
 
     calls = {"get_updates": 0}
 
@@ -63,7 +64,7 @@ def test_polling_mode_starts_background_ingestion(monkeypatch, tmp_path: Path) -
     monkeypatch.setattr(app_module.telegram_api, "get_updates", _mock_get_updates)
     monkeypatch.setattr(app_module.telegram_api, "delete_webhook", _mock_delete_webhook)
 
-    with TestClient(app_module.app) as client:
+    with TestClient(app) as client:
         health = client.get("/healthz")
         assert health.status_code == 200
         time.sleep(0.2)

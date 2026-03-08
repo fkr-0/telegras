@@ -17,7 +17,7 @@ def _build_app(monkeypatch, tmp_path: Path):
     app_module = importlib.reload(app_module)
     app_module._db_initialized = False
 
-    return app_module.app
+    return app_module.create_app()
 
 
 def _auth_headers() -> dict[str, str]:

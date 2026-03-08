@@ -1,6 +1,6 @@
 """telegras - Telegram + FastAPI focused integration service."""
 
-from .app import app, create_app
+from .app import create_app
 from .telegram_api import (
     send_message,
     get_webhook_info,
@@ -13,7 +13,6 @@ from .telegram_api import (
 )
 
 __all__ = [
-    "app",
     "create_app",
     "send_message",
     "get_webhook_info",
