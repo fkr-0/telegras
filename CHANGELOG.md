@@ -2,12 +2,21 @@
 
 All notable changes to `telegras` will be documented in this file.
 
+## [0.3.1] - 2026-03-08
+
+### Added
+- Handler plugin hooks (`telegras.default_handlers.handler_plugin`
+  and `register_handler_plugin`) so downstream packages can extend the handler map.
+
+### Removed
+- `telegras.backends.wordpress.WordPressPublishBackend`; WordPress publishing now sits in handler plugins outside telegras.
+
 ## [0.3.0] - 2026-03-07
 
 ### Added
 - Additional assurance that CI installs `uv` so workflow runs succeed on GitHub Actions.
 - Release workflow `publish.yml` now bumps via tags `v*`, builds with `uv build`, validates artifacts, and pushes to PyPI via trusted publisher/OIDC.
--
+
 ### Changed
 - Documentation and changelog mention the CI/release improvements, and the version metadata now reflects 0.3.0.
 

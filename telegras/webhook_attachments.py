@@ -350,6 +350,7 @@ def build_message_context(update: TelegramUpdate) -> dict[str, Any]:
         },
         "chat": chat_info,
         "update": {"update_id": update.update_id, "kind": kind},
+        "update_obj": update,
         "payload": payload,
     }
 

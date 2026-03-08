@@ -5,9 +5,7 @@ import os
 
 from telegras.contracts import PublishBackend
 
-AVAILABLE_BACKENDS: dict[str, str | type[PublishBackend]] = {
-    "wordpress": "telegras.backends.wordpress:WordPressPublishBackend",
-}
+AVAILABLE_BACKENDS: dict[str, str | type[PublishBackend]] = {}
 
 
 def _load_backend_class(entry: str | type[PublishBackend]) -> type[PublishBackend]:
@@ -29,11 +27,9 @@ def parse_backend_names(config_value: str | None) -> list[str]:
     raw = (
         config_value
         if config_value is not None
-        else os.getenv("TELEGRAS_BACKENDS", "wordpress")
+        else os.getenv("TELEGRAS_BACKENDS", "")
     )
     names = [item.strip() for item in raw.split(",") if item.strip()]
-    if not names:
-        return ["wordpress"]
     return names
 
 

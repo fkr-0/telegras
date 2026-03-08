@@ -1,6 +1,42 @@
 # telegras
 
 Standalone Telegram ingestion core extracted from `tg-wp-bridge`.
+## telegras architecture
+
+`telegras` is a focused Telegram + FastAPI ingestion core offering:
+
+- Async ingestion service and backend abstraction (`PublishBackend`)
+- Async SQLAlchemy persistence (default `sqlite+aiosqlite:///./data/telegras.db`)
+- OpenAPI endpoints for persisted interactions/publications
+- Alembic migrations (`telegras db-init`, `telegras backends`)
+
+The plugin-capable handler registry lets downstream packages (like `tg-wp-bridge`) register WordPress publishing via `telegras.default_handlers.handler_plugin`.
+
+## Concept
+
+```ascii
+[Telegram Channel]
+        |
+        | (forwarded via bot)
+        v
+[Telegram Bot Webhook (our service, in Docker)]
+        |
+        | 1. Parse message (text + media URLs)
+        | 2. Optionally download media
+        | 3. POST to WordPress REST API
+        v
+[WordPress REST API]
+        |
+        v
+[New Post in Category X]
+```
+
+Each channel message becomes a WordPress post:
+
+- **Text** → post title & content
+- **Media** (photos, videos, documents) → uploaded to WordPress and embedded
+
+No WordPress plugin required; uses built-in REST API + Application Passwords.
 
 # Parsed Telegram API
 
