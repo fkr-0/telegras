@@ -113,7 +113,9 @@ async def require_introspection_auth(
 ) -> None:
     expected = os.getenv("INTROSPECTION_TOKEN")
     if not expected:
-        raise HTTPException(status_code=503, detail="Introspection token not configured")
+        raise HTTPException(
+            status_code=503, detail="Introspection token not configured"
+        )
 
     provided = _read_bearer_token(authorization)
     if provided is None:
@@ -383,7 +385,8 @@ def create_app() -> FastAPI:
         return [item.name for item in matched]
 
     @app.post(
-        "/v1/webhook-attachments/execute", response_model=list[AttachmentExecutionRecord]
+        "/v1/webhook-attachments/execute",
+        response_model=list[AttachmentExecutionRecord],
     )
     async def execute_webhook_attachments(
         payload: AttachmentMatchRequest,
@@ -427,7 +430,11 @@ def create_app() -> FastAPI:
         await _ensure_db_ready()
         try:
             webhook_info = await telegram_api.get_webhook_info()
-            bot_api = webhook_info.model_dump(mode="json") if hasattr(webhook_info, "model_dump") else webhook_info
+            bot_api = (
+                webhook_info.model_dump(mode="json")
+                if hasattr(webhook_info, "model_dump")
+                else webhook_info
+            )
         except Exception as exc:
             bot_api = {"error": str(exc)}
 
@@ -451,7 +458,9 @@ def create_app() -> FastAPI:
                 {
                     "name": att.name,
                     "handler": att.handler,
-                    "handler_chain": [step.model_dump(mode="json") for step in att.handler_chain],
+                    "handler_chain": [
+                        step.model_dump(mode="json") for step in att.handler_chain
+                    ],
                     "enabled": att.enabled,
                     "priority": att.priority,
                 }
@@ -540,7 +549,9 @@ def create_app() -> FastAPI:
         session: AsyncSession = Depends(get_session),
     ) -> list[dict[str, Any]]:
         await _ensure_db_ready()
-        rows = await repository.list_webhook_executions(session, limit=limit, offset=offset)
+        rows = await repository.list_webhook_executions(
+            session, limit=limit, offset=offset
+        )
         return [
             {
                 "id": row.id,
@@ -616,7 +627,9 @@ def create_app() -> FastAPI:
         return [
             {
                 **row,
-                "last_run_at": row["last_run_at"].isoformat() if row.get("last_run_at") else None,
+                "last_run_at": (
+                    row["last_run_at"].isoformat() if row.get("last_run_at") else None
+                ),
             }
             for row in rows
         ]
