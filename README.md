@@ -9,6 +9,12 @@ Standalone Telegram ingestion core extracted from `tg-wp-bridge`.
 - Async SQLAlchemy persistence (default `sqlite+aiosqlite:///./data/telegras.db`)
 - OpenAPI endpoints for persisted interactions/publications
 - Alembic migrations (`telegras db-init`, `telegras backends`)
+- Media download utilities for Telegram Bot API files
+- Message parsing for extracting media and text from updates
+- Logging utilities with rotation and error artifact recording
+- DisplayManager for rich CLI output with plain text fallback
+- Startup validation and diagnostics
+- Enhanced CLI with Telegram operations
 
 The plugin-capable handler registry lets downstream packages (like `tg-wp-bridge`) register WordPress publishing via `telegras.default_handlers.handler_plugin`.
 
@@ -58,6 +64,164 @@ The generated Telegram Bot API models live in `tg_api_parsed`. They are copied f
 - Install: `uv pip install -e .[dev]`
 - Run API: `uv run uvicorn telegras.app:app --reload`
 - Run tests: `uv run pytest`
+
+## Media Download
+
+Telegras provides utilities for downloading files from Telegram Bot API:
+
+```python
+from telegras import get_file_direct_url, download_file
+
+# Get direct download URL for a file
+url = await get_file_direct_url(file_id)
+
+# Download file to bytes
+content = await download_file(file_id)
+
+# Download file to path
+await download_file(file_id, destination_path="/path/to/file")
+```
+
+## Message Parsing
+
+The message parser extracts media and text from Telegram updates:
+
+```python
+from telegras.message_parser import (
+    TelegramMedia,
+    collect_supported_media,
+    extract_message_entity,
+    extract_message_text,
+)
+
+# Extract media from a message
+media_items = collect_supported_media(message)
+for item in media_items:
+    print(f"{item.media_type}: {item.file_id}")
+
+# Extract text from update
+text = extract_message_text(update)
+
+# Get the message entity from an update
+msg = extract_message_entity(update)
+```
+
+Supported media types:
+- Photos (largest variant selected)
+- Videos
+- Animations (GIFs)
+- Documents
+
+## Logging Utilities
+
+Telegras includes structured logging utilities with rotation:
+
+```python
+from telegras.logging_utils import (
+    resolve_writable_dir,
+    rotate_logs,
+    record_update_log,
+    record_error_artifact,
+)
+
+# Resolve a writable directory with fallback
+log_dir = resolve_writable_dir(
+    Path("./logs"),
+    fallback_env_var="STORAGE_FALLBACK_DIR",
+    fallback_subdir="logs",
+)
+
+# Record update and result to disk
+paths = await record_update_log(update, result, tg_message_id=123)
+
+# Record error with traceback
+error_path = await record_error_artifact(update, exception, tg_message_id=123)
+```
+
+Log rotation is controlled by environment variables:
+- `LOG_MAX_FILES`: Maximum number of log files to keep
+- `LOG_MAX_BYTES`: Maximum total bytes of logs
+
+## DisplayManager
+
+CLI output formatting with rich support and plain text fallback:
+
+```python
+from telegras.display import DisplayManager
+
+display = DisplayManager(force_rich=True, force_plain=False)
+
+# Print with formatting
+display.print("[bold]Hello[/bold]")
+
+# Print status with icons
+display.print_status("ok", "Operation successful", success=True)
+
+# Print section header
+display.print_section("Configuration")
+```
+
+## Startup Validation
+
+Validate Telegram and webhook configuration:
+
+```python
+from telegras.startup import run_startup_validation_sync
+
+results = run_startup_validation_sync()
+# Returns dict with validation results
+```
+
+## CLI Commands
+
+Telegras provides a comprehensive CLI:
+
+```bash
+# Start the server
+telegras start [--host HOST] [--port PORT] [--reload]
+
+# Webhook operations
+telegras webhook-info [--format json|table]
+telegras set-webhook --url URL [--dry-run]
+telegras delete-webhook [--drop-pending]
+
+# Bot information
+telegras get-me
+
+# Startup diagnostics
+telegras startup-check [--auto-fix-webhook/--no-auto-fix-webhook]
+
+# Database operations
+telegras db-init
+telegras backends
+```
+
+## Mounting on Existing FastAPI Apps
+
+You can mount telegras on an existing FastAPI application:
+
+```python
+from fastapi import FastAPI
+from telegras import create_app
+
+app = FastAPI()
+telegras_app = create_app()
+
+# Mount telegras at a specific path
+app.mount("/telegram", telegras_app)
+```
+
+## Standalone Entry Point
+
+For running telegras directly:
+
+```python
+# Via start.py
+python -m telegras.start
+
+# Or via CLI
+telegras start
+```
 
 ## Bot mode
 

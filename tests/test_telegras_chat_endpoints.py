@@ -22,7 +22,8 @@ def _build_app(monkeypatch, tmp_path: Path):
     app_module = importlib.reload(app_module)
     app_module._db_initialized = False
 
-    return app_module
+    app = app_module.create_app()
+    return app_module, app
 
 
 async def _seed_interactions(db_url: str) -> None:
@@ -60,14 +61,14 @@ async def _seed_interactions(db_url: str) -> None:
 
 
 def test_list_chat_ids_returns_distinct_chat_ids(monkeypatch, tmp_path: Path) -> None:
-    app_module = _build_app(monkeypatch, tmp_path)
+    app_module, app = _build_app(monkeypatch, tmp_path)
     db_url = f"sqlite+aiosqlite:///{tmp_path / 'telegras_chat_endpoints.db'}"
 
     import asyncio
 
     asyncio.run(_seed_interactions(db_url))
 
-    client = TestClient(app_module.app)
+    client = TestClient(app)
     response = client.get("/v1/chats")
 
     assert response.status_code == 200
@@ -75,14 +76,14 @@ def test_list_chat_ids_returns_distinct_chat_ids(monkeypatch, tmp_path: Path) ->
 
 
 def test_history_endpoint_returns_messages_for_specific_chat(monkeypatch, tmp_path: Path) -> None:
-    app_module = _build_app(monkeypatch, tmp_path)
+    app_module, app = _build_app(monkeypatch, tmp_path)
     db_url = f"sqlite+aiosqlite:///{tmp_path / 'telegras_chat_endpoints.db'}"
 
     import asyncio
 
     asyncio.run(_seed_interactions(db_url))
 
-    client = TestClient(app_module.app)
+    client = TestClient(app)
     response = client.get("/v1/chats/12345/history")
 
     assert response.status_code == 200
@@ -93,12 +94,12 @@ def test_history_endpoint_returns_messages_for_specific_chat(monkeypatch, tmp_pa
 
 
 def test_send_message_endpoint_sends_text_to_chat(monkeypatch, tmp_path: Path) -> None:
-    app_module = _build_app(monkeypatch, tmp_path)
+    app_module, app = _build_app(monkeypatch, tmp_path)
 
     mock_send = AsyncMock(return_value={"ok": True, "result": {"message_id": 42}})
     monkeypatch.setattr(app_module.telegram_api, "send_message", mock_send)
 
-    client = TestClient(app_module.app)
+    client = TestClient(app)
     response = client.post("/v1/chats/12345/send", json={"message_body": "ping"})
 
     assert response.status_code == 200

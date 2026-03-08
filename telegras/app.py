@@ -4,6 +4,7 @@ import asyncio
 import logging
 import os
 from asyncio import Lock
+from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager, suppress
 from pathlib import Path
 from typing import Any
@@ -165,21 +166,21 @@ async def _run_polling_loop(
             await asyncio.sleep(settings.polling_error_backoff_seconds)
 
 
-def create_app() -> FastAPI:
-    settings = AppSettings.from_env()
-    app = FastAPI(
-        title="telegras",
-        description=(
-            "Telegram + FastAPI bridge with persistent interaction history "
-            "and pluggable publication backends."
-        ),
-        version="0.1.0",
-    )
+def _create_telegras_lifespan(
+    settings: AppSettings,
+    service: TelegramIngestionService,
+):
+    """Create the lifespan context manager for telegras.
 
-    service = TelegramIngestionService()
+    Args:
+        settings: Application settings
+        service: Telegram ingestion service
 
+    Returns:
+        An async context manager for startup/shutdown lifecycle
+    """
     @asynccontextmanager
-    async def lifespan(_: FastAPI):
+    async def lifespan(_: FastAPI) -> AsyncIterator[None]:
         await _ensure_db_ready()
         polling_task: asyncio.Task[None] | None = None
         if settings.bot_mode == BotMode.POLLING:
@@ -201,7 +202,83 @@ def create_app() -> FastAPI:
                 with suppress(asyncio.CancelledError):
                     await polling_task
 
-    app.router.lifespan_context = lifespan
+    return lifespan
+
+
+def _merge_lifespans(
+    ctx1: Any,
+    ctx2: Any,
+) -> Any:
+    """Merge two lifespan context managers into one.
+
+    Args:
+        ctx1: First lifespan context manager
+        ctx2: Second lifespan context manager
+
+    Returns:
+        A new async context manager that runs both lifespans
+    """
+    @asynccontextmanager
+    async def merged_lifespan(app: FastAPI) -> AsyncIterator[None]:
+        async with ctx1(app):
+            async with ctx2(app):
+                yield
+
+    return merged_lifespan
+
+
+def create_app(
+    *,
+    app: FastAPI | None = None,
+    settings: AppSettings | None = None,
+    service: TelegramIngestionService | None = None,
+    merge_lifespan: bool = True,
+) -> FastAPI:
+    """Create or configure the FastAPI application.
+
+    This function can either create a new standalone FastAPI app or
+    mount telegras routes onto an existing FastAPI app.
+
+    Args:
+        app: Optional existing FastAPI app to mount routes onto.
+             If None, creates a new standalone app.
+        settings: Optional application settings. If None, loads from environment.
+        service: Optional TelegramIngestionService instance. If None, creates one.
+        merge_lifespan: Whether to merge lifespans when mounting on existing app.
+                       Only applicable when app is provided.
+
+    Returns:
+        The configured FastAPI application (new or provided)
+    """
+    if settings is None:
+        settings = AppSettings.from_env()
+
+    if service is None:
+        service = TelegramIngestionService()
+
+    if app is None:
+        # Create new standalone app
+        app = FastAPI(
+            title="telegras",
+            description=(
+                "Telegram + FastAPI bridge with persistent interaction history "
+                "and pluggable publication backends."
+            ),
+            version="0.1.0",
+        )
+        telegras_lifespan = _create_telegras_lifespan(settings, service)
+        app.router.lifespan_context = telegras_lifespan
+    elif merge_lifespan:
+        # Mount on existing app and merge lifespans
+        telegras_lifespan = _create_telegras_lifespan(settings, service)
+        existing_lifespan = app.router.lifespan_context
+        if existing_lifespan is not None:
+            app.router.lifespan_context = _merge_lifespans(
+                existing_lifespan,
+                telegras_lifespan,
+            )
+        else:
+            app.router.lifespan_context = telegras_lifespan
 
     @app.get("/healthz")
     async def healthz() -> dict[str, str]:
@@ -646,6 +723,3 @@ def create_app() -> FastAPI:
         }
 
     return app
-
-
-app = create_app()
