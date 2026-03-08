@@ -14,5 +14,6 @@ It supports webhook-driven workflows, configurable handler attachments, and plug
 
 - Start with [Getting Started](getting-started.md).
 - Learn matcher/handler behavior in [Webhook Attachments](webhook-attachments.md).
+- Understand handler/parser flow in [Handler & Parser Architecture](architecture/handler-parser.md).
 - Maintain extraction tooling via [Telegram API Extraction](telegram-api-extraction.md).
 - See [API Reference](api/index.md) for package and module docs.
