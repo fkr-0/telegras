@@ -3,7 +3,7 @@ from __future__ import annotations
 import logging
 import subprocess
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 log = logging.getLogger("telegras.default_handlers")
 
@@ -59,8 +59,28 @@ def shell_sh(context: dict[str, Any], *commands: str) -> dict[str, Any]:
 
 
 def get_default_handlers() -> dict[str, Any]:
-    return {
+    handlers: dict[str, Any] = {
         "handlers.shell:ls": shell_ls,
         "handlers.shell:sh": shell_sh,
         "handlers.python:eval": python_eval,
     }
+    for plugin in _handler_plugins:
+        try:
+            handlers.update(plugin())
+        except Exception:
+            log.exception("Handler plugin failed, skipping")
+    return handlers
+
+
+_handler_plugins: list[Callable[[], dict[str, Any]]] = []
+
+
+def register_handler_plugin(plugin: Callable[[], dict[str, Any]]) -> Callable[[], dict[str, Any]]:
+    """Register a callable that returns handler mappings."""
+    _handler_plugins.append(plugin)
+    return plugin
+
+
+def handler_plugin(func: Callable[[], dict[str, Any]]) -> Callable[[], dict[str, Any]]:
+    """Decorator for registering handler plugins."""
+    return register_handler_plugin(func)
