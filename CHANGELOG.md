@@ -2,6 +2,17 @@
 
 All notable changes to `telegras` will be documented in this file.
 
+## [0.4.2] - 2026-03-08
+
+### Added
+
+- Replace dict-based validation with Pydantic models for structured results
+- Add enums for bot token and webhook status for clarity
+- Implement ensure_webhook_configured to set webhook if needed
+- Consolidate validation into run_startup_validation with auto-setup option
+- Provide get_latest_validation for accessing last validation result
+- Update run_startup_validation_sync for new async validation flow
+
 ## [0.4.1] - 2026-03-08
 
 ### Fixed
@@ -11,6 +22,7 @@ All notable changes to `telegras` will be documented in this file.
 ## [0.4.0] - 2026-03-08
 
 ### Added
+
 - Media download functions from Telegram Bot API:
   - `get_file_direct_url()` - Get direct download URL for Telegram files
   - `download_file()` - Download files to bytes or filesystem
@@ -43,6 +55,7 @@ All notable changes to `telegras` will be documented in this file.
 - Standalone entry point `start.py` for running telegras directly
 
 ### Changed
+
 - Refactored `create_app()` to support mounting on existing FastAPI apps
 - Removed module-level app instantiation for better composability
 - Exported new functions in `__init__.py`: `get_file_direct_url`, `download_file`
@@ -50,15 +63,19 @@ All notable changes to `telegras` will be documented in this file.
 ## [0.3.2] - 2026-03-08
 
 ### Added
+
 - Handler plugin hooks (`telegras.default_handlers.handler_plugin`
   and `register_handler_plugin`) so downstream packages can extend the handler map.
 
 ### Removed
-- `telegras.backends.wordpress.WordPressPublishBackend`; WordPress publishing now sits in handler plugins outside telegras.
+
+- `telegras.backends.wordpress.WordPressPublishBackend`; WordPress publishing now sits
+  in handler plugins outside telegras.
 
 ## [0.3.0] - 2026-03-07
 
 ### Added
+
 - Additional assurance that CI installs `uv` so workflow runs succeed on GitHub Actions.
 - Release workflow `publish.yml` now bumps via tags `v*`, builds with `uv build`, validates artifacts, and pushes to PyPI via trusted publisher/OIDC.
 - `tg_api_parsed`, a copy of the curated Telegram API extraction, now distributed alongside `telegras` so dependent services can share the same reviewed models.
@@ -77,7 +94,9 @@ All notable changes to `telegras` will be documented in this file.
 ## [0.1.0] - 2026-03-06
 
 ### Added
-- Curated runtime `telegras.api` submodule extracted from reviewed generated Telegram API docs:
+
+- Curated runtime `telegras.api` submodule extracted from reviewed generated Telegram
+  API docs:
   - `telegras.api.client.TelegramBotAPI`
   - `telegras.api.getting_updates` (`Update`, `WebhookInfo`, `SetWebhookRequest`)
   - `telegras.api.methods` (`SendMessageRequest`, `GetMeResponse`)
@@ -121,6 +140,7 @@ All notable changes to `telegras` will be documented in this file.
 ## [1.1.0] - 2026-03-05
 
 ### Added
+
 - `telegras` extracted as standalone package in `/home/user/work/code/telegras`.
 - Dedicated packaging and test setup for `telegras`.
 - Telegras API endpoints for:
@@ -132,11 +152,13 @@ All notable changes to `telegras` will be documented in this file.
   - `handlers.python:eval`
 
 ### Changed
+
 - `telegras.app` migrated to FastAPI lifespan startup handling (replacing deprecated `on_event`).
 
 ## [1.0.0] - 2026-03-03
 
 ### Added
+
 - Initial `telegras` ingestion service and persistence schema.
 - Multi-backend publication orchestration.
 - Basic CLI (`telegras db-init`, `telegras backends`).
