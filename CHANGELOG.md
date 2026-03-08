@@ -2,7 +2,7 @@
 
 All notable changes to `telegras` will be documented in this file.
 
-## [0.3.1] - 2026-03-08
+## [0.3.2] - 2026-03-08
 
 ### Added
 - Handler plugin hooks (`telegras.default_handlers.handler_plugin`
