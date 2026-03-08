@@ -6,6 +6,7 @@ from pathlib import Path
 from fastapi.testclient import TestClient
 
 from telegras.update_model import TelegramUpdate
+from telegras.handler_registry import handler_registry
 from telegras.webhook_attachments import (
     Attachment,
     FieldName,
@@ -289,3 +290,243 @@ def test_api_execute_runs_shell_sh_handler(monkeypatch, tmp_path: Path) -> None:
     assert row["ok"] is True
     assert row["result"]["returncode"] == 0
     assert row["result"]["stdout"].strip() == "telegras-ok"
+
+
+def test_parse_mode_strict_blocks_when_parser_invalid(
+    monkeypatch, tmp_path: Path
+) -> None:
+    app = _build_app(monkeypatch, tmp_path)
+    client = TestClient(app)
+
+    parser_name = "tests.test_webhook_attachments:failing_parser"
+
+    def failing_parser(context, update):
+        raise RuntimeError("parse failure")
+
+    handler_registry.register_parser(parser_name, failing_parser)
+
+    register_resp = client.post(
+        "/v1/webhook-attachments",
+        json={
+            "name": "strict-parser",
+            "handler": "handlers.shell:sh",
+            "handler_args": ["echo hi"],
+            "parse": {"parser_ref": parser_name},
+            "parse_mode": "strict",
+            "when": {
+                "op": "leaf",
+                "leaf": {
+                    "field": "chat.type",
+                    "match": "eq",
+                    "value": "group",
+                },
+            },
+        },
+    )
+    assert register_resp.status_code == 200
+
+    execute_resp = client.post(
+        "/v1/webhook-attachments/execute",
+        json={
+            "update": {
+                "update_id": 10003,
+                "message": {
+                    "message_id": 99,
+                    "date": 1700000000,
+                    "chat": {"id": 999, "type": "group"},
+                    "text": "test",
+                },
+            }
+        },
+    )
+    assert execute_resp.status_code == 200
+    payload = execute_resp.json()
+    row = next(item for item in payload if item["attachment"] == "strict-parser")
+    assert row["ok"] is False
+    assert row["error"] == "Parser invalid in strict mode"
+    assert row["handler_executions"] == []
+
+    handler_registry._parsers.pop(parser_name, None)
+
+
+def test_parser_ref_plugins_merge_match(monkeypatch, tmp_path: Path) -> None:
+    app = _build_app(monkeypatch, tmp_path)
+    client = TestClient(app)
+
+    parser_name = "tests.test_webhook_attachments:match_parser"
+
+    def match_parser(context, update):
+        return {"status": "ok", "match": {"parsed": "value"}}
+
+    handler_registry.register_parser(parser_name, match_parser)
+
+    register_resp = client.post(
+        "/v1/webhook-attachments",
+        json={
+            "name": "parser-match",
+            "handler": "handlers.python:eval",
+            "handler_args": ["result = '{{ match.parsed }}'"],
+            "parse": {"parser_ref": parser_name},
+            "when": {
+                "op": "leaf",
+                "leaf": {
+                    "field": "chat.type",
+                    "match": "eq",
+                    "value": "group",
+                },
+            },
+        },
+    )
+    assert register_resp.status_code == 200
+
+    execute_resp = client.post(
+        "/v1/webhook-attachments/execute",
+        json={
+            "update": {
+                "update_id": 10004,
+                "message": {
+                    "message_id": 106,
+                    "date": 1700000000,
+                    "chat": {"id": 888, "type": "group"},
+                    "text": "test",
+                },
+            }
+        },
+    )
+    assert execute_resp.status_code == 200
+    payload = execute_resp.json()
+    row = next(item for item in payload if item["attachment"] == "parser-match")
+    assert row["ok"] is True
+    assert row["handler_executions"][0]["result"]["locals"]["result"] == "value"
+
+    handler_registry._parsers.pop(parser_name, None)
+
+
+
+def test_handler_registry_register_plugin_invalidates_default_cache() -> None:
+    handler_registry.get_handler("handlers.shell:ls")
+
+    def plugin_echo(context, *args):
+        return {"echo": list(args), "chat_type": context.get("chat", {}).get("type")}
+
+    handler_registry.register_plugin(lambda: {"tests.plugins:echo": plugin_echo})
+
+    resolved = handler_registry.get_handler("tests.plugins:echo")
+    assert resolved is plugin_echo
+
+    handler_registry._handlers.pop("tests.plugins:echo", None)
+
+
+def test_default_parser_plugin_populates_match_context(
+    monkeypatch,
+    tmp_path: Path,
+) -> None:
+    app = _build_app(monkeypatch, tmp_path)
+    client = TestClient(app)
+
+    register_resp = client.post(
+        "/v1/webhook-attachments",
+        json={
+            "name": "default-parser",
+            "handler": "handlers.python:eval",
+            "handler_args": [
+                "result = {'title': '{{ match.title }}', 'body': '{{ match.body }}'}"
+            ],
+            "parse": {"parser_ref": "parsers.message:text_parts"},
+            "when": {
+                "op": "leaf",
+                "leaf": {
+                    "field": "chat.type",
+                    "match": "eq",
+                    "value": "group",
+                },
+            },
+        },
+    )
+    assert register_resp.status_code == 200
+
+    execute_resp = client.post(
+        "/v1/webhook-attachments/execute",
+        json={
+            "update": {
+                "update_id": 10005,
+                "message": {
+                    "message_id": 107,
+                    "date": 1700000000,
+                    "chat": {"id": 889, "type": "group"},
+                    "text": "Release note\nAll systems nominal.",
+                },
+            }
+        },
+    )
+    assert execute_resp.status_code == 200
+    payload = execute_resp.json()
+    row = next(item for item in payload if item["attachment"] == "default-parser")
+    assert row["ok"] is True
+    assert row["parse"]["match"]["title"] == "Release note"
+    assert row["parse"]["match"]["body"] == "All systems nominal."
+    assert row["handler_executions"][0]["result"]["locals"]["result"] == {
+        "title": "Release note",
+        "body": "All systems nominal.",
+    }
+
+
+def test_parser_service_merges_regex_and_registered_parser_match(
+    monkeypatch,
+    tmp_path: Path,
+) -> None:
+    app = _build_app(monkeypatch, tmp_path)
+    client = TestClient(app)
+
+    parser_name = "tests.test_webhook_attachments:registered_parser"
+
+    def registered_parser(context, update):
+        return {"status": "ok", "match": {"suffix": "done"}}
+
+    handler_registry.register_parser(parser_name, registered_parser)
+
+    register_resp = client.post(
+        "/v1/webhook-attachments",
+        json={
+            "name": "parser-merge",
+            "handler": "handlers.python:eval",
+            "handler_args": [
+                "result = '{{ match.title }} {{ match.suffix }}'"
+            ],
+            "parse": {
+                "regex": {"title": "^(?P<title>[^\n]+)"},
+                "parser_ref": parser_name,
+            },
+            "when": {
+                "op": "leaf",
+                "leaf": {
+                    "field": "chat.type",
+                    "match": "eq",
+                    "value": "group",
+                },
+            },
+        },
+    )
+    assert register_resp.status_code == 200
+
+    execute_resp = client.post(
+        "/v1/webhook-attachments/execute",
+        json={
+            "update": {
+                "update_id": 10006,
+                "message": {
+                    "message_id": 108,
+                    "date": 1700000000,
+                    "chat": {"id": 890, "type": "group"},
+                    "text": "Ship it\nthat is all",
+                },
+            }
+        },
+    )
+    assert execute_resp.status_code == 200
+    payload = execute_resp.json()
+    row = next(item for item in payload if item["attachment"] == "parser-merge")
+    assert row["parse"]["match"] == {"title": "Ship it", "suffix": "done"}
+    assert row["handler_executions"][0]["result"]["locals"]["result"] == "Ship it done"
+
+    handler_registry._parsers.pop(parser_name, None)

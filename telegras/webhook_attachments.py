@@ -1,97 +1,28 @@
 from __future__ import annotations
 
 import asyncio
-import importlib
-import inspect
 import re
 from enum import Enum
 from typing import Any
 
 from pydantic import BaseModel, Field, model_validator
 
-from telegras.default_handlers import get_default_handlers
+from telegras.handler_registry import handler_executor
+from telegras.parsers import ParseSpec, parser_service
 from telegras.api.getting_updates import Update as TelegramUpdate
+from telegras.matchers import (
+    FieldName,
+    MatchOp,
+    RuleExpr,
+    get_chat,
+    get_message_text,
+    get_payload,
+    has_media,
+    matches,
+    media_type,
+)
 
 _TEMPLATE_RE = re.compile(r"\{\{\s*([a-zA-Z0-9_\.]+)\s*\}\}")
-
-
-class FieldName(str, Enum):
-    UPDATE_KIND = "update.kind"
-    CHAT_TYPE = "chat.type"
-    CHAT_ID = "chat.id"
-    CHAT_TITLE = "chat.title"
-    SENDER_ID = "sender.id"
-    MESSAGE_TEXT = "message.text"
-    MESSAGE_HAS_MEDIA = "message.has_media"
-    MESSAGE_MEDIA_TYPE = "message.media_type"
-
-
-class MatchOp(str, Enum):
-    EQ = "eq"
-    IN = "in"
-    REGEX = "regex"
-    CONTAINS = "contains"
-    STARTS_WITH = "starts_with"
-    EXISTS = "exists"
-
-
-class LeafRule(BaseModel):
-    field: FieldName
-    match: MatchOp
-    value: Any = None
-
-
-class RuleOp(str, Enum):
-    ALL = "all"
-    ANY = "any"
-    NOT = "not"
-    LEAF = "leaf"
-
-
-class RuleExpr(BaseModel):
-    op: RuleOp
-    children: list["RuleExpr"] = Field(default_factory=list)
-    leaf: LeafRule | None = None
-
-    @model_validator(mode="after")
-    def _validate_shape(self) -> "RuleExpr":
-        if self.op == RuleOp.LEAF:
-            if self.leaf is None:
-                raise ValueError("leaf must be provided for op=leaf")
-            return self
-
-        if self.leaf is not None:
-            raise ValueError("leaf must be omitted for non-leaf ops")
-
-        if self.op == RuleOp.NOT and len(self.children) != 1:
-            raise ValueError("not requires exactly one child")
-
-        if self.op in {RuleOp.ALL, RuleOp.ANY} and not self.children:
-            raise ValueError("all/any require at least one child")
-
-        return self
-
-    @staticmethod
-    def make_leaf(field: FieldName, match: MatchOp, value: Any = None) -> "RuleExpr":
-        return RuleExpr(op=RuleOp.LEAF, leaf=LeafRule(field=field, match=match, value=value))
-
-    @staticmethod
-    def all_of(children: list["RuleExpr"]) -> "RuleExpr":
-        return RuleExpr(op=RuleOp.ALL, children=children)
-
-    @staticmethod
-    def any_of(children: list["RuleExpr"]) -> "RuleExpr":
-        return RuleExpr(op=RuleOp.ANY, children=children)
-
-    @staticmethod
-    def not_(child: "RuleExpr") -> "RuleExpr":
-        return RuleExpr(op=RuleOp.NOT, children=[child])
-
-
-class ParseSpec(BaseModel):
-    regex: dict[str, str] = Field(default_factory=dict)
-    parser_ref: str | None = None
-    allow_partial: bool = True
 
 
 class HandlerStep(BaseModel):
@@ -161,7 +92,7 @@ class WebhookAttachmentRegistry:
         for item in self.list_attachments():
             if not item.enabled:
                 continue
-            if _matches(item.when, update):
+            if matches(item.when, update):
                 matched.append(item)
                 if item.stop_on_match:
                     break
@@ -174,8 +105,9 @@ class WebhookAttachmentRegistry:
 
         for attachment in self.match_attachments(update):
             base_context = build_message_context(update)
-            parse_info = await apply_parser(attachment, update, base_context)
-            if parse_info["status"] == "invalid" and attachment.parse_mode == ParseMode.STRICT:
+            parse_result = await parser_service.parse(attachment.parse, base_context, update)
+            parse_info = parse_result.to_dict()
+            if parse_result.status == "invalid" and attachment.parse_mode == ParseMode.STRICT:
                 results.append(
                     {
                         "attachment": attachment.name,
@@ -190,27 +122,18 @@ class WebhookAttachmentRegistry:
                 continue
 
             context = dict(base_context)
-            context["match"] = parse_info.get("match", {})
+            context["match"] = parse_result.match
 
             step_results: list[dict[str, Any]] = []
             steps = attachment.normalized_steps()
 
             async def run_step(step: HandlerStep) -> dict[str, Any]:
-                rendered_args = [
-                    render_template(arg, context) if isinstance(arg, str) else arg
-                    for arg in step.handler_args
-                ]
+                rendered_args: list[Any] = []
                 try:
-                    handler = resolve_handler(step.handler)
-                    value = handler(context, *rendered_args)
-                    if inspect.isawaitable(value):
-                        value = await value
-                    return {
-                        "handler": step.handler,
-                        "rendered_args": rendered_args,
-                        "ok": True,
-                        "result": value,
-                    }
+                    rendered_args = [
+                        render_template(arg, context) if isinstance(arg, str) else arg
+                        for arg in step.handler_args
+                    ]
                 except Exception as exc:
                     return {
                         "handler": step.handler,
@@ -218,6 +141,10 @@ class WebhookAttachmentRegistry:
                         "ok": False,
                         "error": str(exc),
                     }
+                execution = await handler_executor.execute(
+                    step.handler, context, rendered_args
+                )
+                return execution.to_dict()
 
             if attachment.execution_mode == ExecutionMode.PARALLEL:
                 step_results = await asyncio.gather(*(run_step(step) for step in steps))
@@ -245,83 +172,12 @@ class WebhookAttachmentRegistry:
         return results
 
 
-def resolve_handler(handler_name: str):
-    defaults = get_default_handlers()
-    if handler_name in defaults:
-        return defaults[handler_name]
-
-    module_name, _, symbol = handler_name.partition(":")
-    if not module_name or not symbol:
-        raise ValueError(f"Invalid handler '{handler_name}'")
-    module = importlib.import_module(module_name)
-    handler = getattr(module, symbol, None)
-    if handler is None:
-        raise ValueError(f"Handler not found: {handler_name}")
-    return handler
-
-
-async def apply_parser(
-    attachment: Attachment,
-    update: TelegramUpdate,
-    context: dict[str, Any],
-) -> dict[str, Any]:
-    result = {
-        "status": "ok",
-        "match": {},
-        "warnings": [],
-        "errors": [],
-    }
-
-    if attachment.parse is None:
-        return result
-
-    text = context.get("message", {}).get("full") or ""
-
-    for key, pattern in attachment.parse.regex.items():
-        matched = re.search(pattern, text)
-        if not matched:
-            result["warnings"].append(f"regex '{key}' did not match")
-            if result["status"] == "ok":
-                result["status"] = "partial"
-            continue
-
-        if matched.groupdict():
-            result["match"].update(matched.groupdict())
-        elif matched.groups():
-            result["match"][key] = matched.group(1)
-        else:
-            result["match"][key] = matched.group(0)
-
-    if attachment.parse.parser_ref:
-        try:
-            parser = resolve_handler(attachment.parse.parser_ref)
-            parser_output = parser(context, update)
-            if inspect.isawaitable(parser_output):
-                parser_output = await parser_output
-            if isinstance(parser_output, dict):
-                result["match"].update(parser_output.get("match", {}))
-                result["warnings"].extend(parser_output.get("warnings", []))
-                result["errors"].extend(parser_output.get("errors", []))
-                if parser_output.get("status") in {"ok", "partial", "invalid"}:
-                    result["status"] = parser_output["status"]
-        except Exception as exc:
-            result["errors"].append(str(exc))
-            result["status"] = "invalid"
-
-    if result["errors"] and attachment.parse_mode == ParseMode.STRICT:
-        result["status"] = "invalid"
-    elif result["warnings"] and result["status"] == "ok":
-        result["status"] = "partial"
-
-    return result
-
-
 def build_message_context(update: TelegramUpdate) -> dict[str, Any]:
-    payload = _payload(update)
-    text = _message_text(update) or ""
+    payload = get_payload(update)
+    text = get_message_text(update) or ""
     title = text.splitlines()[0] if text else ""
     full = text
-    chat = _chat(update)
+    chat = get_chat(update)
 
     chat_info: dict[str, Any]
     if isinstance(chat, dict):
@@ -345,8 +201,8 @@ def build_message_context(update: TelegramUpdate) -> dict[str, Any]:
             "title": title,
             "full": full,
             "text": text,
-            "has_media": _has_media(update),
-            "media_type": _media_type(update),
+            "has_media": has_media(update),
+            "media_type": media_type(update),
         },
         "chat": chat_info,
         "update": {"update_id": update.update_id, "kind": kind},
@@ -376,148 +232,3 @@ def lookup_context_value(context: dict[str, Any], dotted_path: str) -> Any:
         if node is None:
             return None
     return node
-
-
-def _payload(update: TelegramUpdate) -> Any:
-    return update.get_payload()
-
-
-def _message_text(update: TelegramUpdate) -> str | None:
-    payload = _payload(update)
-    if payload is None:
-        return None
-    if isinstance(payload, dict):
-        return payload.get("text") or payload.get("caption")
-    return getattr(payload, "text", None) or getattr(payload, "caption", None)
-
-
-def _chat(update: TelegramUpdate) -> Any:
-    payload = _payload(update)
-    if payload is None:
-        return None
-    if isinstance(payload, dict):
-        return payload.get("chat")
-    return getattr(payload, "chat", None)
-
-
-def _sender(update: TelegramUpdate) -> Any:
-    payload = _payload(update)
-    if payload is None:
-        return None
-    if isinstance(payload, dict):
-        return payload.get("from")
-    return getattr(payload, "from_user", None) or getattr(payload, "from", None)
-
-
-def _has_media(update: TelegramUpdate) -> bool:
-    payload = _payload(update)
-    if payload is None:
-        return False
-
-    media_keys = ["photo", "video", "animation", "document", "audio", "voice", "sticker"]
-    if isinstance(payload, dict):
-        return any(payload.get(k) is not None for k in media_keys)
-    return any(getattr(payload, k, None) is not None for k in media_keys)
-
-
-def _media_type(update: TelegramUpdate) -> str | None:
-    payload = _payload(update)
-    if payload is None:
-        return None
-
-    media_keys = ["video", "animation", "photo", "document", "audio", "voice", "sticker"]
-    if isinstance(payload, dict):
-        for k in media_keys:
-            if payload.get(k) is not None:
-                return k
-        return None
-
-    for k in media_keys:
-        if getattr(payload, k, None) is not None:
-            return k
-    return None
-
-
-def _resolve_field(field: FieldName, update: TelegramUpdate) -> Any:
-    if field == FieldName.UPDATE_KIND:
-        payload = _payload(update)
-        if payload is None:
-            return None
-        return update.kind.value if update.kind else None
-
-    if field == FieldName.MESSAGE_TEXT:
-        return _message_text(update)
-
-    if field == FieldName.MESSAGE_HAS_MEDIA:
-        return _has_media(update)
-
-    if field == FieldName.MESSAGE_MEDIA_TYPE:
-        return _media_type(update)
-
-    if field in {FieldName.CHAT_ID, FieldName.CHAT_TYPE, FieldName.CHAT_TITLE}:
-        chat = _chat(update)
-        if chat is None:
-            return None
-        if isinstance(chat, dict):
-            key = field.value.split(".", 1)[1]
-            return chat.get(key)
-        key = field.value.split(".", 1)[1]
-        return getattr(chat, key, None)
-
-    if field == FieldName.SENDER_ID:
-        sender = _sender(update)
-        if sender is None:
-            return None
-        if isinstance(sender, dict):
-            return sender.get("id")
-        return getattr(sender, "id", None)
-
-    return None
-
-
-def _eval_leaf(leaf: LeafRule, update: TelegramUpdate) -> bool:
-    actual = _resolve_field(leaf.field, update)
-
-    if leaf.match == MatchOp.EXISTS:
-        return actual is not None
-
-    if leaf.match == MatchOp.EQ:
-        return actual == leaf.value
-
-    if leaf.match == MatchOp.IN:
-        if not isinstance(leaf.value, list):
-            return False
-        return actual in leaf.value
-
-    if leaf.match == MatchOp.CONTAINS:
-        if actual is None:
-            return False
-        return str(leaf.value) in str(actual)
-
-    if leaf.match == MatchOp.STARTS_WITH:
-        if actual is None:
-            return False
-        return str(actual).startswith(str(leaf.value))
-
-    if leaf.match == MatchOp.REGEX:
-        if actual is None:
-            return False
-        return re.search(str(leaf.value), str(actual)) is not None
-
-    return False
-
-
-def _matches(expr: RuleExpr, update: TelegramUpdate) -> bool:
-    if expr.op == RuleOp.LEAF and expr.leaf is not None:
-        return _eval_leaf(expr.leaf, update)
-
-    if expr.op == RuleOp.ALL:
-        return all(_matches(child, update) for child in expr.children)
-
-    if expr.op == RuleOp.ANY:
-        return any(_matches(child, update) for child in expr.children)
-
-    if expr.op == RuleOp.NOT:
-        return not _matches(expr.children[0], update)
-
-    return False

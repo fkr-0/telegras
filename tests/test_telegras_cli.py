@@ -3,17 +3,13 @@ from __future__ import annotations
 import sqlite3
 from pathlib import Path
 
-from click.testing import CliRunner
-
-from telegras.cli import cli
 
 
-def test_telegras_db_init_creates_tables(tmp_path: Path, monkeypatch) -> None:
+def test_telegras_db_init_creates_tables(tmp_path: Path, monkeypatch, invoke_cli) -> None:
     db_path = tmp_path / "telegras_cli.db"
     monkeypatch.setenv("TELEGRAS_DATABASE_URL", f"sqlite+aiosqlite:///{db_path}")
 
-    runner = CliRunner()
-    result = runner.invoke(cli, ["db-init"])
+    result = invoke_cli(["db-init"])
 
     assert result.exit_code == 0
 
@@ -30,11 +26,10 @@ def test_telegras_db_init_creates_tables(tmp_path: Path, monkeypatch) -> None:
     assert "publications" in tables
 
 
-def test_telegras_backends_lists_configured(monkeypatch) -> None:
+def test_telegras_backends_lists_configured(monkeypatch, invoke_cli) -> None:
     monkeypatch.setenv("TELEGRAS_BACKENDS", "wordpress")
 
-    runner = CliRunner()
-    result = runner.invoke(cli, ["backends"])
+    result = invoke_cli(["backends"])
 
     assert result.exit_code == 0
     assert "wordpress" in result.output
