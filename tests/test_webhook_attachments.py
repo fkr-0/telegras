@@ -100,7 +100,13 @@ def test_registry_match_attachments_composable_rules() -> None:
             "date": 1700000000,
             "chat": {"id": 123, "type": "channel"},
             "caption": "new clip",
-            "video": {"file_id": "abc"},
+            "video": {
+                "file_id": "abc",
+                "file_unique_id": "unique-abc",
+                "width": 1280,
+                "height": 720,
+                "duration": 60,
+            },
         },
     )
 

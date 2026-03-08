@@ -2,6 +2,12 @@
 
 All notable changes to `telegras` will be documented in this file.
 
+## [0.4.1] - 2026-03-08
+
+### Fixed
+
+- Test failure preventing build
+
 ## [0.4.0] - 2026-03-08
 
 ### Added
